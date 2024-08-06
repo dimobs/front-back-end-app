@@ -292,11 +292,12 @@ body.nav-active { overflow: hidden; }
   filter: drop-shadow(0px 0px 7px rgba(1, 1, 1, 0.5));
 }
 
-.header ul:has(li:hover)>li:not(:hover) {
+.header ul:has(li:hover)>li a:not(:hover) {
   opacity: 0.5; 
   filter: blur(1px);
   transform: scale(.9);
   transition: all 0.75s;
+  
 }
 
 #greet {
