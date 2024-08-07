@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const App = () => {
+export default function TableRow() {
     const [items, setItems] = useState([]);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -58,5 +58,3 @@ const App = () => {
         </div>
     );
 };
-
-export default App;
