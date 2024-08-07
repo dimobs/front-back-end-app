@@ -7,6 +7,8 @@ const App = () => {
     const [amount, setAmount] = useState('');
 
     useEffect(() => {
+        console.log('react get all...');
+        
         fetch('http://localhost:3030/api/items')
             .then(response => response.json())
             .then(data => setItems(data))
@@ -14,7 +16,7 @@ const App = () => {
     }, []);
 
     const addItem = () => {
-        fetch('http://localhost:3030/api/items', {
+        fetch('http://localhost:3030/api/items', {            
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
