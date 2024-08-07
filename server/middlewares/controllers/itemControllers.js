@@ -1,6 +1,7 @@
 const itemController = require('express').Router()
 const {db} = require('../../config/items-DB')
 
+
 // Get all items
 itemController.get('/', (req, res) => {
     console.log('server get');
@@ -16,9 +17,10 @@ itemController.get('/', (req, res) => {
 
 // Add a new item
 itemController.post('/', (req, res) => {
-    console.log('itemControling requesting...');
+    console.log('itemControlling requesting...');
     const { name, description, amount } = req.body;
-    const date = new Date().toISOString();
+    const date = new Date().toLocaleDateString(); 
+  
     db.run("INSERT INTO items (date, name, description, amount) VALUES (?, ?, ?, ?)", [date, name, description, amount], function(err) {
         console.log(date, name, description, amount)
         if (err) {
