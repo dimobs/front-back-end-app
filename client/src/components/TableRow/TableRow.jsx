@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import style from 'TableRow.module.css'
+import TableRowItem from './TableRowItem';
+// import style from 'TableRow.module.css'
 
 export default function TableRow() {
     const [items, setItems] = useState([]);
@@ -35,11 +36,12 @@ export default function TableRow() {
             body: JSON.stringify({ name, description, amount }),
         })
             .then(response => response.json())
-            .then(data => setItems([...items, data]))
+            .then(data => setItems([data, ...items]))
             .catch(error => console.error('Error adding item:', error));
     };
+console.log(items);
 
-    const totalAmount = items.reduce((total, item) => total + item.amount, 0);
+    const totalAmount = items.reduce((total, item) => total + Number(item.amount), 0);
     
     return (
         <div>
@@ -47,27 +49,27 @@ export default function TableRow() {
             <table>
                 <thead>
                     <tr>
+                        <th>Date</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Amount</th>
-                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map(item => (
-                        <tr key={item.id}>
-                            <td>{item.name}</td>
-                            <td>{item.description}</td>
-                            <td>${item.amount}</td>
-                            <td>{new Date(item.date).toLocaleString()}</td>
-                        </tr>
-                    ))}
+                   {items.map((i) => (
+                    <TableRowItem 
+                    key={i.id}
+                    date={i.date}
+                    name={i.name}
+                    description={i.description}
+                    value={i.amount}
+                    />
+                   ))}
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan="2">Total</td>
-                        <td>${totalAmount}</td>
-                        <td></td>
+                        <td colSpan="3">Total</td>
+                        <td>{totalAmount}лв.</td>                        
                     </tr>
                 </tfoot>
             </table>

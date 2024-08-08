@@ -12,15 +12,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --color-dark-green: #386641;
+  --color-medium-green: #6a994e;
+  --color-light-green: #a7c957;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-dark-green);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-dark-green);
 }
 
 body {
@@ -48,7 +51,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-dark-green);
 }
 button:focus,
 button:focus-visible {
@@ -61,14 +64,19 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: var(--color-dark-green);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--color-medium-green);
   }
 }
 
 
+
+form .btn {
+  display: inline-block;
+ margin-right: 12px;
+}
 
 form .btn {
   display: inline-block;
@@ -82,13 +90,16 @@ table {
   margin: 20px 0;
 }
 th, td {
-  border: 1px solid #ddd;
+  border-bottom: 1px solid var(--color-medium-green);
   padding: 8px;
   text-align: left;
 }
 th {
-  background-color: #f2f2f2;
+  background-color: var(--color-dark-green);
 }
 tfoot {
   font-weight: bold;
+  border-top: 3px solid var(--color-medium-green);
+  border-bottom: 3px solid var(--color-medium-green);
+
 }

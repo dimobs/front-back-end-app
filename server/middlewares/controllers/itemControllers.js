@@ -6,7 +6,7 @@ const {db} = require('../../config/items-DB')
 itemController.get('/', (req, res) => {
     console.log('server get');
     
-    db.all("SELECT * FROM items", (err, rows) => {
+    db.all("SELECT * FROM items ORDER BY id DESC LIMIT 5", (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
             return;
@@ -30,5 +30,9 @@ itemController.post('/', (req, res) => {
         res.json({ id: this.lastID, date, name, description, amount });
     });
 });
+
+
+
+// db.run("SELECT * FROM items ORDER BY data desc LIMIT 2")
 
 module.exports = itemController;
