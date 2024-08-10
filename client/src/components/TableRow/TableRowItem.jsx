@@ -1,7 +1,8 @@
 import formatDate from "../../util/formatDate"
+import { Link } from "react-router-dom"
 
 export default function TableRowItem (
-    {id, date, name, description, value, index}) {
+    {itemId, date, name, description, value, index}) {
       
       function handleEdit() {
         window.alert('Going to Edit?')
@@ -17,10 +18,7 @@ export default function TableRowItem (
     <td className="description header__items td" >{description}</td>
     <td className='header__items td'>{value}</td>
     <td>
-    <button className="btn-submit" onClick={handleEdit}>
-edit
-            </button>
-    <button onClick={(e)=> handleDel()}>Del</button>
+    <Link to={`/item/${itemId}`} key={itemId}>Edit</Link>
       </td>
   </tr>
         </>

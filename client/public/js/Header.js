@@ -69,11 +69,5 @@ for (let i = 0, len = revealDelayElements.length; i < len; i++) {
 }
 
 
-function downloadFile() {
-  // let url = "https://firebasestorage.googleapis.com/v0/b/portfolio-dimo.appspot.com/o/DimoKARACHORBADZHIEV_resume2024.pdf?alt=media&token=bd06adbd-3db8-4001-aea9-a2f378355405";
-  let url = "https://firebasestorage.googleapis.com/v0/b/portfolio-dimo.appspot.com/o/DimoKARACHORBADZHIEV_resume2024.pdf?alt=media&token=c04452ff-cd00-4237-97f1-5bac004b2290";
-  window.open(url, '_blank')
-}
-
 window.addEventListener("scroll", reveal);
 window.addEventListener("load", reveal);

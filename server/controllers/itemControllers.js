@@ -15,6 +15,8 @@ itemController.get('/', (req, res) => {
 
 // Add a new item
 itemController.post('/', (req, res) => {
+    console.log(req.body);
+    
     const { name, description, amount } = req.body;
     const date = new Date().toLocaleDateString(); 
   
@@ -28,13 +30,18 @@ itemController.post('/', (req, res) => {
     });
 });
 
-itemController.get('/:id', (req, res) => {
-     const { name, description, amount } = req.body;
-    db.all(`UPDATE items SET name=${name}, deception=${description}, amount=${amount}`, (err, rows) => {
+itemController.get('/:itemId', (req, res) => {
+    console.log('request for /:id');
+    
+    info = req.params;
+    console.log(info.itemId);
+    
+    db.all(`SELECT * FROM items WHERE ID = ${info.itemId}`, (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
             return;
         }
+
         res.json(rows);
     });
 });

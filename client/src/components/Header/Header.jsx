@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css'; // Make sure to create this file
 
 const Header = () => {
@@ -14,10 +15,13 @@ const Header = () => {
                 <img src="path_to_logo.png" alt="Logo" /> {/* Replace with your logo */}
             </div>
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-                <a href="/">Home</a>
-                <a href="/login">Login</a>
-                <a href="/logout">Logout</a>
-                <a href="/profile">Profile</a>
+                <Link to="/">Home</Link>
+                <Link to="/profile">Profile</Link>
+                <Link to="/table/tableDetails">Details</Link>              
+            </nav>
+            <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+                <Link to="/logout">Logout</Link>
+                <Link to="/login">Login</Link>
             </nav>
             <div className="menu-toggle" onClick={toggleMenu}>
                 <span className="menu-icon"></span>

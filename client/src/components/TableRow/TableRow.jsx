@@ -1,83 +1,106 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import TableRowItem from './TableRowItem';
-// import style from 'TableRow.module.css'
-import './tableRow.css'
+// import style from 'TableRow.module.css';
+import './tableRow.css';
 
 
 export default function TableRow() {
-    const [items, setItems] = useState([]);
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [amount, setAmount] = useState('');
-
+    // const [items, setItems] = useState([]);
+    
+    const inputRef = useRef();
+    useEffect(() => {
+        inputRef.current.focus();
+    })
     const baseUrl = ('http://localhost:3030/api/items')
 
+    const [formValue, setFormValue] = useState([]);
+
     // Initial Render / Component Mount
-    useEffect(() => {
-        console.log('inital rendering');       
+    useEffect(() => { 
         try {
         fetch(baseUrl)
             .then(response => response.json())
-            .then(data => setItems(data))
+            .then(data => setFormValue(data))
         }catch (err){
-            (error => console.error('Error fetching data:', error));
+           console.error('Error fetching data:', err);
         }
     }, []);
 
-    //Update Rows
-    // useEffect(() => {
-    //     console.log('values updateing');
-    //     fetch('http://localhost:3030/api/items')        
-    //     .then(response => response.json())
-    //     .then(data => setItems(data))
-    //     .catch(error => console.error('Error fetching data:', error));
-    // }, [values.name, values.description, values.amount]);
-
-    const addItem = () => {
-        fetch(baseUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, description, amount }),
-        })
-            .then(response => response.json())
-            .then(data => setItems([data, ...items]))
-            .catch(error => console.error('Error adding item:', error));
-    };
-console.log(items);
-
-    const totalAmount = items.reduce((total, item) => total + Number(item.amount), 0);
+    // const totalAmount = formValue.reduce((total, item) => total + Number(item.amount), 0);
     
+    const formSubmitHandler = (e) => {
+        e.preventDefault();
+      
+
+        try {
+            const data = {
+                name: formValue.name,
+                description: formValue.description,
+                amount: formValue.amount
+            }
+
+            console.log(data);
+            
+            fetch(baseUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({name, description, amount}),
+            })
+                .then(response => response.json())
+                .then(data => setFormValue([data, ...formValue]))
+        }catch(err){
+             console.error('Error adding item:', err);
+        }
+    }
+
+const changeHandler = (e) => {
+    setFormValue(oldValue => ({
+        ...oldValue,
+        [e.target.name]: e.target.type === 'checkbox'
+        ? e.target.checked
+        : e.target.value
+    }));
+};
+
     return (
         <div>
              <div className='table__body'>
             <h1>Item List</h1>
+            <form onSubmit={formSubmitHandler}>
             <div>
                 <input
-                    className='input'
+                    className='input__table'
+                    ref={inputRef}
                     type="text"
                     placeholder="Name"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
+                    name='name'
+                    id="name"
+                    value={formValue.name}
+                    onChange={changeHandler}
                 />
                 <input
                     className='input__table'
                     type="text"
+                    name='description'
                     placeholder="Description"
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
+                    id='description'
+                    value={formValue.description}
+                    onChange={changeHandler}
                 />
                 <input
-                    className='input'
+                    className='input__table'
                     type="number"
+                    id='amount'
+                    name='amount'
                     placeholder="Amount"
-                    value={amount}
-                    onChange={e => setAmount(e.target.value)}
+                    value={formValue.amount}
+                    onChange={changeHandler}
                 />
-                <button className='btn-submit form__submit' onClick={addItem}>Add Item</button>
+                <button className='btn-submit form__submit'>Add Item</button>
             </div>
-           
+            </form>
             <table className='table__container'>
                 <thead>
                     <tr>
@@ -90,10 +113,10 @@ console.log(items);
                     </tr>
                 </thead>
                 <tbody>
-                   {items.map((i, idx) => (
+                   {formValue.map((i, idx) => (
                     <TableRowItem 
                     key={i.id}
-                    id = {i.id}
+                    itemId = {i.id}
                     date={i.date}
                     name={i.name}
                     description={i.description}
@@ -105,7 +128,7 @@ console.log(items);
                 <tfoot>
                     <tr>
                         <td colSpan="3">Total</td>
-                        <td>{totalAmount}лв.</td>                        
+                        {/* <td>{totalAmount}лв.</td>                         */}
                     </tr>
                 </tfoot>
             </table>
@@ -113,4 +136,4 @@ console.log(items);
         </div>
         </div>
     );
-};
+}
