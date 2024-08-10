@@ -1,3 +1,11 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -5,35 +13,66 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #223243;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  --color-dark-green: #386641;
-  --color-medium-green: #6a994e;
-  --color-light-green: #a7c957;
+  --background: #223243;
+  --color-orange-one: #f4a261;
+  --color-yellow-two: #e9c46a;
+  --color-green-tree: #2a9d8f;
+  --color-dark-four: #264653;
+  --shadow-1: 0 0 20px hsla(216, 14%, 14%, 0.05);
+  --shadow-2: 0 4px 28px hsla(216, 14%, 14%, 0.07);
+  --shadow-3:   -5px -5px 15px rgba(255, 255, 255, 0.1),
+  5px 5px 15px rgba(0, 0, 0, 0.35),
+  inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+  inset 5px 5px 15px rgba(0, 0, 0, 0.35);
 }
+
+.btn-submit {
+  background: #00dfc4;
+  color: #223243;
+  padding: 10px 0;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow:
+   -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.35),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+    inset 5px 5px 15px rgba(0, 0, 0, 0.35)
+    ;
+}
+
+
+
+html {
+scroll-behavior: smooth;
+font-family: "Poppins", sans-serif;
+}
+li { list-style: none; }
 
 a {
   font-weight: 500;
-  color: var(--color-dark-green);
+  color: var(--color-dark-four);
   text-decoration: inherit;
+  text-decoration: none;
 }
 a:hover {
-  color: var(--color-dark-green);
+  color: var(--color-dark-four);
 }
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  transition: 0.75s ease;
 }
-
+.container { padding-inline: 16px; }
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -41,37 +80,25 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  padding: 0.6em 1em;
+  font-size: 0.4em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-orange-one);
   cursor: pointer;
   transition: border-color 0.25s;
+  color: var(--color-dark-four);
 }
 button:hover {
-  border-color: var(--color-dark-green);
+  border-color: var(--color-yellow-two);
+  background-color: var(--color-yellow-two);
+  transform: translateY(2px)
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+  border: none;
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: var(--color-dark-green);
-  }
-  button {
-    background-color: var(--color-medium-green);
-  }
-}
-
-
 
 form .btn {
   display: inline-block;
@@ -90,16 +117,70 @@ table {
   margin: 20px 0;
 }
 th, td {
-  border-bottom: 1px solid var(--color-medium-green);
+  border-bottom: 1px solid var(--color-yellow-two);
   padding: 8px;
   text-align: left;
 }
 th {
-  background-color: var(--color-dark-green);
+  background-color: var(--color-dark-four);
 }
 tfoot {
   font-weight: bold;
-  border-top: 3px solid var(--color-medium-green);
-  border-bottom: 3px solid var(--color-medium-green);
-
+  border-top: 3px solid var(--color-orange-one);
+  border-bottom: 3px solid var(--color-orange-one);
 }
+
+.header__items {
+  text-align: center;
+}
+
+.controls {
+  background: transparent;
+  opacity: 0.5;
+  backdrop-filter: blur(20px);
+}
+
+.td {
+  font-style: italic;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: var(--color-dark-green);
+  }
+  button {
+    background-color: var(--color-medium-green);
+  }
+  .input {
+    display: flex;
+    background-color: red;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  body {
+    background-color: rgb(78, 74, 74);
+  }
+  .input {
+display: flex;
+margin: 5px;
+  }
+  .index {
+    display: none;
+  }
+
+  .table__container{
+    width: 100%;
+    float: left;
+    border-collapse: collapse;
+    font-weight: 100;
+    font-size: 10px;
+  
+ }
+}
+

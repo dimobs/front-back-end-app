@@ -1,0 +1,43 @@
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td,
+table th {
+    border-bottom: 1px solid #ddd ;
+    padding: 8px;
+}
+.table__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: 18rem;
+}
+
+.table__container{
+   width: 60rem;
+   
+}
+
+.form__submit {
+    width: 100px;
+    margin: 10px;
+}
+
+.input__table {
+    height: 30px;
+    width: 15rem;
+    margin-top: 5rem;
+}
+
+tr:nth-child(even) {background-color: #716565;}
+table tr:hover {background-color: gray;}
+table th, 
+tfoot td {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}

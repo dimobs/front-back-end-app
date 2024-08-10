@@ -2,8 +2,9 @@ const express = require('express');
 const config = require('./config/config.json')[process.env.PORT || 'development'];
 const cors = require('./middlewares/cors');
 const initDB = require('./config/user-DB');
-const itemController = require('./middlewares/controllers/itemControllers');
 const { connectDB } = require('./config/items-DB');
+const itemController = require('./controllers/itemControllers');
+const session = require('./middlewares/session');
 
 
 start()
@@ -13,11 +14,13 @@ async function start() {
 
 connectDB()
 const app = express();
-app.use(express.urlencoded({extended: true})) //form value
+// app.use(express.urlencoded({extended: true})) //form value (stamdart HTML form)
 app.use(cors());
+app.use(session());
 app.use(express.json());
 
 app.use('/api/items', itemController)
+// app.use('/api/items', AuthController)
 
 app.listen(config.PORT, () => console.log("Server running on", `http://localhost:${config.PORT}`));
 
