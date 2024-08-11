@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function TableDetails({
-    onClose,    
+    detailsItem
 }) {
 
 const [details, setDetails] = useState([]);
@@ -24,12 +24,12 @@ useEffect(() => {
 
     return (
         <div className="overlay__table">
-        <div className="backdrop" onClick={onClose}></div>
+        <div className="backdrop" onClick={() => alert('Are you sure?')}></div>
         <div className="modal">
             <div className="detail-container">
                 <header className="headers__table">
                     <h2>Details</h2>
-                    <button className="btn close" onClick={onClose}>
+                    <button className="btn close" onClick={() => alert('Are you sure?')}>
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                             className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                             <path fill="currentColor"
@@ -43,16 +43,16 @@ useEffect(() => {
                         <img src={''} alt="avatar" className="image" />
                     </div>
                     <div className="table-details">
-                        <p>User Id: <strong>{details.id}</strong></p>
+                        <p>User Id: <strong>{detailsItem.id}</strong></p>
                         <p>
                             name:
-                            <strong>{details.name}</strong>
+                            <strong>{detailsItem.name}</strong>
                         </p>
-                        <p>Description: <strong>{details.description}</strong></p>
-                        <p>Amout: <strong>{details.amount}</strong></p>
+                        <p>Description: <strong>{detailsItem.description}</strong></p>
+                        <p>Amout: <strong>{detailsItem.amount}</strong></p>
                         <p>
                             Date:
-                            <strong> {details.date}</strong>
+                            <strong> {detailsItem.date}</strong>
                         </p>
 
                         <p>Created on: <strong>{}</strong></p>

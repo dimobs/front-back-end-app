@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { Navigate } from 'react-router-dom';
 import TableRowItem from './TableRowItem';
-// import style from 'TableRow.module.css';
 import './tableRow.css';
 import TableDetails from './tableDetails';
 
@@ -13,27 +13,19 @@ export default function TableRow() {
     }
     const [showItem, ToggleItem] = useState(false);
     const [values, onchange] = useState([INITIAL_STATE]);
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState([]);
+    const [id, setId] =useState(null);
     const baseUrl = ('http://localhost:3030/api/items')
     const totalAmount = items.reduce((total, item) => total + Number(item.amount), 0);
-    const resetFrom = () => {onchange(INITIAL_STATE)}
-    
-    const editItemCloseHandler = () => {
-        ToggleItem(false)
-    };
-
-    const addUserClickHandler = () => {
-        ToggleItem(true);
-
-    }
-
+    const resetFrom = () => {onchange(INITIAL_STATE)};
     const inputRef = useRef();
+   
     useEffect(() => {
         if(inputRef.current){
             inputRef.current.focus();
         }
     },[inputRef]);  
-
+    
     useEffect(() => { 
         try {
         fetch(baseUrl)
@@ -66,6 +58,10 @@ export default function TableRow() {
         // ToggleItem(false);
     }
 
+    const onclickDetailsHandler = () => {    
+        ToggleItem(true)        
+    };
+
 const changeHandler = (e) => {
     onchange(state => ({
         // ...oldValue,
@@ -77,6 +73,10 @@ const changeHandler = (e) => {
     }));
 };
 
+const itemDetailsClickHandler = (userId) => {
+    ToggleItem(true)
+    setId(userId);
+}
 
     return (
         <div>
@@ -138,7 +138,7 @@ const changeHandler = (e) => {
                     description={i.description}
                     value={i.amount}
                     index = {idx + 1}
-                    addUserClickHandler
+                    itemDetailsClickHandler={itemDetailsClickHandler}
                     />
                    ))}
                 </tbody>
@@ -149,9 +149,14 @@ const changeHandler = (e) => {
                     </tr>
                 </tfoot>
             </table>
+            {
+                console.log(items)
+                
+            }
           {showItem && (
             <TableDetails
-            onClose={editItemCloseHandler} 
+            detailsItem={items.find(item => item.id == id)}
+            // onClose={editItemCloseHandler} 
             // onSave={itemSaveHandler}
             />
           )}
