@@ -12,8 +12,7 @@ useEffect(() => {
     try {
         (async ()=> {
             const response = await fetch(`http://localhost:3030/api/items/${itemId}`)
-            const result = await response.json()
-            console.log(result)
+            const result = await response.json()        
             setDetails(result[0])
             
         })()
@@ -29,7 +28,7 @@ useEffect(() => {
         <div className="modal">
             <div className="detail-container">
                 <header className="headers__table">
-                    <h2>User Detail</h2>
+                    <h2>Details</h2>
                     <button className="btn close" onClick={onClose}>
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                             className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">

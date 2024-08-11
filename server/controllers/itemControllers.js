@@ -15,18 +15,21 @@ itemController.get('/', (req, res) => {
 
 // Add a new item
 itemController.post('/', (req, res) => {
-    console.log(req.body);
-    
-    const { name, description, amount } = req.body;
-    const date = new Date().toLocaleDateString(); 
+    console.log(req.body, 'req.body');
+    if (Object.values(req.body).length == 0)  {
+        console.log('no body');        
+        return res.status(204).json({message: 'No content!'})
+    }
+    const { name, description, amount, updatedAt } = req.body;
+    const date = new Date().toISOString(); 
   
-    db.run("INSERT INTO items (date, name, description, amount) VALUES (?, ?, ?, ?)", [date, name, description, amount], function(err) {
-        console.log(date, name, description, amount)
+    db.run("INSERT INTO items (date, name, description, amount, updatedAt) VALUES (?, ?, ?, ?, ?)", [date, name, description, amount, updatedAt], function(err) {
+
         if (err) {
             res.status(500).send(err.message);
             return;
         }
-        res.json({ id: this.lastID, date, name, description, amount });
+        res.json({ id: this.lastID, date, name, description, amount, updatedAt });
     });
 });
 

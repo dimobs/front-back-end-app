@@ -1,0 +1,1 @@
+SELECT * FROM table_name WHERE ID = desired_id;
