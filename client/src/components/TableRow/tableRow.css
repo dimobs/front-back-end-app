@@ -6,8 +6,12 @@ table {
 
 table td,
 table th {
-    border-bottom: 1px solid #ddd ;
+    border-bottom: 1px solid #f4a261 ;
     padding: 8px;
+    box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.35),
+    inset -1px -1px 1px rgba(255, 255, 255, 0.1),
+    inset 1px 5px 10px rgba(0, 0, 0, 0.35);;
 }
 .table__body {
     display: flex;
@@ -49,4 +53,48 @@ tfoot td {
     right: 0;
     bottom: 0;
     z-index: 100;
+  }
+
+  .btn__small {
+    padding: 5px;
+    color: white;
+    opacity: 0.7;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    display: grid;
+    place-items: center;
+}
+
+.btn__small svg {
+   color: #e9c46a;
+}
+
+
+.modal {
+    width: 45rem;
+    position: absolute;
+    max-height: 90vh;
+    margin: auto;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid #f4a261;
+    backdrop-filter: blur(2px);
+    padding: 1rem;
+     box-shadow: 0 2px 18px rgba(51, 111, 42, 0.946);
+    /* box-shadow:  -5px 15px rgba(255, 255, 255, 0.1),
+  5px 5px 15px rgba(0, 0, 0, 0.35),
+  inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+  inset 5px 5px 15px rgba(0, 0, 0, 0.35);  */
+    z-index: 30;
+    margin-top: 50px;
+  }
+
+  @media (min-width: 930px) {
+      .modal {
+          width: 45rem;
+          left: calc(50% - 20rem);
+          border-radius: 14px;
+        }
+
   }

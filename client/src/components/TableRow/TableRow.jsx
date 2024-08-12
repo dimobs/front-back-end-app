@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { Navigate } from 'react-router-dom';
 import TableRowItem from './TableRowItem';
 import './tableRow.css';
 import TableDetails from './tableDetails';
@@ -58,10 +57,6 @@ export default function TableRow() {
         // ToggleItem(false);
     }
 
-    const onclickDetailsHandler = () => {    
-        ToggleItem(true)        
-    };
-
 const changeHandler = (e) => {
     onchange(state => ({
         // ...oldValue,
@@ -76,6 +71,10 @@ const changeHandler = (e) => {
 const itemDetailsClickHandler = (userId) => {
     ToggleItem(true)
     setId(userId);
+}
+
+const itemModalCloseHandler = () => {
+    ToggleItem(false)
 }
 
     return (
@@ -156,7 +155,7 @@ const itemDetailsClickHandler = (userId) => {
           {showItem && (
             <TableDetails
             detailsItem={items.find(item => item.id == id)}
-            // onClose={editItemCloseHandler} 
+            onClose={itemModalCloseHandler} 
             // onSave={itemSaveHandler}
             />
           )}

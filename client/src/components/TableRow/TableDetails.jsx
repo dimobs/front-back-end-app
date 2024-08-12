@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import formatDate from "../../util/formatDate";
 
 export default function TableDetails({
-    detailsItem
+    detailsItem,
+    onClose,
 }) {
 
 const [details, setDetails] = useState([]);
 const {itemId} = useParams();
+const navigate = useNavigate();
 
 useEffect(() => {
     try {
         (async ()=> {
             const response = await fetch(`http://localhost:3030/api/items/${itemId}`)
+            if (response.status == "No Content"){
+                navigate('/404');
+                return;
+            }
             const result = await response.json()        
             setDetails(result[0])
             
@@ -22,14 +29,20 @@ useEffect(() => {
 }, [itemId])
 
 
+document.onkeydown = function (e) {
+    if (e.keyCode == 27) {
+        onClose()
+    }
+};
+
     return (
         <div className="overlay__table">
-        <div className="backdrop" onClick={() => alert('Are you sure?')}></div>
+        <div className="backdrop" onClick={onClose}></div>
         <div className="modal">
             <div className="detail-container">
                 <header className="headers__table">
                     <h2>Details</h2>
-                    <button className="btn close" onClick={() => alert('Are you sure?')}>
+                    <button className="btn__small close" onClick={onClose}>
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                             className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                             <path fill="currentColor"
@@ -52,11 +65,11 @@ useEffect(() => {
                         <p>Amout: <strong>{detailsItem.amount}</strong></p>
                         <p>
                             Date:
-                            <strong> {detailsItem.date}</strong>
+                            <strong> {formatDate(detailsItem.date)}</strong>
                         </p>
 
-                        <p>Created on: <strong>{}</strong></p>
-                        <p>Modified on: <strong>{}</strong></p>
+                        <p>Created on: <strong>{detailsItem.date}</strong></p>
+                        <p>Modified on: <strong>{detailsItem.updatedAt ? detailsItem.updatedA : 'Not Changed'}</strong></p>
                     </div>
                 </div>
             </div>
