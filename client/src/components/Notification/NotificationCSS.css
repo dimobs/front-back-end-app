@@ -1,0 +1,40 @@
+.notification {
+    position: fixed;
+    width: calc(width - 60%);
+    background-color: transparent;
+    border: 2px solid #f4a261;
+    backdrop-filter: blur(20px);
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transform: translateY(100%); */
+    animation: txt 0.5s ;
+    font-weight: 700;
+}
+
+@keyframes txt {
+	from {
+	  transform: translateY(-100%);
+	}
+	to {
+        transform: translateY(0);
+
+	}
+  }
+.notification p{
+  font-family: inherit;
+  letter-spacing: 0.1rem;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}

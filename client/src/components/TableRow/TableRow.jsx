@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import TableRowItem from './TableRowItem';
 import './tableRow.css';
 import TableDetails from './tableDetails';
+import Notification from '../Notification/Notification';
 
 
 export default function TableRow() {
@@ -14,10 +15,11 @@ export default function TableRow() {
     const [values, onchange] = useState([INITIAL_STATE]);
     const [items, setItems] = useState([]);
     const [id, setId] =useState(null);
-    const baseUrl = ('http://localhost:3030/api/items')
     const totalAmount = items.reduce((total, item) => total + Number(item.amount), 0);
     const resetFrom = () => {onchange(INITIAL_STATE)};
     const inputRef = useRef();
+    const [notification, setNotification] = useState({ message: '', visible: false });
+    const baseUrl = ('http://localhost:3030/api/items')
    
     useEffect(() => {
         if(inputRef.current){
@@ -49,8 +51,19 @@ export default function TableRow() {
         });
         const createdItems = await response.json();
         setItems(oldItems => [createdItems, ...oldItems]);
-    }catch(err){
-        console.error('Error adding item:', err);
+        setNotification({ message: 'Added successfully!', visible: true });
+        setTimeout(() => {
+            setNotification({ message: 'Saved...', visible: false });
+        }, 4000);
+
+    }catch(err){      
+        setNotification({ message: `Data not saved! You should check the server or input validation. ${err}`, visible: true });
+        setTimeout(() => {
+            setNotification({ message: '', visible: false });
+        }, 4000);
+
+        // console.error('Error adding item:', err);
+
     }
     resetFrom();
         // close modal
@@ -68,13 +81,27 @@ const changeHandler = (e) => {
     }));
 };
 
-const itemDetailsClickHandler = (userId) => {
+const itemDetailsClickHandler = (id) => {
     ToggleItem(true)
-    setId(userId);
+    setId( );
 }
 
 const itemModalCloseHandler = () => {
     ToggleItem(false)
+}
+
+const itemDelClickHandler = async (id) => {
+    const itemForDel = items.find((i) => i.id == id)
+    if (!itemForDel){
+        return
+    }
+  const hasConfirmed = confirm(`Are you shure do you want to delete ${itemForDel.name}?`);
+  if(hasConfirmed){
+    const response = await fetch(`baseUrl/${itemForDel.id}`)
+    const data = await response.json()
+    console.log(data);
+    
+  }
 }
 
     return (
@@ -114,6 +141,8 @@ const itemModalCloseHandler = () => {
                 />
                 <button className='btn-submit form__submit'>Add Item</button>
             </div>
+            <Notification message={notification.message} visible={notification.visible} onClose={() => setNotification({ message: 'From return', visible: false })} />
+
             </form>
             <table className='table__container'>
                 <thead>
@@ -138,6 +167,7 @@ const itemModalCloseHandler = () => {
                     value={i.amount}
                     index = {idx + 1}
                     itemDetailsClickHandler={itemDetailsClickHandler}
+                    itemDelClickHandler={itemDelClickHandler}
                     />
                    ))}
                 </tbody>
@@ -148,10 +178,6 @@ const itemModalCloseHandler = () => {
                     </tr>
                 </tfoot>
             </table>
-            {
-                console.log(items)
-                
-            }
           {showItem && (
             <TableDetails
             detailsItem={items.find(item => item.id == id)}

@@ -16,7 +16,9 @@ itemController.get('/', (req, res) => {
 // Add a new item
 itemController.post('/', (req, res) => {
     console.log(req.body, 'req.body');
-    if (Object.values(req.body).length == 0)  {
+        console.log(Object.values(req.body).includes(''));
+        
+    if ((Object.values(req.body).length == 0) || (Object.values(req.body).includes(''))){
         console.log('no body');        
         return res.status(204).json({message: 'No content!'})
     }
@@ -34,11 +36,6 @@ itemController.post('/', (req, res) => {
 });
 
 itemController.get('/:itemId', (req, res) => {
-    console.log('request for /:id');
-    
-    info = req.params;
-    console.log(info.itemId);
-    
     db.all(`SELECT * FROM items WHERE ID = ${info.itemId}`, (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
@@ -48,5 +45,28 @@ itemController.get('/:itemId', (req, res) => {
         res.json(rows);
     });
 });
+
+itemController.delete('/:id', async (req, res) => {
+    console.log(req.params, 'deleting...');
+    
+        try {
+            let comments = await service.readDataFile();
+            const index = comments.findIndex(c => c.commentId === req.params.id);
+    
+            if (index === -1) {
+                return res.status(404).json({ error: 'Comment not found' });
+            }
+    
+            const deletedComment = comments.splice(index, 1)[0];
+    
+            await service.writeDataFile(comments);
+    
+            res.json(deletedComment);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    });
+    
 
 module.exports = itemController;

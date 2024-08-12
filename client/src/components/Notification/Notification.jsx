@@ -1,12 +1,12 @@
 import React from 'react';
-import './NotFoundCSS.css';
+import './NotificationCSS.css';
 
 const Notification = ({ message, visible, onClose }) => {
     if (!visible) return null;
 
     return (
         <div className="notification">
-            {message}
+           <p>{message}</p> 
             <button onClick={onClose} className="close-btn">x</button>
         </div>
     );
