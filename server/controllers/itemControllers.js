@@ -37,7 +37,6 @@ itemController.get('/:id', (req, res) => {
     if (!req.params.id){
         res.status(401).json({message: 'No content'})
     }
-    
     db.all(`SELECT * FROM items WHERE ID = ${req.params.id}`, (err, rows) => {
         if (err) {
             res.status(500).send(err.message);

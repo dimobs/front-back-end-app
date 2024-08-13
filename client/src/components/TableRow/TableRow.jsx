@@ -84,13 +84,15 @@ const formSubmitHandler = async(e) => {
 const itemDetailsClickHandler = (userId) => {
     ToggleItem(true)
 try {
-(async () => {
+(async () => {  
     const response = await fetch(`${baseUrl}/${userId}`)
     if (response.status == "No Content"){
         return
     }
     const result = await response.json();
-    setItem(result);
+    console.log(result[0]);
+    
+    setItem(result[0]);
 
 })()
 }catch(err){
@@ -211,7 +213,7 @@ console.error(err)
             </table>
           {showItem && (
             <TableDetails
-            detailsItem={item[0]}            
+            detailsItem={item}            
             onClose={itemModalCloseHandler} 
             // onSave={itemSaveHandler}
             />

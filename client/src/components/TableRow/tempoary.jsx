@@ -219,3 +219,5 @@ const itemModalCloseHandler = () => {
 //         console.error(err);
 //     }    
 // }, [itemId])
+
+https://codesandbox.io/s/react-confirmation-modal-functional-component-evmtf?file=/src/index.js:508-804
