@@ -50,14 +50,23 @@ itemController.get('/:id', (req, res) => {
 
 //Del by ID
 itemController.delete('/:id', async (req, res) => {
-    console.log(req.params, 'deleting...');
+
+
+    let delItem = undefined
+    db.all(`SELECT * FROM items WHERE ID = ${req.params.id}`, (err, rows) => {
+        if (err) {
+            res.status(500).send({message:'No such ID were found. Please refresh and try again.'}, err.message);
+            return;
+        }
+        delItem = rows;
+    });
     db.all(`DELETE FROM items WHERE ID=${req.params.id}`, (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
             return;
         }
-        
-        res.json({});
+
+        res.json(delItem);
     });
     });
     

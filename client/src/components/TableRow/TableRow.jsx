@@ -20,7 +20,7 @@ export default function TableRow() {
     const inputRef = useRef();
     const [notification, setNotification] = useState({ message: '', visible: false });
     const baseUrl = ('http://localhost:3030/api/items')
-   
+    //ref
     useEffect(() => {
         if(inputRef.current){
             inputRef.current.focus();
@@ -103,10 +103,10 @@ const itemModalCloseHandler = () => {
 }
 
 const itemDelHandler = async (itemId, name) => {
-// const confirmed = confirm(`Are you sure do you want to delete ${name}`)
-// if (!confirmed){
-//     return
-// }
+const confirmed = confirm(`Are you sure do you want to delete ${name}`)
+if (!confirmed){
+    return
+}
 
 try{
     const response = await fetch(`${baseUrl}/${itemId}`, {
@@ -123,8 +123,13 @@ try{
         throw result
     }
 
-    setItems(oldItems => [...oldItems]);
+    console.log(result[0]);
     
+    // setItems(oldItems => [...oldItems]);
+    setNotification({ message: `Deleted ${result[0].name} successfully!`, visible: true });
+    setTimeout(() => {
+        setNotification({ message: '', visible: false });
+    }, 4000);
 
 }catch(err){      
 console.error(err)
