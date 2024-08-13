@@ -93,6 +93,7 @@ tfoot td {
   @media (min-width: 930px) {
       .modal {
           width: 45rem;
+          height: calc(930px - 100vh);
           left: calc(50% - 20rem);
           border-radius: 14px;
         }
