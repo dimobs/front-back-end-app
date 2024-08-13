@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Navigate } from 'react-router-dom';
 import TableRowItem from './TableRowItem';
 import './tableRow.css';
 import TableDetails from './tableDetails';
@@ -11,10 +12,11 @@ export default function TableRow() {
         description: '',
         amount: ''
     }
+    const navigate = Navigate();
     const [showItem, ToggleItem] = useState(false);
     const [values, onchange] = useState([INITIAL_STATE]);
     const [items, setItems] = useState([]);
-    const [item, setItem] = useState([]);
+    const [id, setId] =useState(null);
     const totalAmount = items.reduce((total, item) => total + Number(item.amount), 0);
     const resetFrom = () => {onchange(INITIAL_STATE)};
     const inputRef = useRef();
@@ -37,19 +39,8 @@ export default function TableRow() {
         }
     }, []);
 
-const changeHandler = (e) => {
-        onchange(state => ({
-            // ...oldValue,
-            // [e.target.name]: e.target.type === 'checkbox'
-            // ? e.target.checked
-            // : e.target.value
-            ...state,
-            [e.target.name]: e.target.value,  
-        }));
-    };
-    
-//post
-const formSubmitHandler = async(e) => {
+    const formSubmitHandler = async(e) => {
+        // prevent refresh
         e.preventDefault();
         const dataItems = Object.fromEntries(new FormData(e.currentTarget));
       try{
@@ -81,55 +72,50 @@ const formSubmitHandler = async(e) => {
         // ToggleItem(false);
     }
 
-const itemDetailsClickHandler = (userId) => {
-    ToggleItem(true)
-try {
-(async () => {
-    const response = await fetch(`${baseUrl}/${userId}`)
-    if (response.status == "No Content"){
-        return
-    }
-    const result = await response.json();
-    setItem(result);
+const changeHandler = (e) => {
+    onchange(state => ({
+        // ...oldValue,
+        // [e.target.name]: e.target.type === 'checkbox'
+        // ? e.target.checked
+        // : e.target.value
+        ...state,
+        [e.target.name]: e.target.value,  
+    }));
+};
 
-})()
-}catch(err){
-    console.error(err)
-}
+const itemDetailsClickHandler = (id) => {
+    ToggleItem(true)
+    setId(id);
 }
 
 const itemModalCloseHandler = () => {
     ToggleItem(false)
 }
 
-const itemDelHandler = async (itemId, name) => {
-// const confirmed = confirm(`Are you sure do you want to delete ${name}`)
-// if (!confirmed){
+// const itemDelClickHandler = async (id) => {
+//     const itemForDel = items.find((i) => i.id == id)
+//     if (!itemForDel){
+//         return
+//     }
+//   const hasConfirmed = confirm(`Are you shure do you want to delete ${itemForDel.name}?`);
+//   if (!hasConfirmed){
 //     return
+//   }
+      
+//   try{
+//     const response = await fetch(`${baseUrl}` + id, {
+//         method: 'DELETE',
+//     });
+//     const data = await response.json();
+//     setItems(oldItems => [...oldItems]);
+   
+
+// }catch(err){      
+//     console.error('Error Deleting Item:', err);
 // }
+//   };
 
-try{
-    const response = await fetch(`${baseUrl}/${itemId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-    if (response.status == 204){
-        return {};
-    }
-    const result = await response.json();
-    if (!response.ok){
-        throw result
-    }
 
-    setItems(oldItems => [...oldItems]);
-    
-
-}catch(err){      
-console.error(err)
-}
-}
     return (
         <div>
              <div className='table__body'>
@@ -192,8 +178,8 @@ console.error(err)
                     description={i.description}
                     value={i.amount}
                     index = {idx + 1}
-                    itemDetailsClickHandler={itemDetailsClickHandler}                    
-                    itemDelHandler={itemDelHandler}
+                    itemDetailsClickHandler={itemDetailsClickHandler}
+                    itemDelClickHandler={itemDelClickHandler}
                     />
                    ))}
                 </tbody>
@@ -206,8 +192,8 @@ console.error(err)
             </table>
           {showItem && (
             <TableDetails
-            detailsItem={item[0]}            
-            onClose={itemModalCloseHandler} 
+            detailsItem={items.find(item => item.id == id)}
+            // onClose={itemModalCloseHandler} 
             // onSave={itemSaveHandler}
             />
           )}
@@ -215,3 +201,21 @@ console.error(err)
         </div>
     );
 }
+
+
+// useEffect(() => {
+//     try {
+//         (async ()=> {
+//             const response = await fetch(`http://localhost:3030/api/items/${itemId}`)
+//             if (response.status == "No Content"){
+//                 navigate('/not-found');
+//                 return;
+//             }
+//             const result = await response.json()        
+//             setDetails(result[0])
+            
+//         })()
+//     }catch(err){
+//         console.error(err);
+//     }    
+// }, [itemId])

@@ -7,28 +7,6 @@ export default function TableDetails({
     onClose,
 }) {
 
-const [details, setDetails] = useState([]);
-const {itemId} = useParams();
-const navigate = useNavigate();
-
-useEffect(() => {
-    try {
-        (async ()=> {
-            const response = await fetch(`http://localhost:3030/api/items/${itemId}`)
-            if (response.status == "No Content"){
-                navigate('/404');
-                return;
-            }
-            const result = await response.json()        
-            setDetails(result[0])
-            
-        })()
-    }catch(err){
-        console.error(err);
-    }    
-}, [itemId])
-
-
 document.onkeydown = function (e) {
     if (e.keyCode == 27) {
         onClose()
