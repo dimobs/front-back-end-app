@@ -15,8 +15,7 @@ itemController.get('/', (req, res) => {
 
 // Add a new item
 itemController.post('/', (req, res) => {       
-    if ((Object.values(req.body).length == 0) || (Object.values(req.body).includes(''))){
-        console.log('no body');        
+    if ((Object.values(req.body).length == 0) || (Object.values(req.body).includes(''))){  
         return res.status(204).json({message: 'No content!'})
     }
     const { name, description, amount, updatedAt } = req.body;
@@ -49,8 +48,6 @@ itemController.get('/:id', (req, res) => {
 
 //Del by ID
 itemController.delete('/:id', async (req, res) => {
-
-
     let delItem = undefined
     db.all(`SELECT * FROM items WHERE ID = ${req.params.id}`, (err, rows) => {
         if (err) {
@@ -69,5 +66,4 @@ itemController.delete('/:id', async (req, res) => {
     });
     });
     
-
 module.exports = itemController;

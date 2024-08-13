@@ -128,7 +128,7 @@ try{
     console.log(result[0]);
     
     // setItems(oldItems => [...oldItems]);
-    setNotification({ message: `Deleted ${result[0].name} successfully!`, visible: true });
+    setNotification({ message: `${result[0].name} deleted successfully!`, visible: true });
     setTimeout(() => {
         setNotification({ message: '', visible: false });
     }, 4000);
