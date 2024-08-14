@@ -24,7 +24,7 @@ export default function TableRowItem (
         <>
   <tr>
     <td className="index">{index}</td>
-    <td >{formatDate(date)}</td>
+    <td >{formatDate.date(date)}</td>
     <td className='header__items td'>{name}</td>
     <td className="description header__items td" >{description}</td>
     <td className='header__items td'>{value}</td>

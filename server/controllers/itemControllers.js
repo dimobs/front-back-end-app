@@ -19,6 +19,7 @@ itemController.post('/', (req, res) => {
         return res.status(204).json({message: 'No content!'})
     }
     const { name, description, amount, updatedAt } = req.body;
+    // const date = new Date().toISOString(); 
     const date = new Date().toISOString(); 
   
     db.run("INSERT INTO items (date, name, description, amount, updatedAt) VALUES (?, ?, ?, ?, ?)", [date, name, description, amount, updatedAt], function(err) {

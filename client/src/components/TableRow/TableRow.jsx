@@ -3,8 +3,8 @@ import TableRowItem from './TableRowItem';
 import './tableRow.css';
 import TableDetails from './tableDetails';
 import Notification from '../Notification/Notification';
-import * as itemApi from '../../api/item-api';
 import Spinner from '../spinner/Spinner';
+import itemsAPI from '../../api/item-api'
 
 
 export default function TableRow() {
@@ -34,7 +34,7 @@ export default function TableRow() {
     useEffect(() => { 
         setPending(true);
       (async () => {
-        const result = await itemApi.getAll();
+        const result = await itemsAPI.getAll();
         setItems(result);
         setPending(false)
       })()

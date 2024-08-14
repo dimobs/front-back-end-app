@@ -97,8 +97,24 @@ tfoot td {
     /* height: 40vh; */
     height: auto;
   }
-  
 
+  .table-details p strong{
+  color: #f4a261;
+    margin-left: 0.3rem;
+  }
+
+  .btn_form_details {
+    display: flex;
+    margin: 10px;
+    font-size: 24px;
+    /* justify-content: left; */
+  }
+
+  .btn__details{
+    
+    width: 60px;
+    margin-left: 20px;
+  }
   @media (max-width: 630px) {
       .modal {
         position: absolute;

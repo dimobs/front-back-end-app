@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import formatDate from "../../util/formatDate";
+import formatDateTime from "../../util/formatDate";
+
 
 export default function TableDetails({
     detailsItem,
@@ -30,11 +31,11 @@ document.onkeydown = function (e) {
                     </button>
                 </header>
                 <div className="content__table">
-                    <div className="image-container__table">
+                    {/* <div className="image-container__table">
                         <img src={''} alt="avatar" className="image" />
-                    </div>
+                    </div> */}
                     <div className="table-details">
-                        <p>User Id: <strong>{detailsItem.id}</strong></p>
+                        <p>ID: <strong>{detailsItem.id}</strong></p>
                         <p>
                             name:
                             <strong>{detailsItem.name}</strong>
@@ -43,12 +44,16 @@ document.onkeydown = function (e) {
                         <p>Amout: <strong>{detailsItem.amount}</strong></p>
                         <p>
                             Date:
-                            <strong> {formatDate(detailsItem.date)}</strong>
-                        </p>
-
-                        <p>Created on: <strong>{detailsItem.date}</strong></p>
-                        <p>Modified on: <strong>{detailsItem.updatedAt ? detailsItem.updatedA : 'Not Changed'}</strong></p>
+                            <strong> {formatDateTime.dateTime(detailsItem.date)}</strong>
+                        </p>            
+                        <p>Created on ISO-DATE: <strong>{detailsItem.date}</strong></p>
+                        <p>Modified on: <strong>{detailsItem.updatedAt ? dateTime(detailsItem.updatedA) : 'It has not been changed.'}</strong></p>
                     </div>
+                </div>
+                <div className="btn_form_details">
+                <button className="btn__details">Edit</button>
+                <button className="btn__details"> Delete</button>
+                <button className="btn__details">close</button>
                 </div>
             </div>
         </div>
