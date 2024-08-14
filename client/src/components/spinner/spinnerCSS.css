@@ -21,6 +21,7 @@
     background-image: conic-gradient(from 0deg at 50% 50%, transparent 60deg, purple 110deg, blue 160deg, green 210deg, yellow 260deg, orange 310deg, red 360deg);
     width: 100px;
     height: 100px;
+    z-index: 101;
   }
    .rainbow-loader:before {
     content: "";

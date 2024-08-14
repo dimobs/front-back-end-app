@@ -6,7 +6,8 @@ export const getAll = async () => {
   return await request.get(BASE_URL);
 }
 
-export const getOne = (itemId) => { request.get(`${BASE_URL}/${itemId}`)}
+export const getOne = async (itemId) => {return await request.get(`${BASE_URL}/${itemId}`)}
+
 
 const itemsAPI = {
   getAll,

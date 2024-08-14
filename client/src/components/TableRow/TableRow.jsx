@@ -84,17 +84,14 @@ const formSubmitHandler = async(e) => {
         // ToggleItem(false);
     }
 
-const itemDetailsClickHandler = (userId) => {
+const itemDetailsOpenHandler = (itemId) => {
     ToggleItem(true)
+    setPending(true);
 try {
-(async () => {  
-    const response = await fetch(`${baseUrl}/${userId}`)
-    if (response.status == "No Content"){
-        return
-    }
-    const result = await response.json();
-    setItem(result[0]);
-
+(async () => {   
+    const response = await itemsAPI.getOne(itemId)
+    setItem(response[0]);
+    setPending(false);
 })()
 }catch(err){
     console.error(err)
@@ -103,6 +100,7 @@ try {
 
 const itemModalCloseHandler = () => {
     ToggleItem(false)
+    setPending(false);
 }
 
 const itemDelHandler = async (itemId, name) => {
@@ -204,7 +202,7 @@ console.error(err)
                     description={i.description}
                     value={i.amount}
                     index = {idx + 1}
-                    itemDetailsClickHandler={itemDetailsClickHandler}                    
+                    itemDetailsClickHandler={itemDetailsOpenHandler}                    
                     itemDelHandler={itemDelHandler}
                     />
                    ))
