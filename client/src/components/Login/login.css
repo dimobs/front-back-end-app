@@ -16,6 +16,7 @@
 }
 
 .login__container {
+  margin-top: 4rem;
     padding: 40px;
     border-radius: 20px;
     border: 8px solid #223243;
@@ -137,3 +138,13 @@
       font-weight: 500;
       color: #fff;
     }
+
+
+    @media only screen and (max-width: 650px) {
+
+.login__container {
+  margin-top: 3rem;
+
+    }
+  }
+    

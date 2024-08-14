@@ -1,6 +1,9 @@
 
 .header {
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
@@ -8,7 +11,8 @@
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(239, 229, 229, 0.2), 0 6px 20px 0 rgba(246, 237, 237, 0.19);
     color: white;
-    z-index: 4;
+    z-index: 9999;
+    backdrop-filter: blur(20px);
 }
 
 .logo img {

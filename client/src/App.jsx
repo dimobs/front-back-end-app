@@ -6,6 +6,7 @@ import TableRow from './components/TableRow/TableRow';
 import TableDetails from './components/TableRow/TableDetails'
 import Login from './components/Login/Login';
 import NotFound from './components/NotFound404/NotFound';
+import Spinner from './components/spinner/Spinner';
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/not-found' element={<NotFound />} />
         <Route path='/*' element={<NotFound />} />
+        <Route path='/spinner' element={<Spinner />} />
         </Routes>
         </>
     )

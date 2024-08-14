@@ -3,6 +3,8 @@ import TableRowItem from './TableRowItem';
 import './tableRow.css';
 import TableDetails from './tableDetails';
 import Notification from '../Notification/Notification';
+import * as itemApi from '../../api/item-api';
+import Spinner from '../spinner/Spinner';
 
 
 export default function TableRow() {
@@ -12,6 +14,7 @@ export default function TableRow() {
         amount: ''
     }
     const [showItem, ToggleItem] = useState(false);
+    const [pending, setPending] = useState(false);
     const [values, onchange] = useState([INITIAL_STATE]);
     const [items, setItems] = useState([]);
     const [item, setItem] = useState([]);
@@ -27,14 +30,14 @@ export default function TableRow() {
         }
     },[inputRef]);  
     
+    // getAll
     useEffect(() => { 
-        try {
-        fetch(baseUrl)
-            .then(response => response.json())
-            .then(data => setItems(data))
-        }catch (err){
-           console.error('Error fetching data:', err);
-        }
+        setPending(true);
+      (async () => {
+        const result = await itemApi.getAll();
+        setItems(result);
+        setPending(false)
+      })()
     }, []);
 
 const changeHandler = (e) => {
@@ -90,8 +93,6 @@ try {
         return
     }
     const result = await response.json();
-    console.log(result[0]);
-    
     setItem(result[0]);
 
 })()
@@ -190,7 +191,11 @@ console.error(err)
                 </thead>
                 <tbody>
       
-                   {items.map((i, idx) => (
+                   {
+                    pending 
+                    ? <Spinner /> 
+                    :
+                    items.map((i, idx) => (
                     <TableRowItem 
                     key={i.id}
                     itemId = {i.id}
@@ -202,7 +207,11 @@ console.error(err)
                     itemDetailsClickHandler={itemDetailsClickHandler}                    
                     itemDelHandler={itemDelHandler}
                     />
-                   ))}
+                   ))
+                // : <tr>
+                //     <td colSpan="6">No Items added</td>
+                //     </tr>
+                }
                 </tbody>
                 <tfoot>
                     <tr>

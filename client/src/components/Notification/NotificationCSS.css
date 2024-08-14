@@ -3,7 +3,7 @@
     width: calc(width - 60%);
     background-color: transparent;
     border: 2px solid #f4a261;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px) saturate(400%);
     color: white;
     padding: 0px;
     border-radius: 5px;
