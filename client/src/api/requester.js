@@ -20,4 +20,4 @@ async function requester(method, url, data) {
     export const post = requester.bind(null, 'POST');
     export const PUT = requester.bind(null, 'PUT');
     export const patch = requester.bind(null, 'PATCH');
-    export const del = requester.bind(null, 'DELETE');
+    export const remove = requester.bind(null, 'DELETE');

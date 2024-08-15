@@ -3,8 +3,8 @@ import TableRowItem from './TableRowItem';
 import './tableRow.css';
 import TableDetails from './tableDetails';
 import Notification from '../Notification/Notification';
+import itemsAPI from '../../api/item-api';
 import Spinner from '../spinner/Spinner';
-import itemsAPI from '../../api/item-api'
 
 
 export default function TableRow() {
@@ -13,33 +13,33 @@ export default function TableRow() {
         description: '',
         amount: ''
     }
+    const inputRef = useRef();
+    const [notification, setNotification] = useState({ message: '', visible: false });
     const [showItem, ToggleItem] = useState(false);
     const [pending, setPending] = useState(false);
     const [values, onchange] = useState([INITIAL_STATE]);
     const [items, setItems] = useState([]);
     const [item, setItem] = useState([]);
+    const baseUrl = ('http://localhost:3030/api/items')
     const totalAmount = items.reduce((total, item) => total + Number(item.amount), 0);
     const resetFrom = () => {onchange(INITIAL_STATE)};
-    const inputRef = useRef();
-    const [notification, setNotification] = useState({ message: '', visible: false });
-    const baseUrl = ('http://localhost:3030/api/items')
-    //ref
+//ref
     useEffect(() => {
         if(inputRef.current){
             inputRef.current.focus();
         }
     },[inputRef]);  
     
-    // getAll
+// getAll
     useEffect(() => { 
         setPending(true);
       (async () => {
-        const result = await itemsAPI.getAll();
+        const result = await itemsAPI.getAll()
         setItems(result);
-        setPending(false)
       })()
+      setPending(false)
     }, []);
-
+//state update
 const changeHandler = (e) => {
         onchange(state => ({
             // ...oldValue,
@@ -49,13 +49,13 @@ const changeHandler = (e) => {
             ...state,
             [e.target.name]: e.target.value,  
         }));
-    };
-    
+    };    
 //post
 const formSubmitHandler = async(e) => {
         e.preventDefault();
         const dataItems = Object.fromEntries(new FormData(e.currentTarget));
       try{
+   
         const response = await fetch(`${baseUrl}`, {
             method: 'POST',
             headers: {
@@ -71,62 +71,39 @@ const formSubmitHandler = async(e) => {
         }, 4000);
 
     }catch(err){      
-        setNotification({ message: `Data not saved! You should check the server or input validation. ${err}`, visible: true });
+        setNotification({ message: `Data not saved. Invalid input!`, visible: true });
         setTimeout(() => {
             setNotification({ message: '', visible: false });
         }, 4000);
 
-        // console.error('Error adding item:', err);
-
     }
     resetFrom();
-        // close modal
-        // ToggleItem(false);
     }
-
-const itemDetailsOpenHandler = (itemId) => {
+//getOne
+const itemDetailsClickHandler = (id) => {
     ToggleItem(true)
-    setPending(true);
 try {
-(async () => {   
-    const response = await itemsAPI.getOne(itemId)
-    setItem(response[0]);
-    setPending(false);
+(async () => {
+    const result = await itemsAPI.getOne(id)  
+    setItem(result[0]);
 })()
+
 }catch(err){
     console.error(err)
 }
-}
-
-const itemModalCloseHandler = () => {
-    ToggleItem(false)
-    setPending(false);
-}
-
+};
+//delete
 const itemDelHandler = async (itemId, name) => {
 const confirmed = confirm(`Are you sure do you want to delete ${name}`)
 if (!confirmed){
     return
 }
-
 try{
-    const response = await fetch(`${baseUrl}/${itemId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-    if (response.status == 204){
-        return {};
-    }
-    const result = await response.json();
-    if (!response.ok){
-        throw result
-    }
-
-    console.log(result[0]);
+    const result = await itemsAPI.remove(itemId, name);   
     
-    // setItems(oldItems => [...oldItems]);
+    const restValues = items.filter((i) => i.id !== itemId);
+    setItems(restValues);
+
     setNotification({ message: `${result[0].name} deleted successfully!`, visible: true });
     setTimeout(() => {
         setNotification({ message: '', visible: false });
@@ -136,10 +113,15 @@ try{
 console.error(err)
 }
 }
+//close modal
+const itemModalCloseHandler = () => {
+    ToggleItem(false)
+}
     return (
         <div>
              <div className='table__body'>
-            <h1>Item List</h1>
+            <h1>Table</h1>
+            <Notification message={notification.message} visible={notification.visible} onClose={() => setNotification({ message: 'From return', visible: false })} />
             <form onSubmit={formSubmitHandler}>
             <div>
                 <input
@@ -149,7 +131,8 @@ console.error(err)
                     placeholder="Name"
                     id="name"
                     name='name'
-                    value={values.name || ''}
+                    // value={values.name || ''}
+                    value={values.name}
                     onChange={changeHandler}
                 />
                 <input
@@ -158,7 +141,7 @@ console.error(err)
                     placeholder="Description"
                     id='description'
                     name='description'
-                    value={values.description || ''}
+                    value={values.description}
                     onChange={changeHandler}
                 />
                 <input
@@ -168,13 +151,11 @@ console.error(err)
                     id='amount'
                     placeholder="Amount"
                     name='amount'
-                    value={values.amount || ''}
+                    value={values.amount}
                     onChange={changeHandler}
                 />
                 <button className='btn-submit form__submit'>Add Item</button>
             </div>
-            <Notification message={notification.message} visible={notification.visible} onClose={() => setNotification({ message: 'From return', visible: false })} />
-
             </form>
             <table className='table__container'>
                 <thead>
@@ -202,13 +183,10 @@ console.error(err)
                     description={i.description}
                     value={i.amount}
                     index = {idx + 1}
-                    itemDetailsClickHandler={itemDetailsOpenHandler}                    
+                    itemDetailsClickHandler={itemDetailsClickHandler}                    
                     itemDelHandler={itemDelHandler}
                     />
                    ))
-                // : <tr>
-                //     <td colSpan="6">No Items added</td>
-                //     </tr>
                 }
                 </tbody>
                 <tfoot>

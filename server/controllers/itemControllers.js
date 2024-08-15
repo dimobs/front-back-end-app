@@ -55,6 +55,7 @@ itemController.delete('/:id', async (req, res) => {
             res.status(500).send({message:'No such ID were found. Please refresh and try again.'}, err.message);
             return;
         }
+
         delItem = rows;
     });
     db.all(`DELETE FROM items WHERE ID=${req.params.id}`, (err, rows) => {
@@ -63,7 +64,7 @@ itemController.delete('/:id', async (req, res) => {
             return;
         }
 
-        res.json(delItem);
+        res.json(delItem);        
     });
     });
     
