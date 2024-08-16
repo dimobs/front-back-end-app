@@ -5,6 +5,7 @@ import TableDetails from './tableDetails';
 import Notification from '../Notification/Notification';
 import itemsAPI from '../../api/item-api';
 import Spinner from '../spinner/Spinner';
+import useFocus from '../../hooks/useFocus';
 
 
 export default function TableRow() {
@@ -13,7 +14,6 @@ export default function TableRow() {
         description: '',
         amount: ''
     }
-    const inputRef = useRef();
     const [notification, setNotification] = useState({ message: '', visible: false });
     const [showItem, ToggleItem] = useState(false);
     const [pending, setPending] = useState(false);
@@ -23,20 +23,37 @@ export default function TableRow() {
     const baseUrl = ('http://localhost:3030/api/items')
     const totalAmount = items.reduce((total, item) => total + Number(item.amount), 0);
     const resetFrom = () => {onchange(INITIAL_STATE)};
-//ref
-    useEffect(() => {
-        if(inputRef.current){
-            inputRef.current.focus();
-        }
-    },[inputRef]);  
+    const inputFocus = useFocus();
     
+    // useEffect(() =>{
+    //     (async() => {
+    //         let data = undefined
+    //         setPending(true)
+    //         try{
+    //         const result = await fetch(`http://localhost:3030/status`)
+    //          data = result.json();
+    //         }catch(err){
+    //             setNotification({ message: 'Cannot reach the server', data, visible: true });
+    //             setTimeout(() => {
+    //                 setNotification({ message: '', visible: false });
+    //                 }, 5000);
+    //         }
+    //     })()
+    // }, []);
 // getAll
     useEffect(() => { 
         setPending(true);
-      (async () => {
+        (async () => {
+          try {
         const result = await itemsAPI.getAll()
         setItems(result);
-      })()
+    }catch(err){  
+        setNotification({ message: `Cannot reach the server.\nServer said: ${err}`, visible: true });
+        setTimeout(() => {
+            setNotification({ message: '', visible: false });
+            }, 6000);
+        }
+    })()
       setPending(false)
     }, []);
 //state update
@@ -50,33 +67,39 @@ const changeHandler = (e) => {
             [e.target.name]: e.target.value,  
         }));
     };    
-//post
+//Submit post
 const formSubmitHandler = async(e) => {
         e.preventDefault();
         const dataItems = Object.fromEntries(new FormData(e.currentTarget));
-      try{
-   
-        const response = await fetch(`${baseUrl}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dataItems),
-        });
-        const createdItems = await response.json();
-        setItems(oldItems => [createdItems, ...oldItems]);
+        const result = await itemsAPI.create(dataItems);
+        setItems(oldState => [result, ...oldState])
         setNotification({ message: 'Added successfully!', visible: true });
         setTimeout(() => {
-            setNotification({ message: 'Saved...', visible: false });
+        setNotification({ message: 'Saved...', visible: false });
         }, 4000);
 
-    }catch(err){      
-        setNotification({ message: `Data not saved. Invalid input!`, visible: true });
-        setTimeout(() => {
-            setNotification({ message: '', visible: false });
-        }, 4000);
+        //   try{
+    //     const response = await fetch(`${baseUrl}`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(dataItems),
+    //     });
+    //     const createdItems = await response.json();
+    //     setItems(oldItems => [createdItems, ...oldItems]);
+    //     setNotification({ message: 'Added successfully!', visible: true });
+    //     setTimeout(() => {
+    //         setNotification({ message: 'Saved...', visible: false });
+    //     }, 4000);
 
-    }
+    // }catch(err){      
+    //     setNotification({ message: `Data not saved. Invalid input!`, visible: true });
+    //     setTimeout(() => {
+    //         setNotification({ message: '', visible: false });
+    //     }, 4000);
+
+    // }
     resetFrom();
     }
 //getOne
@@ -126,7 +149,7 @@ const itemModalCloseHandler = () => {
             <div>
                 <input
                     className='input__table'
-                    ref={inputRef}
+                    ref={inputFocus}
                     type="text"
                     placeholder="Name"
                     id="name"
