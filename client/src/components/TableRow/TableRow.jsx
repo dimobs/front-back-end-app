@@ -9,37 +9,16 @@ import useFocus from '../../hooks/useFocus';
 
 
 export default function TableRow() {
-    const INITIAL_STATE = {
-        name: '',
-        description: '',
-        amount: ''
-    }
+    const INITIAL_STATE = {name: '',description: '',amount: ''};
     const [notification, setNotification] = useState({ message: '', visible: false });
     const [showItem, ToggleItem] = useState(false);
     const [pending, setPending] = useState(false);
-    const [values, onchange] = useState([INITIAL_STATE]);
+    const [values, onchange] = useState(INITIAL_STATE);
     const [items, setItems] = useState([]);
     const [item, setItem] = useState([]);
-    const baseUrl = ('http://localhost:3030/api/items')
     const totalAmount = items.reduce((total, item) => total + Number(item.amount), 0);
     const resetFrom = () => {onchange(INITIAL_STATE)};
     const inputFocus = useFocus();
-    
-    // useEffect(() =>{
-    //     (async() => {
-    //         let data = undefined
-    //         setPending(true)
-    //         try{
-    //         const result = await fetch(`http://localhost:3030/status`)
-    //          data = result.json();
-    //         }catch(err){
-    //             setNotification({ message: 'Cannot reach the server', data, visible: true });
-    //             setTimeout(() => {
-    //                 setNotification({ message: '', visible: false });
-    //                 }, 5000);
-    //         }
-    //     })()
-    // }, []);
 // getAll
     useEffect(() => { 
         setPending(true);
@@ -57,8 +36,8 @@ export default function TableRow() {
       setPending(false)
     }, []);
 //state update
-const changeHandler = (e) => {
-        onchange(state => ({
+const changeHandler = (e) => {  
+            onchange(state => ({
             // ...oldValue,
             // [e.target.name]: e.target.type === 'checkbox'
             // ? e.target.checked
@@ -73,33 +52,10 @@ const formSubmitHandler = async(e) => {
         const dataItems = Object.fromEntries(new FormData(e.currentTarget));
         const result = await itemsAPI.create(dataItems);
         setItems(oldState => [result, ...oldState])
-        setNotification({ message: 'Added successfully!', visible: true });
+        setNotification({ message: `${result.name} added successfully!`, visible: true });
         setTimeout(() => {
-        setNotification({ message: 'Saved...', visible: false });
+        setNotification({ message: '', visible: false });
         }, 4000);
-
-        //   try{
-    //     const response = await fetch(`${baseUrl}`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(dataItems),
-    //     });
-    //     const createdItems = await response.json();
-    //     setItems(oldItems => [createdItems, ...oldItems]);
-    //     setNotification({ message: 'Added successfully!', visible: true });
-    //     setTimeout(() => {
-    //         setNotification({ message: 'Saved...', visible: false });
-    //     }, 4000);
-
-    // }catch(err){      
-    //     setNotification({ message: `Data not saved. Invalid input!`, visible: true });
-    //     setTimeout(() => {
-    //         setNotification({ message: '', visible: false });
-    //     }, 4000);
-
-    // }
     resetFrom();
     }
 //getOne
@@ -122,11 +78,9 @@ if (!confirmed){
     return
 }
 try{
-    const result = await itemsAPI.remove(itemId, name);   
-    
+    const result = await itemsAPI.remove(itemId, name);       
     const restValues = items.filter((i) => i.id !== itemId);
     setItems(restValues);
-
     setNotification({ message: `${result[0].name} deleted successfully!`, visible: true });
     setTimeout(() => {
         setNotification({ message: '', visible: false });
@@ -154,8 +108,8 @@ const itemModalCloseHandler = () => {
                     placeholder="Name"
                     id="name"
                     name='name'
-                    // value={values.name || ''}
                     value={values.name}
+                    // value={values.name}
                     onChange={changeHandler}
                 />
                 <input

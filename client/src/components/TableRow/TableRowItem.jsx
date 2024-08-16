@@ -21,7 +21,7 @@ export default function TableRowItem (
 
 
     return(
-        <>
+<>
   <tr>
     <td className="index">{index}</td>
     <td >{formatDate.date(date)}</td>
@@ -29,21 +29,16 @@ export default function TableRowItem (
     <td className="description header__items td" >{description}</td>
     <td className='header__items td'>{value}</td>
     <td>
-    {/* <Link to={`/item/${itemId}`} key={itemId}>
-      Edit
-    </Link> */}
     <button
-    onClick={editItemHandler}
-    >
-      Edit
+    onClick={editItemHandler}>
+    Edit
     </button>
     <button
-    onClick={deleteHandler}
-    >
-      Del
+    onClick={deleteHandler}>
+    Del
     </button>
-      </td>
+    </td>
   </tr>
-        </>
+</>
     )
 }
