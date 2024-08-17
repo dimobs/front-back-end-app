@@ -11,7 +11,7 @@ import useFocus from '../../hooks/useFocus';
 export default function TableRow() {
     const INITIAL_STATE = {name: '',description: '',amount: ''};
     const [notification, setNotification] = useState({ message: '', visible: false });
-    const [showItem, ToggleItem] = useState(false);
+    const [showToggle, setToggleItem] = useState(false);
     const [pending, setPending] = useState(false);
     const [values, onchange] = useState(INITIAL_STATE);
     const [items, setItems] = useState([]);
@@ -60,7 +60,7 @@ const formSubmitHandler = async(e) => {
     }
 //getOne
 const itemDetailsClickHandler = (id) => {
-    ToggleItem(true)
+    setToggleItem(true)
 try {
 (async () => {
     const result = await itemsAPI.getOne(id)  
@@ -77,6 +77,7 @@ const confirmed = confirm(`Are you sure do you want to delete ${name}`)
 if (!confirmed){
     return
 }
+
 try{
     const result = await itemsAPI.remove(itemId, name);       
     const restValues = items.filter((i) => i.id !== itemId);
@@ -92,7 +93,7 @@ console.error(err)
 }
 //close modal
 const itemModalCloseHandler = () => {
-    ToggleItem(false)
+    setToggleItem(false)
 }
     return (
         <div>
@@ -173,7 +174,7 @@ const itemModalCloseHandler = () => {
                     </tr>
                 </tfoot>
             </table>
-          {showItem && (
+          {showToggle && (
             <TableDetails
             detailsItem={item}            
             onClose={itemModalCloseHandler} 
