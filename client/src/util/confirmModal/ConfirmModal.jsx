@@ -1,6 +1,7 @@
 import React from 'react';
 import './ConfirmModal.css';
 
+
 const ConfirmModal = ({ isOpen, message, onConfirm, onCancel }) => {
     if (!isOpen) return null;
 

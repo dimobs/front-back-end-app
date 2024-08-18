@@ -19,6 +19,7 @@ const Header = () => {
                 <Link to="/profile">Profile</Link>
                 <Link to="/table/tableDetails">Details</Link>              
                 <Link to="/spinner">Spinner</Link>              
+                <Link to="/confirm">confirm</Link>              
             </nav>
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
                 <Link to="/logout">Logout</Link>

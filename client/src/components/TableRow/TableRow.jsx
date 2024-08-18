@@ -11,12 +11,14 @@ import useFocus from '../../hooks/useFocus';
 export default function TableRow() {
     const INITIAL_STATE = {name: '',description: '',amount: ''};
     const [notification, setNotification] = useState({ message: '', visible: false });
-    const [showToggle, setToggleItem] = useState(false);
+    const [showItem, ToggleItem] = useState(false);
     const [pending, setPending] = useState(false);
     const [values, onchange] = useState(INITIAL_STATE);
     const [items, setItems] = useState([]);
     const [item, setItem] = useState([]);
-    const totalAmount = items.reduce((total, item) => total + Number(item.amount), 0);
+    const totalAmount = (items.length == 0)
+    ? ""
+    :`${(items.reduce((total, item) => total + Number(item.amount), 0)).toFixed(2)}лв.`;
     const resetFrom = () => {onchange(INITIAL_STATE)};
     const inputFocus = useFocus();
 // getAll
@@ -30,7 +32,7 @@ export default function TableRow() {
         setNotification({ message: `Cannot reach the server.\nServer said: ${err}`, visible: true });
         setTimeout(() => {
             setNotification({ message: '', visible: false });
-            }, 6000);
+            }, 9000);
         }
     })()
       setPending(false)
@@ -60,7 +62,7 @@ const formSubmitHandler = async(e) => {
     }
 //getOne
 const itemDetailsClickHandler = (id) => {
-    setToggleItem(true)
+    ToggleItem(true)
 try {
 (async () => {
     const result = await itemsAPI.getOne(id)  
@@ -77,7 +79,6 @@ const confirmed = confirm(`Are you sure do you want to delete ${name}`)
 if (!confirmed){
     return
 }
-
 try{
     const result = await itemsAPI.remove(itemId, name);       
     const restValues = items.filter((i) => i.id !== itemId);
@@ -93,7 +94,7 @@ console.error(err)
 }
 //close modal
 const itemModalCloseHandler = () => {
-    setToggleItem(false)
+    ToggleItem(false)
 }
     return (
         <div>
@@ -170,11 +171,11 @@ const itemModalCloseHandler = () => {
                 <tfoot>
                     <tr>
                         <td colSpan="4">Total</td>
-                        <td>{totalAmount.toFixed(2)}лв.</td>                        
+                        <td>{totalAmount}</td>                        
                     </tr>
                 </tfoot>
             </table>
-          {showToggle && (
+          {showItem && (
             <TableDetails
             detailsItem={item}            
             onClose={itemModalCloseHandler} 
