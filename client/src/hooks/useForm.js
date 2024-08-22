@@ -4,16 +4,17 @@ export function useForm(initialValues, submitCallback) {
     const [values, setValues]  = useState(initialValues);
 
 
-const changeHandler = (e) => {  
-    setValues(state => ({
-        [e.target.name]: e.target.type === 'checkbox'
-        ? e.target.checked
-        : e.target.value,        
-        ...state,
-        }))
-    };   
-
-    const submitHandler = (e) => {
+    const changeHandler = (e) => {
+        setValues((state) => ({
+        //       // ...oldValue,
+        //       // [e.target.name]: e.target.type === 'checkbox'
+        //       // ? e.target.checked
+        //       // : e.target.value
+              ...state,
+              [e.target.name]: e.target.value
+            }));
+          };
+    const onSubmit = (e) => {
         e.preventDefault();
 
         submitCallback(values);
@@ -21,7 +22,7 @@ const changeHandler = (e) => {
     return {
         values,
         changeHandler,
-        submitHandler,
+        onSubmit,
     };
 }
 

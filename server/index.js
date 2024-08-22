@@ -5,6 +5,7 @@ const initDB = require('./config/user-DB');
 const { connectDB } = require('./config/items-DB');
 const itemController = require('./controllers/itemControllers');
 const session = require('./middlewares/session');
+const authController = require('./controllers/authController');
 
 
 start()
@@ -20,7 +21,7 @@ app.use(session());
 app.use(express.json());
 
 app.use('/api/items', itemController)
-// app.use('/api/items', AuthController)
+app.use('/users', authController)
 
 app.listen(config.PORT, () => console.log("Server running on", `http://localhost:${config.PORT}`));
 

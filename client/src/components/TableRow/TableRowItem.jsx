@@ -8,7 +8,7 @@ export default function TableRowItem (
       description, 
       value, 
       index, 
-      itemDelHandler, 
+      // itemDelHandler, 
       itemDetailsClickHandler}) {
       
       const editItemHandler= () =>{
