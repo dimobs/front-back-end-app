@@ -2,14 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './login.css'
 import { useForm } from '../../hooks/useForm';
+import { useLogin } from '../../hooks/useAuth';
 
 const INITIAL_VALUES = {email: '', password: '',}
 
 export default function Login() {
-  // const login = useLogin();
-// useForm(INITIAL_VALUES, ({email, password}) => login(email, password))
+  const login = useLogin();
+const {values, changeHandler, onSubmit} = useForm(INITIAL_VALUES, ({email, password}) => login(email, password))
 
-const [formValues, setFormValues] = useState(INITIAL_VALUES)
+// const [formValues, setFormValues] = useState(INITIAL_VALUES)
 
 const inputRef = useRef();
 
@@ -17,21 +18,21 @@ useEffect(() =>{
   inputRef.current.focus();
 }, []);
 
-const formSubmitHandler = (e) => {
-  e.preventDefault();
-}
+// const formSubmitHandler = (e) => {
+//   e.preventDefault();
+// }
 
-const changeHandler = (e) => {
-  setFormValues(oldValue => ({
-    ...oldValue,
-    [e.target.name]: e.target.type === 'checkbox'
-    ? e.target.checked
-    : e.target.value,
-  }));
-};
+// const changeHandler = (e) => {
+//   setFormValues(oldValue => ({
+//     ...oldValue,
+//     [e.target.name]: e.target.type === 'checkbox'
+//     ? e.target.checked
+//     : e.target.value,
+//   }));
+// };
 
     return(
-      <form onSubmit={formSubmitHandler}>
+      <form onSubmit={onSubmit}>
       <div className="login__section">
       <div className="login__body">
 <div className="login__container">
@@ -44,7 +45,7 @@ const changeHandler = (e) => {
        required="required" 
        name='email'
        ref={inputRef}
-       value={formValues.email}
+       value={values.email}
        onChange={changeHandler}
        />
       <i className="fa-regular fa-envelope" />
@@ -55,7 +56,7 @@ const changeHandler = (e) => {
       type="password" 
       required="required"
       name='password' 
-      value={formValues.password}
+      value={values.password}
        onChange={changeHandler}
       />
       <i className="fa-solid fa-lock" />
@@ -68,7 +69,7 @@ const changeHandler = (e) => {
     </div>
     <p>
       Not Registered ?{" "}
-      <Link to="\register" className="create">
+      <Link to="/register" className="create">
         Create an account
       </Link>
     </p>

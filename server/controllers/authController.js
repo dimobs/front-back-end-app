@@ -1,8 +1,7 @@
 const authController = require('express').Router();
 const { body, validationResult } = require('express-validator');
 const { register, login, logout } = require('../services/userService');
-const {parserError} = require('../util/parser')
-
+const {parseError} = require('../util/parser')
 
 authController.post('/register',
     body('email').isEmail().withMessage('Invalid email'),
@@ -16,7 +15,7 @@ authController.post('/register',
             const token = await register(req.body.email, req.body.password);
             res.json(token);
         } catch (error) { 
-            const message = parserError(error);
+            const message = parseError(error);
             res.status(400).json({ message });
         }
     });
@@ -29,8 +28,8 @@ authController.post('/login',
         const token = await login(req.body.email, req.body.password);
         res.json(token);
     } catch (error) {
-        const message = parseError(error);
-        res.status(401).json({ message });
+        // const message = parseError(error);
+        res.status(401).json(error);
     }
 });
 

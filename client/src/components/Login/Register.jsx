@@ -82,7 +82,7 @@ const changeHandler = (e) => {
     </div>
     <p>
       Already a member ?{" "}
-      <Link to="\login" className="login">
+      <Link to="/login" className="login">
         Log in
       </Link>
     </p>

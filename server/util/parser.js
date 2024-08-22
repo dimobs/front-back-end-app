@@ -1,4 +1,4 @@
-function parserError(error) {
+ function parseError(error) {
     if (Array.isArray(error)) {
         return error.map(e => e.msg).join('\n');
     }else if (error.name = 'ValidationError') {
@@ -8,6 +8,4 @@ function parserError(error) {
     }
 }
 
-module.export = {
-    parserError
-};
+module.export = {parseError};
