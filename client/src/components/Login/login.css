@@ -37,7 +37,7 @@
   
   .login__container .form.signin,
   .login__container.signinForm .form.signup {
-    display: none;
+    /* display: none; */
   }
   
   .login__container.signinForm .form.signin {

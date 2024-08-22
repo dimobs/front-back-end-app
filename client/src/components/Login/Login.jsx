@@ -3,18 +3,13 @@ import { Link } from 'react-router-dom';
 import './login.css'
 import { useForm } from '../../hooks/useForm';
 
-const INITIAL_VALUES = {email: '', password: '', rePass: '',}
+const INITIAL_VALUES = {email: '', password: '',}
 
-export default function Register() {
+export default function Login() {
 
 useForm(INITIAL_VALUES)
 
-const [formValues, setFormValues] =useState({
-  username: '',
-  email: '',
-  password: '',
-  rePass: '',
-})
+const [formValues, setFormValues] = useState(INITIAL_VALUES)
 
 const inputRef = useRef();
 
@@ -40,85 +35,40 @@ const changeHandler = (e) => {
       <div className="login__section">
       <div className="login__body">
 <div className="login__container">
-  <div className="form signup">
-    {/* Register */}
-    <h2>Sign Up</h2>
-    {/* <div className="inputBox">
-      <input 
-      type="text" 
-      required="required" 
-      ref={inputRef}
-      name='username'
-      id="username"
-      value={formValues.username}
-      onChange={changeHandler}
-      />
-      <i className="fa-regular fa-user" />
-      <span>username</span>
-    </div> */}
+  <div className="form signin">
+    <h2>Login</h2>
     <div className="inputBox">
-      <input type="text"
+      <input 
+      type="text"
        id="email"
-      ref={inputRef}
+       required="required" 
        name='email'
+       ref={inputRef}
        value={formValues.email}
        onChange={changeHandler}
-       required="required" 
        />
       <i className="fa-regular fa-envelope" />
       <span>email address</span>
     </div>
     <div className="inputBox">
-      <input type="password" 
-      required="required" 
-      id='password'
-      name='password'
-      value={formValues.password}
-      onChange={changeHandler}
-      />
-      <i className="fa-solid fa-lock" />
-      <span>create password</span>
-    </div>
-    <div className="inputBox">
       <input 
       type="password" 
-      required="required" 
-      id='rePass'
-      name='repass'
-      value={formValues.rePass}
-      onChange={changeHandler}
+      required="required"
+      name='password' 
+      value={formValues.password}
+       onChange={changeHandler}
       />
-      <i className="fa-solid fa-lock" />
-      <span>confirm password</span>
-    </div>
-    <div className="inputBox">
-      <input type="submit" value="Create Account" />
-    </div>
-    <p>
-      Already a member ?{" "}
-      <Link to="\login" className="login">
-        Log in
-      </Link>
-    </p>
-  </div>
-  <div className="form signin">
-    <h2>Sign In</h2>
-    <div className="inputBox">
-      <input type="text" required="required" />
-      <i className="fa-regular fa-user" />
-      <span>username</span>
-    </div>
-    <div className="inputBox">
-      <input type="password" required="required" />
       <i className="fa-solid fa-lock" />
       <span>password</span>
     </div>
     <div className="inputBox">
-      <input type="submit" value="Login" />
+      <input 
+      type="submit" 
+      value="Login" />
     </div>
     <p>
       Not Registered ?{" "}
-      <Link to="#" className="create">
+      <Link to="\register" className="create">
         Create an account
       </Link>
     </p>
