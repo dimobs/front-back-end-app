@@ -118,3 +118,7 @@ export const postData = async (url, payload) => {
         throw error;
     }
 };
+
+
+
+Autocomplete = https://codesandbox.io/p/sandbox/react-input-autocomplete-knwn3?file=%2Fsrc%2FInputAuto.js

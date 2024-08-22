@@ -42,6 +42,7 @@ const changeHandler = (e) => {
        type="text"
        id="email"
        required="required" 
+       autoComplete='email'
        name='email'
       ref={inputRef}
        value={formValues.email}
@@ -66,6 +67,7 @@ const changeHandler = (e) => {
         type="password" 
         required="required"
         name='rePass'
+        autoComplete='Re-pass your password'
         value={formValues.rePass}
         onChange={changeHandler}
         />
