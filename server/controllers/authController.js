@@ -1,7 +1,7 @@
 const authController = require('express').Router();
 const { body, validationResult } = require('express-validator');
 const { register, login, logout } = require('../services/userService');
-const { parseError } = require('../../client/utils/parser');
+const {parserError} = require('../util/parser')
 
 
 authController.post('/register',
@@ -13,18 +13,17 @@ authController.post('/register',
             if (errors.length > 0) {
                 throw errors;
             }
-
             const token = await register(req.body.email, req.body.password);
             res.json(token);
-        } catch (error) {
-            const message = parseError(error);
+        } catch (error) { 
+            const message = parserError(error);
             res.status(400).json({ message });
         }
     });
 
 authController.post('/login',
     body('email').trim().isEmail().withMessage('Please enter valid email'),
-    body('password').trim().length({min: 3}).withMessage('Password must be at least 3 characters long '),
+    body('password').trim().isLength({min: 3}).withMessage('Password must be at least 3 characters long '),
     async (req, res) => {
     try {
         const token = await login(req.body.email, req.body.password);

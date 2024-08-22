@@ -20,10 +20,11 @@ const Header = () => {
                 <Link to="/table/tableDetails">Details</Link>              
                 <Link to="/spinner">Spinner</Link>              
                 <Link to="/confirm">confirm</Link>              
+                <Link to="/login">Login</Link>
+                <Link to="/register">Login</Link>
             </nav>
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
                 <Link to="/logout">Logout</Link>
-                <Link to="/login">Login</Link>
             </nav>
             <div className="menu-toggle" onClick={toggleMenu}>
                 <span className="menu-icon"></span>

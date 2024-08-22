@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './login.css'
+import { useForm } from '../../hooks/useForm';
 
-export default function Login() {
+const INITIAL_VALUES = {email: '', password: '', rePass: '',}
+
+export default function Register() {
+
+useForm(INITIAL_VALUES)
+
 const [formValues, setFormValues] =useState({
   username: '',
   email: '',
@@ -35,8 +41,9 @@ const changeHandler = (e) => {
       <div className="login__body">
 <div className="login__container">
   <div className="form signup">
+    {/* Register */}
     <h2>Sign Up</h2>
-    <div className="inputBox">
+    {/* <div className="inputBox">
       <input 
       type="text" 
       required="required" 
@@ -48,10 +55,11 @@ const changeHandler = (e) => {
       />
       <i className="fa-regular fa-user" />
       <span>username</span>
-    </div>
+    </div> */}
     <div className="inputBox">
       <input type="text"
        id="email"
+      ref={inputRef}
        name='email'
        value={formValues.email}
        onChange={changeHandler}
@@ -88,7 +96,7 @@ const changeHandler = (e) => {
     </div>
     <p>
       Already a member ?{" "}
-      <Link to="#" className="login">
+      <Link to="\login" className="login">
         Log in
       </Link>
     </p>
