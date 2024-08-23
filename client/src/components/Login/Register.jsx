@@ -1,35 +1,42 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 import { useForm } from "../../hooks/useForm";
+import { useRegister } from "../../hooks/useAuth";
 
 const INITIAL_VALUES = { email: "", password: "", rePass: "" };
 
 export default function Register() {
-  useForm(INITIAL_VALUES);
-
-  const [formValues, setFormValues] = useState(INITIAL_VALUES);
+  const [error, setError] = useState();
+  const register = useRegister();
+  const navigate = useNavigate();
 
   const inputRef = useRef();
-
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
-  const formSubmitHandler = (e) => {
-    e.preventDefault();
-  };
+  const registerHandler = async ({ email, password, rePass }) => {
+    if (password !== rePass) {
+      return setError("Password mismatch!");
+    }
 
-  const changeHandler = (e) => {
-    setFormValues((oldValue) => ({
-      ...oldValue,
-      [e.target.name]:
-        e.target.type === "checkbox" ? e.target.checked : e.target.value,
-    }));
+    try {
+      await register(email, password);
+
+      navigate("/");
+    } catch (err) {
+      setError(err.message)
+      console.log(err.message);
+    }
   };
+    const { values, changeHandler, onSubmit } = useForm(
+      INITIAL_VALUES,
+      registerHandler
+    );
 
   return (
-    <form onSubmit={formSubmitHandler}>
+    <form onSubmit={onSubmit}>
       <div className="login__section">
         <div className="login__body">
           <div className="login__container">
@@ -43,7 +50,7 @@ export default function Register() {
                   autoComplete="email"
                   name="email"
                   ref={inputRef}
-                  value={formValues.email}
+                  value={values.email}
                   onChange={changeHandler}
                 />
                 <i className="fa-regular fa-envelope" />
@@ -55,7 +62,7 @@ export default function Register() {
                   required="required"
                   name="password"
                   autoComplete="new-password"
-                  value={formValues.password}
+                  value={values.password}
                   onChange={changeHandler}
                 />
                 <i className="fa-solid fa-lock" />
@@ -67,12 +74,17 @@ export default function Register() {
                   required="required"
                   name="rePass"
                   autoComplete="Re-pass your password"
-                  value={formValues.rePass}
+                  value={values.rePass}
                   onChange={changeHandler}
                 />
                 <i className="fa-solid fa-lock"></i>
                 <span>confirm password</span>
               </div>
+              {error && (
+                <p className="field">
+                  <span>{error}</span>
+                </p>
+              )}
               <div className="inputBox">
                 <input type="submit" value="Create Account" />
               </div>

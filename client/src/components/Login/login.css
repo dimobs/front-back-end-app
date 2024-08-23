@@ -147,4 +147,17 @@
 
     }
   }
-    
+    p.field {
+    color: rgb(206, 132, 132) !important;
+    border: 2px solid  rgb(173, 96, 96);
+    border-radius: 20px;
+    letter-spacing: 1.5px;
+    font-weight: 900;
+    padding: 9px;
+    cursor: pointer;
+    }
+
+    p.field:hover {
+color: white !important;
+border: 2px solid white;
+    }
