@@ -29,8 +29,6 @@ export function useAllTableData() {
     return [items, loading, notification, onClose];
 }
 
-
-
 export function useGetOneTableData(id) {
     const [itemAs, setItem] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -62,5 +60,15 @@ const item = {name: "Az", description: "Demo", amount: "10"
 }
 
     return [item, setItem, onClose];
+}
+
+export function useCreateTableItem() {
+    const [items, setItem] = useState([]);
+ const itemCreateHandler = async (itemData) => {
+  const result = await itemsAPI.create(itemData);
+  setItem(result)
+} 
+
+ return itemCreateHandler
 }
 

@@ -10,8 +10,8 @@ export function useForm(initialValues, submitCallback) {
         //       // [e.target.name]: e.target.type === 'checkbox'
         //       // ? e.target.checked
         //       // : e.target.value
-              ...state,
-              [e.target.name]: e.target.value
+        ...state,
+        [e.target.name]: e.target.value
             }));
           };
     const onSubmit = (e) => {
@@ -22,7 +22,7 @@ export function useForm(initialValues, submitCallback) {
     return {
         values,
         changeHandler,
-        onSubmit,
+        onSubmit,        
     };
 }
 

@@ -1,22 +1,44 @@
 import { useState, useEffect, useRef } from "react";
 import TableRowItem from "./TableRowItem";
 import "./tableRow.css";
-import TableDetails from './tableDetails';
+import TableDetails from "./tableDetails";
 import Notification from "../Notification/Notification";
 // import itemsAPI from '../../api/item-api';
 import Spinner from "../spinner/Spinner";
 import useFocus from "../../hooks/useFocus";
-import { useAllTableData, useGetOneTableData } from "../../hooks/useTableItem";
+import {
+  useAllTableData,
+  useCreateTableItem,
+  useGetOneTableData,
+} from "../../hooks/useTableItem";
 import { useForm } from "../../hooks/useForm";
 import itemsAPI from "../../api/item-api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function TableRow() {
   const INITIAL_STATE = { name: "", description: "", amount: "" };
   // const [notification, setNotification] = useState({ message: '', visible: false });
-  const {idItem} = useParams();
+  // const { idItem } = useParams();
   const [showItem, ToggleItem] = useState(false);
   const inputFocus = useFocus();
+  const [items, loading, notification, onClose] = useAllTableData();
+  const createItem = useCreateTableItem();
+
+
+  const formSubmitHandler = async (values) => {
+    try {
+     
+     console.log( await createItem(values));
+     
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const { values, changeHandler, onSubmit } = useForm(
+    INITIAL_STATE,
+    formSubmitHandler
+  );
   // const [pending, setPending] = useState(false);
   // const [values, onchange] = useState(INITIAL_STATE);
   // const [items, setItems] = useState([]);
@@ -26,11 +48,9 @@ export default function TableRow() {
   // :`${(items.reduce((total, item) => total + Number(item.amount), 0)).toFixed(2)}лв.`;
   // const resetFrom = () => {onchange(INITIAL_STATE)};
 
-  
   // getAll
-  const [items, loading, notification, onClose] = useAllTableData();
   // useEffect(() => {
-    //     setPending(true);
+  //     setPending(true);
   //     (async () => {
   //       try {
   //     const result = await itemsAPI.getAll()
@@ -67,24 +87,7 @@ export default function TableRow() {
   //         }, 4000);
   //     resetFrom();
   //     }
-  //getOne  
-  const getOne = useGetOneTableData()
-  const getOneHandler = async (id) => {
-    try {
-      // const result = await getOne(id);
-      console.log(result);
-      
-    }catch(err) {
-      console.log(err);
-    }
-  }
-  function itemDetailsClickHandler (itemId) {
-      ToggleItem(true);
-      // getOneHandler(itemId)
-      
-    }
-    // const [item] = useGetOneTableData(idItem);
-    const {values, changeHandler, onSubmit} = useForm(INITIAL_STATE, itemDetailsClickHandler)
+  //getOne
 
   // const itemDetailsClickHandler = (id) => {
   //     ToggleItem(true)
@@ -119,8 +122,8 @@ export default function TableRow() {
   // }
   //close modal
   const itemModalCloseHandler = () => {
-      ToggleItem(false)
-  }
+    ToggleItem(false);
+  };
   return (
     <div>
       <div className="table__body">
@@ -130,8 +133,8 @@ export default function TableRow() {
           visible={notification.visible}
           onClose={onClose}
         />
-        {/* <form onSubmit={formSubmitHandler}> */}
-        <form>
+        <form onSubmit={onSubmit}>
+          {/* <form> */}
           <div>
             <input
               className="input__table"
@@ -178,7 +181,11 @@ export default function TableRow() {
           </thead>
           <tbody>
             {loading ? (
-            <tr><td colSpan={6}><Spinner /></td></tr>
+              <tr>
+                <td colSpan={6}>
+                  <Spinner />
+                </td>
+              </tr>
             ) : (
               items.map((i, idx) => (
                 <TableRowItem
@@ -189,7 +196,7 @@ export default function TableRow() {
                   description={i.description}
                   value={i.amount}
                   index={idx + 1}
-                  itemDetailsClickHandler={itemDetailsClickHandler}
+                  // itemDetailsClickHandler={itemDetailsClickHandler}
                   // itemDelHandler={itemDelHandler}
                 />
               ))
@@ -203,13 +210,13 @@ export default function TableRow() {
           </tfoot>
         </table>
         {showItem && (
-            <TableDetails
-            detailsItem={item}            
-            onClose={itemModalCloseHandler} 
+          <TableDetails
+            detailsItem={item}
+            onClose={itemModalCloseHandler}
 
-//            // onSave={itemSaveHandler}
-            />
-          )}
+            //            // onSave={itemSaveHandler}
+          />
+        )}
       </div>
     </div>
   );
