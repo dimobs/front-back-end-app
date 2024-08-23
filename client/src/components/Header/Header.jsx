@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css'; // Make sure to create this file
+import { AuthContext } from '../../context/AuthContext';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const {isAuthenticated, email} = useContext(AuthContext)
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -15,17 +17,42 @@ const Header = () => {
                <Link to={'/'}> <img src="../../../public/logo/dimo-favi.png" alt="Logo" /> {/* Replace with your logo */}</Link>
             </div>
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
-                <Link to="/">Home</Link>
-                <Link to="/profile">Profile</Link>
-                <Link to="/table/tableDetails">Details</Link>              
-                <Link to="/spinner">Spinner</Link>              
-                <Link to="/confirm">confirm</Link>              
-                <Link to="/login">Login</Link>
-                <Link to="/register">Register</Link>
+                <ul>
+                <div className='nav__bar'>
+               <Link to="/">Home</Link>
+               </div>
+                <div className='nav__bar'>
+                {isAuthenticated
+                ? (
+                   <>
+                    <div className='hasUser'>
+                                    <Link to="/profile">Profile</Link>
+                                    <Link to="/table/tableDetails">Details</Link>
+                                    <Link to="/spinner">Spinner</Link>
+                                    <Link to="/confirm">confirm</Link>
+                                <div>
+                                
+                                        <Link style={{marginLeft: "15rem"}} to="/logout">Logout({email.split('@')[0].toUpperCase()}) </Link>
+                                    </div>                    
+                                </div>
+                                </>
+                )            
+                :(
+                <div className='nav-bar guest'>
+               <Link to="/login">Login</Link>
+               <Link to="/register">Register</Link>
+                </div>
+            )}
+                </div>
+                </ul>
             </nav>
-            <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+                <div className="menu-toggle" onClick={toggleMenu}>
+                <span className="menu-icon"></span>
+                </div>
+            {/* <nav className={`nav ${menuOpen ? 'open' : ''}`}>
                 <Link to="/logout">Logout</Link>
-            </nav>
+            </nav> */}
+    
             <div className="menu-toggle" onClick={toggleMenu}>
                 <span className="menu-icon"></span>
             </div>
