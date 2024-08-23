@@ -9,16 +9,18 @@ const INITIAL_VALUES = { email: "", password: "" };
 export default function Login() {
   const navigate = useNavigate();
   const login = useLogin();
+
+  const loginHandler = async ({ email, password }) => {
+    try {
+      await login(email, password);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const { values, changeHandler, onSubmit } = useForm(
     INITIAL_VALUES,
-   async ({ email, password }) => {
-    try{
-      await login(email, password);
-      navigate('/')
-    } catch(err){
-      console.log(err);
-    } 
-    }
+    loginHandler
   );
 
   // const [formValues, setFormValues] = useState(INITIAL_VALUES)
@@ -54,6 +56,7 @@ export default function Login() {
                   type="text"
                   id="email"
                   required="required"
+                  autoComplete="on"
                   name="email"
                   ref={inputRef}
                   value={values.email}
@@ -66,12 +69,17 @@ export default function Login() {
                 <input
                   type="password"
                   required="required"
+                  autoComplete="on"
                   name="password"
                   value={values.password}
                   onChange={changeHandler}
                 />
                 <i className="fa-solid fa-lock" />
                 <span>password</span>
+                <label htmlFor="">
+                  Show pass
+                  <input type="checkbox" name="checkbox" />
+                </label>
               </div>
               <div className="inputBox">
                 <input type="submit" value="Login" />

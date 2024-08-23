@@ -21,16 +21,16 @@ export default function TableRow() {
   // const [values, onchange] = useState(INITIAL_STATE);
   // const [items, setItems] = useState([]);
   // const [item, setItem] = useState([]);
-  const [item, setItem] = useGetOneTableData(idItem);
   // const totalAmount = (items.length == 0)
   // ? ""
   // :`${(items.reduce((total, item) => total + Number(item.amount), 0)).toFixed(2)}лв.`;
   // const resetFrom = () => {onchange(INITIAL_STATE)};
 
+  
   // getAll
   const [items, loading, notification, onClose] = useAllTableData();
   // useEffect(() => {
-  //     setPending(true);
+    //     setPending(true);
   //     (async () => {
   //       try {
   //     const result = await itemsAPI.getAll()
@@ -67,9 +67,20 @@ export default function TableRow() {
   //         }, 4000);
   //     resetFrom();
   //     }
-  //getOne
-  const itemDetailsClickHandler = () => {
+  //getOne  
+  const getOne = useGetOneTableData()
+  const getOneHandler = async (id) => {
+    try {
+      // const result = await getOne(id);
+      console.log(result);
+      
+    }catch(err) {
+      console.log(err);
+    }
+  }
+  function itemDetailsClickHandler (itemId) {
       ToggleItem(true);
+      // getOneHandler(itemId)
       
     }
     // const [item] = useGetOneTableData(idItem);

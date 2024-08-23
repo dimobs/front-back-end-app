@@ -9,12 +9,25 @@ import Register from './components/login/Register';
 import NotFound from './components/NotFound404/NotFound';
 import Spinner from './components/spinner/Spinner';
 import ConfirmModal from './util/confirmModal/ConfirmModal';
+import { AuthContext } from './context/AuthContext';
 
 const App = () => {
+const [authState, setAuthState] = useState({});
+
+const changeAuthState = (state) => {
+    setAuthState(state)
+}
+
+const contextData = {
+    email: authState.email,
+    accessToken: authState.accessToken,
+    isAuthenticated: !!authState.email,
+    changeAuthState,
+}
 
     return (
         <>
-
+        <AuthContext.Provider value={ contextData }>
         <Header />
         <Routes>
         <Route path='/' element={<TableRow />} />
@@ -26,6 +39,7 @@ const App = () => {
         <Route path='/spinner' element={<Spinner />} />
         <Route path='/confirm' element={<ConfirmModal />} />
         </Routes>
+        </AuthContext.Provider>
         </>
     )
 };
