@@ -8,6 +8,7 @@ import Spinner from "../spinner/Spinner";
 import useFocus from "../../hooks/useFocus";
 import {
   useAllTableData,
+  useCreate,
   useCreateTableItem,
   useGetOneTableData,
 } from "../../hooks/useTableItem";
@@ -23,12 +24,16 @@ export default function TableRow() {
   const inputFocus = useFocus();
   const [items, loading, notification, onClose] = useAllTableData();
   const createItem = useCreateTableItem();
+  const handler = useCreate()
 
 
   const formSubmitHandler = async (values) => {
     try {
+    //  console.log(values);
      
-     console.log( await createItem(values));
+     const result = await handler(values);
+     console.log(result, 'from component');
+     
      
     } catch (err) {
       console.error(err.message);

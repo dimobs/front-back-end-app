@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css'; // Make sure to create this file
-import { AuthContext } from '../../context/AuthContext';
+import { useAuthContext } from '../../context/AuthContext';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const {isAuthenticated, email} = useContext(AuthContext)
+    const {isAuthenticated, email} = useAuthContext();
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
