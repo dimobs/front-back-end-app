@@ -10,6 +10,7 @@ import NotFound from './components/NotFound404/NotFound';
 import Spinner from './components/spinner/Spinner';
 import ConfirmModal from './util/confirmModal/ConfirmModal';
 import { AuthContextProvider } from './context/AuthContext';
+import Logout from './components/logout/logout';
 
 const App = () => {
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path='/*' element={<NotFound />} />
         <Route path='/spinner' element={<Spinner />} />
         <Route path='/confirm' element={<ConfirmModal />} />
+        <Route path='/logout' element={<Logout />} />
         </Routes>
         </AuthContextProvider>
         </>

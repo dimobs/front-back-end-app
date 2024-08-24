@@ -39,4 +39,9 @@ authController.get('/logout', async (req, res) => {
     res.status(204).end();
 });
 
+authController.get('/logout', async (req, res) => {
+    const token = req.token;
+    await logout(token);
+    res.status(204).end();
+});
 module.exports = authController;
