@@ -7,6 +7,8 @@ export const useLogin = () => {
     const {changeAuthState} = useAuthContext();
     
     const loginHandler = async (email, password) => {
+        console.log(email, password, 'useAuth....');
+        
         const {...authData} = await login(email, password);
 
        changeAuthState(authData);
@@ -33,8 +35,8 @@ export const useLogout = () => {
     const {logout: localLogout} = useAuthContext();
 
     const logoutHandler = async () => {
-        await logout();
         localLogout();
+        await logout();
     };
 
     return logoutHandler;

@@ -3,13 +3,13 @@ import TableRowItem from "./TableRowItem";
 import "./tableRow.css";
 import TableDetails from "./tableDetails";
 import Notification from "../Notification/Notification";
-// import itemsAPI from '../../api/item-api';
 import Spinner from "../spinner/Spinner";
 import useFocus from "../../hooks/useFocus";
 import {
   useAllTableData,
   useCreate,
   useCreateTableItem,
+  useGetOne,
   useGetOneTableData,
 } from "../../hooks/useTableItem";
 import { useForm } from "../../hooks/useForm";
@@ -24,26 +24,25 @@ export default function TableRow() {
   const inputFocus = useFocus();
   const [items, loading, notification, onClose] = useAllTableData();
   const createItem = useCreateTableItem();
-  const handler = useCreate()
+  const creatHandler = useCreate();
 
-
+  // create
   const formSubmitHandler = async (values) => {
-    try {
-    //  console.log(values);
-     
-     const result = await handler(values);
-     console.log(result, 'from component');
-     
-     
-    } catch (err) {
-      console.error(err.message);
-    }
+    console.log(values);
+    
+    // try {
+    //   const result = await handler(values);
+    //   console.log(result, "from component");
+    // } catch (err) {
+    //   console.error(err.message);
+    // }
   };
 
   const { values, changeHandler, onSubmit } = useForm(
     INITIAL_STATE,
     formSubmitHandler
   );
+
   // const [pending, setPending] = useState(false);
   // const [values, onchange] = useState(INITIAL_STATE);
   // const [items, setItems] = useState([]);
@@ -93,6 +92,17 @@ export default function TableRow() {
   //     resetFrom();
   //     }
   //getOne
+
+  // const [item, setItem] = useGetOne();
+  // const getOne = useGetOne();
+  const detailsHandler = async (id) => {
+        // ToggleItem(true);
+        // try {
+        //   await itemsAPI.getOne(id);
+        // }catch (err) {
+        //   console.error(err.message);
+        // }
+  }
 
   // const itemDetailsClickHandler = (id) => {
   //     ToggleItem(true)
@@ -201,7 +211,7 @@ export default function TableRow() {
                   description={i.description}
                   value={i.amount}
                   index={idx + 1}
-                  // itemDetailsClickHandler={itemDetailsClickHandler}
+                  itemDetailsClickHandler={detailsHandler}
                   // itemDelHandler={itemDelHandler}
                 />
               ))

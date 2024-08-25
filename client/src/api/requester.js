@@ -24,6 +24,8 @@ async function requester(method, url, data) {
     }
 
         const response = await fetch(url, options);
+        console.log(url, options);
+        
         if (response.status === 204){
             return;
         }

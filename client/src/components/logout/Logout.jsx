@@ -4,7 +4,7 @@ import { useLogout } from "../../hooks/useAuth";
 export default function Logout() {
     const logout = useLogout();
 
-    Logout();
+    logout();
 
 return <Navigate to={'/'} />
 }

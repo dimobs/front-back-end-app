@@ -65,46 +65,59 @@ export function useGetOneTableData(id) {
 }
 
 export function useCreateTableItem() {
-    const { id } = useParams();
-
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(false);
     const [notification, setNotification] = useState({ message: "", visible: false })
     const onClose = () => {
         setNotification({ message: '', visible: false });
     }
-    useEffect(() => {
-        (async () => {
-            setLoading(true);
-            try {
-                const result = await itemsAPI.create(values);
-                setItems(result);
-            } catch (err) {
-                setNotification({ message: `Cannot reach the server.\nError: ${err}`, visible: true });
-                setTimeout(() => {
-                    setNotification({ message: '', visible: false });
-                }, 6000)
-            } finally {
-                setLoading(false)
-            }
-        })();
+    // useEffect(() => {
+    //     (async () => {
+    //         setLoading(true);
+    //         try {
+    //             const result = await itemsAPI.create(values);
+    //             setItems(result);
+    //         } catch (err) {
+    //             setNotification({ message: `Cannot reach the server.\nError: ${err}`, visible: true });
+    //             setTimeout(() => {
+    //                 setNotification({ message: '', visible: false });
+    //             }, 6000)
+    //         } finally {
+    //             setLoading(false)
+    //         }
+    //     })();
 
-    }, [id]);
+    // }, []);
 
-    return [items, loading, notification, onClose];
+    // return [items, loading, notification, onClose];
 }
 
 export function useCreate() {
     // const setState = useValueState();
     const [items, setItems] = useState([]);
 
-    const handler = async (values) => {
+    const createItem = async (values) => {
         const result =  await itemsAPI.create(values);
         console.log(result);
         // setItems(oldState => [result, ...oldState])
         // setState(result)
         // console.log(values, "values");
     }
-    return handler
+
+    return createItem
 }
 
+export async function useGetOne (id) {
+    const [item, setItem] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [notification, setNotification] = useState({ message: "", visible: false })
+    const onClose = () => {
+        setNotification({ message: '', visible: false });
+    }
+    const result = await itemsAPI.getOne(id);
+    setItem(result);
+    console.log(item);
+    
+
+    return [item, setItem, onClose];
+}
