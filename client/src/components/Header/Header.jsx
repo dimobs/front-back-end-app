@@ -14,7 +14,7 @@ const Header = () => {
     return (
         <header className="header">
             <div className="logo">
-               <Link to={'/'}> <img src="../../../public/logo/dimo-favi.png" alt="Logo" /> {/* Replace with your logo */}</Link>
+               <Link to={'/'}> <img src="logo/dimo-favi.png" alt="Logo" /> {/* Replace with your logo */}</Link>
             </div>
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
                 <ul>

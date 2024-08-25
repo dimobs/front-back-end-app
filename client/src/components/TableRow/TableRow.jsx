@@ -23,13 +23,12 @@ export default function TableRow() {
   const [showItem, ToggleItem] = useState(false);
   const inputFocus = useFocus();
   const [items, loading, notification, onClose] = useAllTableData();
-  const createItem = useCreateTableItem();
-  const creatHandler = useCreate();
+  const [item, setItem] = useGetOne();
 
   // create
   const formSubmitHandler = async (values) => {
     console.log(values);
-    
+
     // try {
     //   const result = await handler(values);
     //   console.log(result, "from component");
@@ -95,14 +94,16 @@ export default function TableRow() {
 
   // const [item, setItem] = useGetOne();
   // const getOne = useGetOne();
-  const detailsHandler = async (id) => {
-        // ToggleItem(true);
-        // try {
-        //   await itemsAPI.getOne(id);
-        // }catch (err) {
-        //   console.error(err.message);
-        // }
-  }
+
+   const detailsHandler =  (id) => {
+  ToggleItem(true);
+  setItem(id)
+  // try {
+  //   await itemsAPI.getOne(id);
+  // }catch (err) {
+  //   console.error(err.message);
+  // }
+   }
 
   // const itemDetailsClickHandler = (id) => {
   //     ToggleItem(true)

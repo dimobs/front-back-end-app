@@ -16,7 +16,7 @@ export default function TableRowItem (
       }
 
       const deleteHandler = () => {
-        itemDelHandler(itemId, name)
+        itemDelHandler(itemId)
       }
 
 

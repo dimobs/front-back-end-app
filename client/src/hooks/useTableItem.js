@@ -107,17 +107,19 @@ export function useCreate() {
     return createItem
 }
 
-export async function useGetOne (id) {
-    const [item, setItem] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [notification, setNotification] = useState({ message: "", visible: false })
-    const onClose = () => {
-        setNotification({ message: '', visible: false });
-    }
-    const result = await itemsAPI.getOne(id);
-    setItem(result);
-    console.log(item);
-    
+export function useGetOne () {
+    const [item, setState] = useState( async () => {
+        // const result = await itemsAPI.getOne();
+        // console.log(result, 'useTableItem getOne');
+        
+        // return result
+    });
 
-    return [item, setItem, onClose];
+
+    const updateState = async (id) => {                
+            const result = await itemsAPI.getOne(id);            
+        setState(result[0]);
+    }
+
+    return [item, updateState];
 }
