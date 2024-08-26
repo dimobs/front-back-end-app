@@ -24,10 +24,12 @@ export default function TableRow() {
   const inputFocus = useFocus();
   const [items, loading, notification, onClose] = useAllTableData();
   const [item, setItem] = useGetOne();
+  const [newItems, createItem] = useCreate();
 
   // create
-  const formSubmitHandler = async (values) => {
-    console.log(values);
+  const formSubmitHandler = (values) => {
+    createItem(values)
+    // console.log(values);
 
     // try {
     //   const result = await handler(values);
@@ -42,6 +44,12 @@ export default function TableRow() {
     formSubmitHandler
   );
 
+// getOne
+  const detailsHandler =  (id) => {
+    ToggleItem(true);
+    setItem(id)
+     }
+  
   // const [pending, setPending] = useState(false);
   // const [values, onchange] = useState(INITIAL_STATE);
   // const [items, setItems] = useState([]);
@@ -95,15 +103,6 @@ export default function TableRow() {
   // const [item, setItem] = useGetOne();
   // const getOne = useGetOne();
 
-   const detailsHandler =  (id) => {
-  ToggleItem(true);
-  setItem(id)
-  // try {
-  //   await itemsAPI.getOne(id);
-  // }catch (err) {
-  //   console.error(err.message);
-  // }
-   }
 
   // const itemDetailsClickHandler = (id) => {
   //     ToggleItem(true)
@@ -196,6 +195,8 @@ export default function TableRow() {
             </tr>
           </thead>
           <tbody>
+          {console.log(items, newItems, 'newitemssssssssssss')}
+
             {loading ? (
               <tr>
                 <td colSpan={6}>
@@ -203,6 +204,7 @@ export default function TableRow() {
                 </td>
               </tr>
             ) : (
+
               items.map((i, idx) => (
                 <TableRowItem
                   key={i.id}

@@ -94,17 +94,22 @@ export function useCreateTableItem() {
 
 export function useCreate() {
     // const setState = useValueState();
-    const [items, setItems] = useState([]);
+    const [newItems, setItems] = useState( async () => {
+
+    });
 
     const createItem = async (values) => {
+        console.log(values, 'use');
+        
         const result =  await itemsAPI.create(values);
-        console.log(result);
+        console.log(result, 'use table');
+        setItems(oldValues => ({values, ...oldValues}))
         // setItems(oldState => [result, ...oldState])
         // setState(result)
         // console.log(values, "values");
     }
 
-    return createItem
+    return [newItems, createItem]
 }
 
 export function useGetOne () {
