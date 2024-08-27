@@ -35,7 +35,7 @@ export default function TableRow() {
   const formSubmitHandler = async (values) => {
     try {
     const newItemCreated = await createItem(values)
-     setItems(oldState => [...oldState, newItemCreated])
+     setItems(oldState => [newItemCreated, ...oldState ])
     }catch (err){
       err.message
     }    

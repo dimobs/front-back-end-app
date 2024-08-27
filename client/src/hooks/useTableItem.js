@@ -94,29 +94,14 @@ export function useCreateTableItem() {
 }
 
 export function useCreate() {
-    // const setState = useValueState();
-    // const [items, setItems] = useState(() => {
-
-    // });
-
-    const createItem = async (values) => {    
-                   
-    await itemsAPI.create(values);
-        // setItems(result);
-    }
+    const createItem =  (values) => itemsAPI.create(values)
        
     return createItem
 }
 
 export function useGetOne () {
     const [item, setState] = useState( async () => {
-        // const result = await itemsAPI.getOne();
-        // console.log(result, 'useTableItem getOne');
-        
-        // return result
     });
-
-
     const updateState = async (id) => {                
             const result = await itemsAPI.getOne(id);            
         setState(result[0]);
@@ -125,7 +110,7 @@ export function useGetOne () {
     return [item, updateState];
 }
 
-export function useAll() {
+export function useGetAllTableItems () {
     const [all, setAll] = useState([]);
     const [loading, setLoading] = useState(false);
     const [notification, setNotification] = useState({ message: "", visible: false })
