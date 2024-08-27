@@ -6,10 +6,10 @@ import Notification from "../Notification/Notification";
 import Spinner from "../spinner/Spinner";
 import useFocus from "../../hooks/useFocus";
 import {
-  useAll,
-  // useAllTableData,
   useCreate,
   useCreateTableItem,
+  useDelete,
+  useGetAllTableItems,
   useGetOne,
   useGetOneTableData,
 } from "../../hooks/useTableItem";
@@ -17,45 +17,64 @@ import { useForm } from "../../hooks/useForm";
 import itemsAPI from "../../api/item-api";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
+import ConfirmModal from "../../util/confirmModal/ConfirmModal";
 
 export default function TableRow() {
-  const {isAuthenticated} = useAuthContext();
+  const { isAuthenticated } = useAuthContext();
   const INITIAL_STATE = { name: "", description: "", amount: "" };
   // const [notification, setNotification] = useState({ message: '', visible: false });
   // const { idItem } = useParams();
   const [showItem, ToggleItem] = useState(false);
   const inputFocus = useFocus();
   // const [items, loading, notification, onClose] = useAllTableData();
-  const [item, setItem] = useGetOne();
+  const [id, setItem] = useGetOne();
   // const [newItem, createItem] = useCreate();
   const createItem = useCreate();
-  const [items, setItems, loading, notification, onClose] = useAll();
-
+  const [items, setItems, loading, notification, setNotification, onClose] =
+    useGetAllTableItems();
+  const removeItem = useDelete();
   // create
   const formSubmitHandler = async (values) => {
+    if (Object.values(values).some((v) => v == "")) {
+      setNotification({ message: `All fields are required!`, visible: true });
+
+      setTimeout(() => {
+        setNotification({ message: "", visible: false });
+      }, 6000);
+      return;
+    }
     try {
-    const newItemCreated = await createItem(values)
-     setItems(oldState => [newItemCreated, ...oldState ])
-    }catch (err){
-      err.message
-    }    
-    
-    // setItems(oldState => [...oldState, newItem])
+      const newItemCreated = await createItem(values);
+
+      setItems((oldState) => [newItemCreated, ...oldState]);
+      setNotification({ message: `Added successfully!`, visible: true });
+      console.log(notification);
+      setTimeout(() => {
+        setNotification({ message: "", visible: false });
+      }, 6000);
+    } catch (err) {
+      setNotification({
+        message: `Your item is not recorded! Server:${err.message}`,
+        visible: true,
+      });
+      console.log(notification);
+      setTimeout(() => {
+        setNotification({ message: "", visible: false });
+      }, 6000);
+    }
   };
 
-
   const { values, changeHandler, onSubmit } = useForm(
-    INITIAL_STATE, 
-    // TO DO try catch
-  formSubmitHandler
+    INITIAL_STATE,
+    formSubmitHandler
   );
 
-// getOne
-  const detailsHandler =  (id) => {
+  // getOne
+  const detailsHandler = (id) => {
     ToggleItem(true);
-    setItem(id)
-     }
-  
+    setItem(id);
+  };
+
   // const [pending, setPending] = useState(false);
   // const [values, onchange] = useState(INITIAL_STATE);
   // const [items, setItems] = useState([]);
@@ -109,7 +128,6 @@ export default function TableRow() {
   // const [item, setItem] = useGetOne();
   // const getOne = useGetOne();
 
-
   // const itemDetailsClickHandler = (id) => {
   //     ToggleItem(true)
   // try {
@@ -123,25 +141,26 @@ export default function TableRow() {
   // }
   // };
   //delete
-  // const itemDelHandler = async (itemId, name) => {
-  // const confirmed = confirm(`Are you sure do you want to delete ${name}`)
-  // if (!confirmed){
-  //     return
-  // }
-  // try{
-  //     const result = await itemsAPI.remove(itemId, name);
-  //     const restValues = items.filter((i) => i.id !== itemId);
-  //     setItems(restValues);
-  //     setNotification({ message: `${result[0].name} deleted successfully!`, visible: true });
-  //     setTimeout(() => {
-  //         setNotification({ message: '', visible: false });
-  //     }, 4000);
 
-  // }catch(err){
-  // console.error(err)
-  // }
-  // }
-  //close modal
+  const handleDeleteClick = async (itemId, name) => {
+  const confirmed = confirm(`Are you sure do you want to delete ${name}`)
+  if (!confirmed){
+      return
+  }
+  try{
+      const result = await itemsAPI.remove(itemId);
+      const restValues = items.filter((i) => i.id !== itemId);
+      setItems(restValues);
+      setNotification({ message: `${result[0].name} deleted successfully!`, visible: true });
+      setTimeout(() => {
+          setNotification({ message: '', visible: false });
+      }, 4000);
+
+  }catch(err){
+  console.error(err)
+  }
+  }
+  // close modal
   const itemModalCloseHandler = () => {
     ToggleItem(false);
   };
@@ -154,43 +173,50 @@ export default function TableRow() {
           visible={notification.visible}
           onClose={onClose}
         />
+
+        {/* <ConfirmModal
+                isOpen={isModalOpen}
+                message={`Are you sure you want to delete ${itemToDelete?.name}?`}
+                onConfirm={confirmDelete}
+                onCancel={cancelDelete}
+            /> */}
         {isAuthenticated && (
           <form onSubmit={onSubmit}>
-          {/* <form> */}
-          <div>
-            <input
-              className="input__table"
-              ref={inputFocus}
-              type="text"
-              placeholder="Name"
-              id="name"
-              name="name"
-              value={values.name}
-              onChange={changeHandler}
-            />
-            <input
-              className="input__table"
-              type="text"
-              placeholder="Description"
-              id="description"
-              name="description"
-              value={values.description}
-              onChange={changeHandler}
-            />
-            <input
-              className="input__table"
-              type="number"
-              step="0.01"
-              id="amount"
-              placeholder="Amount"
-              name="amount"
-              value={values.amount}
-              onChange={changeHandler}
-            />
-            <button className="btn-submit form__submit">Add Item</button>
-          </div>
-        </form>
-              )}
+            {/* <form> */}
+            <div>
+              <input
+                className="input__table"
+                ref={inputFocus}
+                type="text"
+                placeholder="Name"
+                id="name"
+                name="name"
+                value={values.name}
+                onChange={changeHandler}
+              />
+              <input
+                className="input__table"
+                type="text"
+                placeholder="Description"
+                id="description"
+                name="description"
+                value={values.description}
+                onChange={changeHandler}
+              />
+              <input
+                className="input__table"
+                type="number"
+                step="0.01"
+                id="amount"
+                placeholder="Amount"
+                name="amount"
+                value={values.amount}
+                onChange={changeHandler}
+              />
+              <button className="btn-submit form__submit">Add Item</button>
+            </div>
+          </form>
+        )}
         <table className="table__container">
           <thead>
             <tr>
@@ -210,7 +236,6 @@ export default function TableRow() {
                 </td>
               </tr>
             ) : (
-
               items.map((i, idx) => (
                 <TableRowItem
                   key={i.id}
@@ -221,7 +246,7 @@ export default function TableRow() {
                   value={i.amount}
                   index={idx + 1}
                   itemDetailsClickHandler={detailsHandler}
-                  // itemDelHandler={itemDelHandler}
+                  itemDelHandler={handleDeleteClick}
                 />
               ))
             )}
@@ -235,7 +260,7 @@ export default function TableRow() {
         </table>
         {showItem && (
           <TableDetails
-            detailsItem={item}
+            detailsItem={id}
             onClose={itemModalCloseHandler}
 
             //            // onSave={itemSaveHandler}

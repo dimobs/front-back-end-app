@@ -94,7 +94,12 @@ export function useCreateTableItem() {
 }
 
 export function useCreate() {
-    const createItem =  (values) => itemsAPI.create(values)
+    const createItem =  (values) => {
+      
+        const result = itemsAPI.create(values)
+
+        return result
+    }
        
     return createItem
 }
@@ -135,5 +140,38 @@ export function useGetAllTableItems () {
 
     }, []);
 
-    return [all, setAll, loading, notification, onClose];
+    return [all, setAll, loading, notification, setNotification, onClose];
 }
+
+export function useDelete() {
+    const [delItem, setDelItem] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(null);
+
+    const handleDeleteClick = async (id) => {
+        setItemToDelete(id);
+        setIsModalOpen(true);
+    }
+    
+const confirmDelete = async (id) => {
+    try {
+    const result = await itemsAPI.remove(id);
+    console.log(result);
+    
+}catch (err){
+    console.log(err.message);
+    
+}
+}
+
+const cancelDelete = () => {
+    setIsModalOpen(false);
+    setItemToDelete(null);
+};
+
+return  [delItem, setDelItem, isModalOpen, setIsModalOpen, itemToDelete, setItemToDelete, cancelDelete, handleDeleteClick]
+}
+
+    
+
+
