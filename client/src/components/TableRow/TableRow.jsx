@@ -6,7 +6,8 @@ import Notification from "../Notification/Notification";
 import Spinner from "../spinner/Spinner";
 import useFocus from "../../hooks/useFocus";
 import {
-  useAllTableData,
+  useAll,
+  // useAllTableData,
   useCreate,
   useCreateTableItem,
   useGetOne,
@@ -15,33 +16,38 @@ import {
 import { useForm } from "../../hooks/useForm";
 import itemsAPI from "../../api/item-api";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 
 export default function TableRow() {
+  const {isAuthenticated} = useAuthContext();
   const INITIAL_STATE = { name: "", description: "", amount: "" };
   // const [notification, setNotification] = useState({ message: '', visible: false });
   // const { idItem } = useParams();
   const [showItem, ToggleItem] = useState(false);
   const inputFocus = useFocus();
-  const [items, loading, notification, onClose] = useAllTableData();
+  // const [items, loading, notification, onClose] = useAllTableData();
   const [item, setItem] = useGetOne();
-  const [newItems, createItem] = useCreate();
+  // const [newItem, createItem] = useCreate();
+  const createItem = useCreate();
+  const [items, setItems, loading, notification, onClose] = useAll();
 
   // create
-  const formSubmitHandler = (values) => {
-    createItem(values)
-    // console.log(values);
-
-    // try {
-    //   const result = await handler(values);
-    //   console.log(result, "from component");
-    // } catch (err) {
-    //   console.error(err.message);
-    // }
+  const formSubmitHandler = async (values) => {
+    try {
+    const newItemCreated = await createItem(values)
+     setItems(oldState => [...oldState, newItemCreated])
+    }catch (err){
+      err.message
+    }    
+    
+    // setItems(oldState => [...oldState, newItem])
   };
 
+
   const { values, changeHandler, onSubmit } = useForm(
-    INITIAL_STATE,
-    formSubmitHandler
+    INITIAL_STATE, 
+    // TO DO try catch
+  formSubmitHandler
   );
 
 // getOne
@@ -148,7 +154,8 @@ export default function TableRow() {
           visible={notification.visible}
           onClose={onClose}
         />
-        <form onSubmit={onSubmit}>
+        {isAuthenticated && (
+          <form onSubmit={onSubmit}>
           {/* <form> */}
           <div>
             <input
@@ -183,6 +190,7 @@ export default function TableRow() {
             <button className="btn-submit form__submit">Add Item</button>
           </div>
         </form>
+              )}
         <table className="table__container">
           <thead>
             <tr>
@@ -195,8 +203,6 @@ export default function TableRow() {
             </tr>
           </thead>
           <tbody>
-          {console.log(items, newItems, 'newitemssssssssssss')}
-
             {loading ? (
               <tr>
                 <td colSpan={6}>

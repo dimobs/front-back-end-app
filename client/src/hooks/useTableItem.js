@@ -2,33 +2,34 @@ import { useEffect, useState } from "react";
 import itemsAPI from "../api/item-api";
 import { useParams } from "react-router-dom";
 
-export function useAllTableData() {
-    const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [notification, setNotification] = useState({ message: "", visible: false })
-    const onClose = () => {
-        setNotification({ message: '', visible: false });
-    }
-    useEffect(() => {
-        (async () => {
-            setLoading(true);
-            try {
-                const result = await itemsAPI.getAll();
-                setItems(result);
-            } catch (err) {
-                setNotification({ message: `Cannot reach the server.\nError: ${err}`, visible: true });
-                setTimeout(() => {
-                    setNotification({ message: '', visible: false });
-                }, 6000)
-            } finally {
-                setLoading(false)
-            }
-        })();
 
-    }, []);
+// export function useAllTableData() {
+//     const [items, setItems] = useState([]);
+//     const [loading, setLoading] = useState(false);
+//     const [notification, setNotification] = useState({ message: "", visible: false })
+//     const onClose = () => {
+//         setNotification({ message: '', visible: false });
+//     }
+//     useEffect(() => {
+//         (async () => {
+//             setLoading(true);
+//             try {
+//                 const result = await itemsAPI.getAll();
+//                 setItems(result);
+//             } catch (err) {
+//                 setNotification({ message: `Cannot reach the server.\nError: ${err}`, visible: true });
+//                 setTimeout(() => {
+//                     setNotification({ message: '', visible: false });
+//                 }, 6000)
+//             } finally {
+//                 setLoading(false)
+//             }
+//         })();
 
-    return [items, loading, notification, onClose];
-}
+//     }, []);
+
+//     return [items, loading, notification, onClose];
+// }
 
 export function useGetOneTableData(id) {
     const [itemAs, setItem] = useState([]);
@@ -94,22 +95,17 @@ export function useCreateTableItem() {
 
 export function useCreate() {
     // const setState = useValueState();
-    const [newItems, setItems] = useState( async () => {
+    // const [items, setItems] = useState(() => {
 
-    });
+    // });
 
-    const createItem = async (values) => {
-        console.log(values, 'use');
-        
-        const result =  await itemsAPI.create(values);
-        console.log(result, 'use table');
-        setItems(oldValues => ({values, ...oldValues}))
-        // setItems(oldState => [result, ...oldState])
-        // setState(result)
-        // console.log(values, "values");
+    const createItem = async (values) => {    
+                   
+    await itemsAPI.create(values);
+        // setItems(result);
     }
-
-    return [newItems, createItem]
+       
+    return createItem
 }
 
 export function useGetOne () {
@@ -127,4 +123,32 @@ export function useGetOne () {
     }
 
     return [item, updateState];
+}
+
+export function useAll() {
+    const [all, setAll] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [notification, setNotification] = useState({ message: "", visible: false })
+    const onClose = () => {
+        setNotification({ message: '', visible: false });
+    }
+    useEffect(() => {
+        (async () => {
+            setLoading(true);
+            try {
+                const result = await itemsAPI.getAll();
+                setAll(result);
+            } catch (err) {
+                setNotification({ message: `Cannot reach the server.\nError: ${err}`, visible: true });
+                setTimeout(() => {
+                    setNotification({ message: '', visible: false });
+                }, 6000)
+            } finally {
+                setLoading(false)
+            }
+        })();
+
+    }, []);
+
+    return [all, setAll, loading, notification, onClose];
 }

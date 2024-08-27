@@ -13,10 +13,11 @@ export function useForm(initialValues, submitCallback) {
         [e.target.name]: e.target.value
             }));
           };
+          
     const onSubmit = (e) => {
         e.preventDefault();
-
         submitCallback(values);
+        setValues(initialValues);
     }
     return {
         values,

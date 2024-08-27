@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import formatDateTime from "../../util/formatDate";
+import { useAuthContext } from "../../context/AuthContext";
 
 
 export default function TableDetails({
     detailsItem,
     onClose,
 }) {
-
+const {isAuthenticated} = useAuthContext();
 document.onkeydown = function (e) {
     if (e.keyCode == 27) {
         onClose()
@@ -50,11 +51,13 @@ document.onkeydown = function (e) {
                         <p>Modified on: <strong>{detailsItem.updatedAt ? dateTime(detailsItem.updatedA) : 'It has not been changed.'}</strong></p>
                     </div>
                 </div>
+                        {isAuthenticated && (
                 <div className="btn_form_details">
                 <button className="btn__details">Edit</button>
                 <button className="btn__details"> Delete</button>
                 <button className="btn__details">close</button>
                 </div>
+                )}
             </div>
         </div>
     </div>
