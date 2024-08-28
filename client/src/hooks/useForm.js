@@ -26,7 +26,8 @@ export function useForm(initialValues, submitCallback) {
     return {
         values,
         changeHandler,
-        onSubmit,        
+        onSubmit,
+        setValues
     };
 }
 

@@ -23,21 +23,16 @@ export default function EditTable({onClose}) {
   const inputFocus = useRef();
   const {itemId}  = useParams();
   const [item, setItem] = useState(initialValue);
-// console.log(item);
 
-
-  async function getData(itemId) {
+const getOneHandler = async (itemId) => {
     console.log(itemId);
-    
     const result = await itemsAPI.getOne(itemId);
+    console.log(result[0]);
     setItem(result[0]); 
-  }
-  getData(itemId)
-  
-  const { changeHandler, onSubmit, values } = useForm(
-    Object.assign(initialValue, item),
-    (values) => {
-    }
+}
+// getOneHandler(itemId)
+  const { values, changeHandler, onSubmit  } = useForm(
+    initialValue, getOneHandler
   );
 
   return (
