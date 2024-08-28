@@ -11,6 +11,7 @@ import Spinner from './components/spinner/Spinner';
 import ConfirmModal from './util/confirmModal/ConfirmModal';
 import { AuthContextProvider } from './context/AuthContext';
 import Logout from './components/logout/logout';
+import EditTable from './components/tableRow/EditTable';
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
         <Routes>
         <Route path='/' element={<TableRow />} />
         <Route path='/item/:itemId' element={<TableDetails/>} />
+        <Route path='/edit/:itemId' element={<EditTable/>} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/not-found' element={<NotFound />} />

@@ -29,13 +29,17 @@ export default function TableRowItem (
     <td className="description header__items td" >{description}</td>
     <td className='header__items td'>{value}</td>
     <td>
-    <button
+    <button title="View"
     onClick={editItemHandler}>
-    Edit
+    View
     </button>
-    <button
+    <button title="Delete"
     onClick={deleteHandler}>
     Del
+    </button>
+    <button title="Comment"
+    onClick>
+    Comment
     </button>
     </td>
   </tr>
