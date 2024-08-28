@@ -111,7 +111,7 @@ export function useGetOne () {
             const result = await itemsAPI.getOne(id);            
         setState(result[0]);
     }
-
+    
     return [item, updateState];
 }
 

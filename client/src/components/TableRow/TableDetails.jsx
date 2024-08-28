@@ -1,19 +1,30 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import formatDateTime from "../../util/formatDate";
 import { useAuthContext } from "../../context/AuthContext";
-
 
 export default function TableDetails({
     detailsItem,
     onClose,
+    itemDelHandler,
+    
 }) {
+    const navigate = useNavigate();
 const {isAuthenticated} = useAuthContext();
 document.onkeydown = function (e) {
     if (e.keyCode == 27) {
         onClose()
     }
 };
+
+const deleteHandler = () => {
+    itemDelHandler(detailsItem.id)
+  }
+
+  const editHandler = () => {
+    onClose()
+    navigate(`/edit/${detailsItem.id}`);
+  }
 
     return (
         <div className="overlay__table">
@@ -53,9 +64,9 @@ document.onkeydown = function (e) {
                 </div>
                         {isAuthenticated && (
                 <div className="btn_form_details">
-                <button className="btn__details">Edit</button>
-                <button className="btn__details"> Delete</button>
-                <button className="btn__details">close</button>
+               <button className="btn__details"> <Link to={`/edit/${detailsItem.id}`} >Edit</Link></button>
+                <button className="btn__details" onClick={deleteHandler}> Delete</button>
+                <button className="btn__details" onClick={onClose}>close</button>
                 </div>
                 )}
             </div>

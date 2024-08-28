@@ -1,65 +1,117 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import formatDateTime from "../../util/formatDate";
 import { useAuthContext } from "../../context/AuthContext";
+import { useForm } from "../../hooks/useForm";
+import useFocus from "../../hooks/useFocus";
+import { useGetOne, useGetOneTableData } from "../../hooks/useTableItem";
+import itemsAPI, { getOne } from "../../api/item-api";
 
-
-export default function EditTable({
-    detailsItem,
-    onClose,
-}) {
-const {isAuthenticated} = useAuthContext();
-document.onkeydown = function (e) {
-    if (e.keyCode == 27) {
-        onClose()
-    }
+const initialValue = {
+  name: "",
+  description: "",
+  amount: "",
 };
 
-    return (
-        <div className="overlay__table">
-        <div className="backdrop" onClick={onClose}></div>
-        <div className="modal">
-            <div className="detail-container">
-                <header className="headers__table">
-                    <h2>Details</h2>
-                    <button className="btn__small close" onClick={onClose}>
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
-                            className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                            <path fill="currentColor"
-                                d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z">
-                            </path>
-                        </svg>
-                    </button>
-                </header>
-                <div className="content__table">
-                    {/* <div className="image-container__table">
-                        <img src={''} alt="avatar" className="image" />
-                    </div> */}
-                    <div className="table-details">
-                        <p>ID: <strong>{detailsItem.id}</strong></p>
-                        <p>
-                            name:
-                            <strong>{detailsItem.name}</strong>
-                        </p>
-                        <p>Description: <strong>{detailsItem.description}</strong></p>
-                        <p>Amout: <strong>{detailsItem.amount}</strong></p>
-                        <p>
-                            Date:
-                            <strong> {formatDateTime.dateTime(detailsItem.date)}</strong>
-                        </p>            
-                        <p>Created on ISO-DATE: <strong>{detailsItem.date}</strong></p>
-                        <p>Modified on: <strong>{detailsItem.updatedAt ? dateTime(detailsItem.updatedA) : 'It has not been changed.'}</strong></p>
-                    </div>
-                </div>
-                        {isAuthenticated && (
-                <div className="btn_form_details">
+export default function EditTable({onClose}) {
+  document.onkeydown = function (e) {
+    if (e.keyCode == 27) {
+      onClose();
+    }
+  };
+  const { isAuthenticated } = useAuthContext();
+  const inputFocus = useRef();
+  const {itemId}  = useParams();
+  const [item, setItem] = useState(initialValue);
+// console.log(item);
+
+
+  async function getData(itemId) {
+    console.log(itemId);
+    
+    const result = await itemsAPI.getOne(itemId);
+    setItem(result[0]); 
+  }
+  getData(itemId)
+  
+  const { changeHandler, onSubmit, values } = useForm(
+    Object.assign(initialValue, item),
+    (values) => {
+    }
+  );
+
+  return (
+    <div className="overlay__table">
+      <div className="backdrop" onClick={onClose}></div>
+      <div className="modal">
+        <div className="detail-container">
+          <header className="headers__table">
+            <h2>Edit</h2>
+            <button className="btn__small close" onClick={() => <Link to={'/'}/>}>
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fas"
+                data-icon="xmark"
+                className="svg-inline--fa fa-xmark"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 320 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
+                ></path>
+              </svg>
+            </button>
+          </header>
+          <form onSubmit={onSubmit}>
+            <div className="content__table">
+              <div className="image-container__table">
+                {/* <img src={''} alt="avatar" className="image" /> */}
+              </div>
+              <div>
+                <input
+                  className="input__table"
+                  ref={inputFocus}
+                  type="text"
+                  placeholder="Name"
+                  id="name"
+                  name="name"
+                  value={values.name}
+                  onChange={changeHandler}
+                />
+                <input
+                  className="input__table"
+                  type="text"
+                  placeholder="Description"
+                  id="description"
+                  name="description"
+                  value={values.description}
+                  onChange={changeHandler}
+                />
+                <input
+                  className="input__table"
+                  type="number"
+                  step="0.01"
+                  id="amount"
+                  placeholder="Amount"
+                  name="amount"
+                  value={values.amount}
+                  onChange={changeHandler}
+                />
+              </div>
+            </div>
+            {isAuthenticated && (
+              <div className="btn_form_details">
                 <button className="btn__details">Save</button>
                 <button className="btn__details"> Delete</button>
                 <button className="btn__details">close</button>
-                </div>
-                )}
-            </div>
+              </div>
+            )}
+          </form>
         </div>
+      </div>
     </div>
-);
+  );
 }

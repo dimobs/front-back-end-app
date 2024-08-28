@@ -48,7 +48,6 @@ export default function TableRow() {
 
       setItems((oldState) => [newItemCreated, ...oldState]);
       setNotification({ message: `Added successfully!`, visible: true });
-      console.log(notification);
       setTimeout(() => {
         setNotification({ message: "", visible: false });
       }, 6000);
@@ -57,7 +56,6 @@ export default function TableRow() {
         message: `Your item is not recorded! Server:${err.message}`,
         visible: true,
       });
-      console.log(notification);
       setTimeout(() => {
         setNotification({ message: "", visible: false });
       }, 6000);
@@ -155,7 +153,7 @@ export default function TableRow() {
       setTimeout(() => {
           setNotification({ message: '', visible: false });
       }, 4000);
-
+      itemModalCloseHandler();
   }catch(err){
   console.error(err)
   }
@@ -262,6 +260,7 @@ export default function TableRow() {
           <TableDetails
             detailsItem={id}
             onClose={itemModalCloseHandler}
+            itemDelHandler={handleDeleteClick}
 
             //            // onSave={itemSaveHandler}
           />

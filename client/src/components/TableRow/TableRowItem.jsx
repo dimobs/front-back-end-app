@@ -2,14 +2,16 @@ import formatDate from "../../util/formatDate"
 // import { Link } from "react-router-dom"
 
 export default function TableRowItem (
-    {itemId, 
+    {
+      itemId, 
       date, 
       name, 
       description, 
       value, 
       index, 
       itemDelHandler, 
-      itemDetailsClickHandler}) {
+      itemDetailsClickHandler
+    }) {
       
       const editItemHandler= () =>{
         itemDetailsClickHandler(itemId)
@@ -18,8 +20,6 @@ export default function TableRowItem (
       const deleteHandler = () => {
         itemDelHandler(itemId, name)
       }
-
-
     return(
 <>
   <tr>
@@ -33,12 +33,14 @@ export default function TableRowItem (
     onClick={editItemHandler}>
     View
     </button>
-    <button title="Delete"
-    onClick={deleteHandler}>
+    <button 
+    title="Delete"
+    onClick={deleteHandler}
+   >
     Del
     </button>
     <button title="Comment"
-    onClick>
+    >
     Comment
     </button>
     </td>
