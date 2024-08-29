@@ -94,28 +94,28 @@ export function useCreateTableItem() {
 }
 
 export function useCreate() {
-    const createItem =  (values) => {
-      
+    const createItem = (values) => {
+
         const result = itemsAPI.create(values)
 
         return result
     }
-       
+
     return createItem
 }
 
-export function useGetOne () {
-    const [item, setState] = useState( async () => {
+export function useGetOne() {
+    const [item, setState] = useState(async () => {
     });
-    const updateState = async (id) => {                
-            const result = await itemsAPI.getOne(id);            
+    const updateState = async (id) => {
+        const result = await itemsAPI.getOne(id);
         setState(result[0]);
     }
-    
+
     return [item, updateState];
 }
 
-export function useGetAllTableItems () {
+export function useGetAllTableItems() {
     const [all, setAll] = useState([]);
     const [loading, setLoading] = useState(false);
     const [notification, setNotification] = useState({ message: "", visible: false })
@@ -152,26 +152,40 @@ export function useDelete() {
         setItemToDelete(id);
         setIsModalOpen(true);
     }
-    
-const confirmDelete = async (id) => {
-    try {
-    const result = await itemsAPI.remove(id);
-    console.log(result);
-    
-}catch (err){
-    console.log(err.message);
-    
+
+    const confirmDelete = async (id) => {
+        try {
+            const result = await itemsAPI.remove(id);
+            console.log(result);
+
+        } catch (err) {
+            console.log(err.message);
+
+        }
+    }
+
+    const cancelDelete = () => {
+        setIsModalOpen(false);
+        setItemToDelete(null);
+    };
+
+    return [delItem, setDelItem, isModalOpen, setIsModalOpen, itemToDelete, setItemToDelete, cancelDelete, handleDeleteClick]
 }
-}
 
-const cancelDelete = () => {
-    setIsModalOpen(false);
-    setItemToDelete(null);
-};
 
-return  [delItem, setDelItem, isModalOpen, setIsModalOpen, itemToDelete, setItemToDelete, cancelDelete, handleDeleteClick]
-}
+export function useGetOneGames(gameId) {
+    const [game, setGame] = useState([]);
 
+    useEffect(() => {
+        (async () => {
+            const result = await itemsAPI.getOne(gameId);
+            // console.log(result);
+            
+            setGame(result[0])
+        })()
+    })
+    // console.log(game);
     
-
+    return [game, setGame]
+}
 

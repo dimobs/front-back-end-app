@@ -4,7 +4,7 @@ import formatDateTime from "../../util/formatDate";
 import { useAuthContext } from "../../context/AuthContext";
 import { useForm } from "../../hooks/useForm";
 import useFocus from "../../hooks/useFocus";
-import { useGetOne, useGetOneTableData } from "../../hooks/useTableItem";
+import { useGetOne, useGetOneGames, useGetOneTableData } from "../../hooks/useTableItem";
 import itemsAPI, { getOne } from "../../api/item-api";
 
 const initialValue = {
@@ -21,19 +21,23 @@ export default function EditTable({onClose}) {
   };
   const { isAuthenticated } = useAuthContext();
   const inputFocus = useRef();
-  const {itemId}  = useParams();
-  const [item, setItem] = useState(initialValue);
+  const {itemId} = useParams();
 
-const getOneHandler = async (itemId) => {
-    console.log(itemId);
-    const result = await itemsAPI.getOne(itemId);
-    console.log(result[0]);
-    setItem(result[0]); 
-}
+  
+ const [game, setGame] = useGetOneGames(itemId);
+
+// const getOneHandler = async (itemId) => {
+//     console.log(itemId);
+//     const result = await itemsAPI.getOne(itemId);
+//     console.log(result[0]);
+//     setItem(result[0]); 
+// }
 // getOneHandler(itemId)
-  const { values, changeHandler, onSubmit  } = useForm(
-    initialValue, getOneHandler
-  );
+  const { values, changeHandler, onsubmitHandler  
+
+  } = useForm(Object.assign(initialValue, game), (values) =>{
+    console.log(values, game)
+  });
 
   return (
     <div className="overlay__table">
@@ -60,7 +64,7 @@ const getOneHandler = async (itemId) => {
               </svg>
             </button>
           </header>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onsubmitHandler}>
             <div className="content__table">
               <div className="image-container__table">
                 {/* <img src={''} alt="avatar" className="image" /> */}

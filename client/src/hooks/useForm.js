@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 export function useForm(initialValues, submitCallback) {
     const [values, setValues]  = useState(initialValues);
 
-    // useEffect(() => {
-    //     setValues(initialValues)
-    // }, [initialValues]);
+    useEffect(() => {
+        setValues(initialValues)
+    }, [initialValues]);
 
     const changeHandler = (e) => {
         setValues((state) => ({
@@ -18,7 +18,7 @@ export function useForm(initialValues, submitCallback) {
             }));
           };
           
-    const onSubmit = (e) => {
+    const onsubmitHandler = (e) => {
         e.preventDefault();
         submitCallback(values);
         setValues(initialValues);
@@ -26,8 +26,7 @@ export function useForm(initialValues, submitCallback) {
     return {
         values,
         changeHandler,
-        onSubmit,
-        setValues
+        onsubmitHandler,
     };
 }
 

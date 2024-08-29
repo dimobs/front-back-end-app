@@ -62,9 +62,11 @@ const deleteHandler = () => {
                         <p>Modified on: <strong>{detailsItem.updatedAt ? dateTime(detailsItem.updatedA) : 'It has not been changed.'}</strong></p>
                     </div>
                 </div>
+                {console.log(`/edit/${detailsItem.id}`, 'details')
+                }
                         {isAuthenticated && (
                 <div className="btn_form_details">
-               <button className="btn__details"> <Link to={`/edit/${detailsItem.id}`} >Edit</Link></button>
+               <button className="btn__details"> <Link to={`/edit/${detailsItem.id}`}>Edit</Link></button>
                 <button className="btn__details" onClick={deleteHandler}> Delete</button>
                 <button className="btn__details" onClick={onClose}>close</button>
                 </div>

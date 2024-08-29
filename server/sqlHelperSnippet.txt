@@ -159,7 +159,7 @@ console.error(err)
         <div>
              <div className='table__body'>
             <h1>Item List</h1>
-            <form onSubmit={formSubmitHandler}>
+            <form onsubmit={formSubmitHandler}>
             <div>
                 <input
                     className='input__table'

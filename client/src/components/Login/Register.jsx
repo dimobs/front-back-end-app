@@ -30,13 +30,13 @@ export default function Register() {
       console.log(err.message);
     }
   };
-    const { values, changeHandler, onSubmit } = useForm(
+    const { values, changeHandler, onsubmit } = useForm(
       INITIAL_VALUES,
       registerHandler
     );
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onsubmit}>
       <div className="login__section">
         <div className="login__body">
           <div className="login__container">

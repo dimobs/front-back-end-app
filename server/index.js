@@ -6,7 +6,7 @@ const { connectDB } = require('./config/items-DB');
 const itemController = require('./controllers/itemControllers');
 const session = require('./middlewares/session');
 const authController = require('./controllers/authController');
-
+const trimBody = require('./middlewares/trimBody');
 
 start()
 async function start() {
@@ -19,11 +19,15 @@ const app = express();
 app.use(cors());
 app.use(session());
 app.use(express.json());
+app.use(trimBody());
+app.use(session()); //jwt
 
-app.use('/api/items', itemController)
-app.use('/users', authController)
+app.use('/api/items', itemController);
+app.use('/users', authController);
 
 app.listen(config.PORT, () => console.log("Server running on", `http://localhost:${config.PORT}`));
+//   app.listen(config.PORT, () => console.log(`http://192.168.50.206:${config.PORT} App is running on `));
+
 
 
 
