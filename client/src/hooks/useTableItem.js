@@ -183,9 +183,20 @@ export function useGetOneGames(gameId) {
             
             setGame(result[0])
         })()
-    })
+    }, [gameId])
     // console.log(game);
     
     return [game, setGame]
+}
+
+export function useGetOneCallback() {
+    const [item, setItem] = useState([]);
+
+    const handleCallBack = async (id) => {
+      const result = await itemsAPI.getOne(id);
+      setItem[result[0]]; 
+    }
+    
+    return [item, handleCallBack, setItem];
 }
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import useFocus from "../../hooks/useFocus";
-import { useCreate, useGetAllTableItems } from "../../hooks/useTableItem";
+import { useCreate, useGetAllTableItems, useGetOneCallback} from "../../hooks/useTableItem";
 import Spinner from "../spinner/Spinner";
 import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
@@ -17,12 +17,18 @@ export default function TableRow() {
   const inputFocus = useFocus();
   const { itemId } = useParams();
   const loading = false;
-  const [items, setItems] = useGetAllTableItems();
-  const [showItem, ToggleItem] = useState(false);
+  const [showItem, setShowItem] = useState(false);
+
   const [notification, setNotification] = useState({
     message: "",
     visible: false,
   });
+  // getOne
+  const [item, setitem] = useState([]);
+  // const [item, handleCallBack] = useGetOneCallback();
+  // getall
+  const [items, setGame] = useGetAllTableItems();
+
   // createGETTER
   const createItem = useCreate();
 
@@ -46,9 +52,16 @@ export default function TableRow() {
     setNotification({ message: "", visible: false });
   };
 
+// getOne
+const detailsHandler = async (id) => {
+  setShowItem(true);
+  setitem(id)
+  
+}
+
   // onClose
   const itemModalCloseHandler = () => {
-    ToggleItem(false);
+    setShowItem(false);
   };
   return (
     <div>
@@ -130,7 +143,10 @@ export default function TableRow() {
                   description={i.description}
                   value={i.amount}
                   index={idx + 1}
-                  // itemDetailsClickHandler={detailsHandler}
+                  itemDetailsClickHandler={() => {
+                    setShowItem(true)
+                    setitem(i)
+                  }}
                   // itemDelHandler={handleDeleteClick}
                 />
               ))
@@ -144,8 +160,8 @@ export default function TableRow() {
           </tfoot>
         </table>
         {showItem && (
-          <TableDetails
-            // detailsItem={id}
+          <TableDetails        
+            detailsItem={item}
             onClose={itemModalCloseHandler}
             // itemDelHandler={handleDeleteClick}
 
