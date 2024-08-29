@@ -1,25 +1,46 @@
 import { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import useFocus from "../../hooks/useFocus";
-import { useGetAllTableItems } from "../../hooks/useTableItem";
+import { useCreate, useGetAllTableItems } from "../../hooks/useTableItem";
 import Spinner from "../spinner/Spinner";
 import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
 import "./tableRow.css";
 import Notification from "../Notification/Notification";
+import { useParams } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
 
 const INITIAL_VALUE = { name: "", description: "", amount: "" };
 
 export default function TableRow() {
   const { isAuthenticated } = useAuthContext();
   const inputFocus = useFocus();
+  const { itemId } = useParams();
   const loading = false;
-  const [items] = useGetAllTableItems();
+  const [items, setItems] = useGetAllTableItems();
   const [showItem, ToggleItem] = useState(false);
   const [notification, setNotification] = useState({
     message: "",
     visible: false,
   });
+  // createGETTER
+  const createItem = useCreate();
+
+  // createSetter
+  const createHandler = async(values) => {
+    try{
+    const newItemCreated = await createItem(values);
+    setItems((oldState) => [newItemCreated, ...oldState]);
+    
+    }catch (err){
+      console.log(err.message);      
+    }
+  };
+  const { values, changeHandler, onsubmitHandler } = useForm(
+    INITIAL_VALUE,
+    createHandler
+  );
+
   // setOnClose
   const onClose = () => {
     setNotification({ message: "", visible: false });
@@ -46,7 +67,7 @@ export default function TableRow() {
                 onCancel={cancelDelete}
             /> */}
         {isAuthenticated && (
-          <form onSubmit={onsubmit}>
+          <form onSubmit={onsubmitHandler}>
             <div>
               <input
                 className="input__table"
@@ -55,8 +76,8 @@ export default function TableRow() {
                 placeholder="Name"
                 id="name"
                 name="name"
-                // value={values.name}
-                // onChange={changeHandler}
+                value={values.name}
+                onChange={changeHandler}
               />
               <input
                 className="input__table"
@@ -64,8 +85,8 @@ export default function TableRow() {
                 placeholder="Description"
                 id="description"
                 name="description"
-                // value={values.description}
-                // onChange={changeHandler}
+                value={values.description}
+                onChange={changeHandler}
               />
               <input
                 className="input__table"
@@ -74,8 +95,8 @@ export default function TableRow() {
                 id="amount"
                 placeholder="Amount"
                 name="amount"
-                // value={values.amount}
-                // onChange={changeHandler}
+                value={values.amount}
+                onChange={changeHandler}
               />
               <button className="btn-submit form__submit">Add Item</button>
             </div>

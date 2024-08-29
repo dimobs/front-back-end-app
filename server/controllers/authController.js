@@ -25,6 +25,8 @@ authController.post('/login',
     body('password').trim().isLength({min: 3}).withMessage('Password must be at least 3 characters long '),
     async (req, res) => {
     try {
+        console.log(req.body.email, req.body.password);
+        
         const token = await login(req.body.email, req.body.password);
         res.json(token);
     } catch (error) {
