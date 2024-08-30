@@ -8,6 +8,7 @@ export default function TableRowItem (
       name, 
       description, 
       value, 
+      modify,
       index, 
       itemDelHandler, 
       itemDetailsClickHandler
@@ -43,6 +44,11 @@ export default function TableRowItem (
     >
     Comment
     </button>
+    {modify 
+    ? <button><strong style={{color: "whitesmoke", marginTop:"5px"}}>M</strong></button>
+    : <button style={{display:"none"}}></button>
+  }  
+   
     
     </td>
   </tr>

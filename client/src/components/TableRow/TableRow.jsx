@@ -141,6 +141,7 @@ const detailsHandler = async (i) => {
                   name={i.name}
                   description={i.description}
                   value={i.amount}
+                  modify={i.updatedAt}
                   index={idx + 1}
                   itemDetailsClickHandler={() => {
                     setShowItem(true);
