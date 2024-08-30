@@ -5,7 +5,6 @@ import { useAuthContext } from "../../context/AuthContext";
 
 // export default function TableDetails({ detailsItem, onClose, itemDelHandler }) {
 export default function TableDetails({detailsItem, onClose}) {
-    console.log(detailsItem, 'item');
     
   const navigate = useNavigate();
   const { isAuthenticated } = useAuthContext();
@@ -78,7 +77,6 @@ export default function TableDetails({detailsItem, onClose}) {
           {isAuthenticated && (
             <div className="btn_form_details">
               <button className="btn__details">
-                {" "}
                 <Link to={`/edit/${detailsItem.id}`}>Edit</Link>
               </button>
               <button className="btn__details" onClick={deleteHandler}>

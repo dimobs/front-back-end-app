@@ -173,30 +173,30 @@ export function useDelete() {
 }
 
 
-export function useGetOneGames(gameId) {
-    const [game, setGame] = useState([]);
+export function useGetOneForEdit(itemId) {
+    const [item, setItem] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const result = await itemsAPI.getOne(gameId);
+            const result = await itemsAPI.getOne(itemId);
             // console.log(result);
             
-            setGame(result[0])
+            setItem(result[0])
         })()
-    }, [gameId])
+    }, [itemId])
     // console.log(game);
     
-    return [game, setGame]
+    return [item, setItem]
 }
 
-export function useGetOneCallback() {
-    const [item, setItem] = useState([]);
+// export function useGetOneCallback() {
+//     const [item, setItem] = useState([]);
 
-    const handleCallBack = async (id) => {
-      const result = await itemsAPI.getOne(id);
-      setItem[result[0]]; 
-    }
+//     const handleCallBack = async (id) => {
+//       const result = await itemsAPI.getOne(id);
+//       setItem[result[0]]; 
+//     }
     
-    return [item, handleCallBack, setItem];
-}
+//     return [item, handleCallBack, setItem];
+// }
 

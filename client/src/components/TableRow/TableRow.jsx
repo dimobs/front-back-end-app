@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import useFocus from "../../hooks/useFocus";
-import { useCreate, useGetAllTableItems, useGetOneCallback} from "../../hooks/useTableItem";
+import { useCreate, useGetAllTableItems} from "../../hooks/useTableItem";
 import Spinner from "../spinner/Spinner";
 import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
@@ -27,7 +27,7 @@ export default function TableRow() {
   const [item, setitem] = useState([]);
   // const [item, handleCallBack] = useGetOneCallback();
   // getall
-  const [items, setGame] = useGetAllTableItems();
+  const [items, setItems ] = useGetAllTableItems();
 
   // createGETTER
   const createItem = useCreate();
@@ -37,7 +37,6 @@ export default function TableRow() {
     try{
     const newItemCreated = await createItem(values);
     setItems((oldState) => [newItemCreated, ...oldState]);
-    
     }catch (err){
       console.log(err.message);      
     }
@@ -53,9 +52,9 @@ export default function TableRow() {
   };
 
 // getOne
-const detailsHandler = async (id) => {
+const detailsHandler = async (i) => {
   setShowItem(true);
-  setitem(id)
+  setitem(i)
   
 }
 
@@ -144,9 +143,11 @@ const detailsHandler = async (id) => {
                   value={i.amount}
                   index={idx + 1}
                   itemDetailsClickHandler={() => {
-                    setShowItem(true)
+                    setShowItem(true);
                     setitem(i)
+                    
                   }}
+                
                   // itemDelHandler={handleDeleteClick}
                 />
               ))
