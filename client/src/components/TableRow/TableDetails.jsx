@@ -71,7 +71,7 @@ export default function TableDetails({detailsItem, onClose}) {
                             <strong> {formatDateTime.dateTime(detailsItem.date)}</strong>
                         </p>            
                         <p>Created on ISO-DATE: <strong>{detailsItem.date}</strong></p>
-                        <p>Modified on: <strong>{detailsItem.updatedAt ? dateTime(detailsItem.updatedA) : 'It has not been changed.'}</strong></p>
+                        <p>Modified on: <strong>{detailsItem.updatedAt ? formatDateTime.dateTime(detailsItem.updatedAt) : 'It has not been changed.'}</strong></p>
             </div>
           </div>
           {isAuthenticated && (

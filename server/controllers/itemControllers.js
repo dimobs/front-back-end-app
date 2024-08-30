@@ -49,7 +49,9 @@ itemController.get('/:id', (req, res) => {
 });
 
 //update
-itemController.put('/id', (req, res) => {
+itemController.put('/:id', (req, res) => {
+    console.log(req.body);
+    
     // ToDo update hasChanged field
     const {name, description, amount } = req.body;
 

@@ -40,12 +40,14 @@ export default function EditTable() {
   //     console.log(result[0]);
   //     setItem(result[0]);
   // }
-  // getOneHandler(itemId)
+  // getOneHandler(it12emId)
   const { values, changeHandler, onsubmitHandler } = useForm(
     Object.assign(initialValue, item),
-    async (values) => {
+     async (values) => {
+      console.log(values);
     const updatedData = await itemsAPI.update(itemId, values);
     console.log(updatedData);
+    
     
     }
   );
