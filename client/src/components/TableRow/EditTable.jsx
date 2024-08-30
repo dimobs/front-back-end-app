@@ -13,7 +13,12 @@ const initialValue = {
   amount: "",
 };
 
-export default function EditTable({onClose}) {
+export default function EditTable() {
+  const navigate = useNavigate();
+const onClose = () => {
+  navigate('/')
+}
+
   document.onkeydown = function (e) {
     if (e.keyCode == 27) {
       onClose();
@@ -46,7 +51,7 @@ export default function EditTable({onClose}) {
         <div className="detail-container">
           <header className="headers__table">
             <h2>Edit</h2>
-            <button className="btn__small close" onClick={() => <Link to={'/'}/>}>
+            <button className="btn__small close" onClick={onClose}>
               <svg
                 aria-hidden="true"
                 focusable="false"
@@ -105,7 +110,7 @@ export default function EditTable({onClose}) {
               <div className="btn_form_details">
                 <button className="btn__details">Save</button>
                 <button className="btn__details"> Delete</button>
-                <button className="btn__details">close</button>
+                <button className="btn__details" onClick={onClose}>close</button>
               </div>
             )}
           </form>
