@@ -29,7 +29,7 @@ export default function EditTable() {
     }
   };
   const { isAuthenticated } = useAuthContext();
-  const inputFocus = useRef();
+  const inputFocus = useFocus();
   const { itemId } = useParams();
 
   const [item, setItem] = useGetOneForEdit(itemId);
@@ -46,8 +46,7 @@ export default function EditTable() {
      async (values) => {
       console.log(values);
     const updatedData = await itemsAPI.update(itemId, values);
-    console.log(updatedData);
-    
+   navigate('/')    
     
     }
   );
@@ -85,6 +84,10 @@ export default function EditTable() {
             <div className="table-details">
               <p>
                 ID: 
+                <strong>{values.id}</strong>
+                </p>
+                <p>
+                  Name:
                 <strong>
                 <input
                   className="input__table"
@@ -131,7 +134,7 @@ export default function EditTable() {
                             <strong> {formatDateTime.dateTime(values.date)}</strong>
                         </p>            
                         <p>Created on ISO-DATE: <strong>{values.date}</strong></p>
-                        <p>Modified on: <strong>{values.updatedAt ? dateTime(values.updatedA) : 'It has not been changed.'}</strong></p>
+                        <p>Modified on: <strong>{values.updatedAt ?formatDateTime.dateTime(values.updatedA) : 'It has not been changed.'}</strong></p>
             </div>
           </div>
             {isAuthenticated && (
