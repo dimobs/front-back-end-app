@@ -39,6 +39,6 @@ async function requester(method, url, data) {
 
 export const get = requester.bind(null, 'GET');
 export const post = requester.bind(null, 'POST');
-export const PUT = requester.bind(null, 'PUT');
+export const put = requester.bind(null, 'PUT');
 export const patch = requester.bind(null, 'PATCH');
 export const remove = requester.bind(null, 'DELETE');

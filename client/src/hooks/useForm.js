@@ -18,9 +18,9 @@ export function useForm(initialValues, submitCallback) {
             }));
           };
           
-    const onsubmitHandler = (e) => {
+    const onsubmitHandler = async (e) => {
         e.preventDefault();
-        submitCallback(values);
+       await submitCallback(values);
         setValues(initialValues);
     }
     return {

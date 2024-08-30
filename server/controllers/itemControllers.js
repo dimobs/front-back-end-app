@@ -37,6 +37,7 @@ itemController.get('/:id', (req, res) => {
     if (!req.params.id){
         res.status(401).json({message: 'No content'})
     }
+    // ToDo! try catch
     db.all(`SELECT * FROM items WHERE ID = ${req.params.id}`, (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
@@ -45,6 +46,35 @@ itemController.get('/:id', (req, res) => {
 
         res.json(rows);
     });
+});
+
+//update
+itemController.put('/id', (req, res) => {
+    // ToDo update hasChanged field
+    const {name, description, amount } = req.body;
+
+    if (!name || !description || !amount  ) {
+        return res.status(400).json({message: 'All fields are required'});
+    }
+
+    const updatedData = new Date().toISOString();
+
+    db.run(
+        `UPDATE items SET name = ?, description = ?, amount = ?, updatedAt = ? WHERE id = ?`,
+        [name, description, amount, updatedData, req.params.id],
+        function(err) {
+            if (err) {
+                res.status(500).send(err.message);
+                return;
+            }
+
+            if (this.changes == 0) {
+                return res.status(400).json({message: 'Entry not found or no changes made' })
+            }
+
+            res.json({message: 'Entry updated successfully', id: req.params.id})
+        }
+    );
 });
 
 //Del by ID
