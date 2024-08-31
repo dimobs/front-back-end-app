@@ -14,11 +14,10 @@ const INITIAL_VALUE = { name: "", description: "", amount: "" };
 
 export default function TableRow() {
   const { isAuthenticated } = useAuthContext();
-  const inputFocus = useFocus();
+  const cursorPointer = useFocus();
   const { itemId } = useParams();
   const loading = false;
   const [showItem, setShowItem] = useState(false);
-
   const [notification, setNotification] = useState({
     message: "",
     visible: false,
@@ -28,7 +27,9 @@ export default function TableRow() {
   // const [item, handleCallBack] = useGetOneCallback();
   // getall
   const [items, setItems ] = useGetAllTableItems();
-
+   const totalAmount = (items.length == 0) 
+  ? ""
+  : `${(items.reduce((total, x) => total + Number(x.amount), 0)).toFixed(2)}лв.`;
   // createGETTER
   const createItem = useCreate();
 
@@ -58,7 +59,6 @@ export default function TableRow() {
 const detailsHandler = async (i) => {
   setShowItem(true);
   setitem(i)
-  
 }
 
   // onClose
@@ -86,7 +86,7 @@ const detailsHandler = async (i) => {
             <div>
               <input
                 className="input__table"
-                ref={inputFocus}
+                ref={cursorPointer}
                 type="text"
                 placeholder="Name"
                 id="name"
@@ -114,7 +114,10 @@ const detailsHandler = async (i) => {
                 value={values.amount}
                 onChange={changeHandler}
               />
-              <button className="btn-submit form__submit">Add Item</button>
+              <button             
+              className="btn-submit form__submit">
+                Add Entry
+                </button>
             </div>
           </form>
         )}
@@ -147,11 +150,7 @@ const detailsHandler = async (i) => {
                   value={i.amount}
                   modify={i.updatedAt}
                   index={idx + 1}
-                  itemDetailsClickHandler={() => {
-                    setShowItem(true);
-                    setitem(i)
-                    
-                  }}
+                itemDetailsClickHandler={() => {detailsHandler(i)}}
                 
                   // itemDelHandler={handleDeleteClick}
                 />
@@ -161,7 +160,7 @@ const detailsHandler = async (i) => {
           <tfoot>
             <tr>
               <td colSpan="4">Total</td>
-              {/* <td>{totalAmount}</td>*/}
+              <td>{totalAmount}</td>
             </tr>
           </tfoot>
         </table>

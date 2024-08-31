@@ -30,22 +30,21 @@ export default function TableRowItem (
     <td className="description header__items td" >{description}</td>
     <td className='header__items td'>{value}</td>
     <td>
-    <button title="View"
+    <button className="btn-small" title="View"
     onClick={editItemHandler}>
     View
     </button>
     <button 
-    title="Delete"
-    onClick={deleteHandler}
-   >
-    Del
-    </button>
-    <button title="Comment"
+    className="btn-small"
+    title="Comment"
     >
     Comment
     </button>
     {modify 
-    ? <button><strong style={{color: "whitesmoke", marginTop:"5px"}}>M</strong></button>
+    ? <button
+    className="btn-small"
+    >
+      <strong style={{color: "whitesmoke", marginTop:"5px"}}>M</strong></button>
     : <button style={{display:"none"}}></button>
   }  
    

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import formatDateTime from "../../util/formatDate";
 import { useAuthContext } from "../../context/AuthContext";
@@ -18,7 +18,6 @@ const initialValue = {
 };
 
 export default function EditTable() {
-
   const navigate = useNavigate();
   const onClose = () => {
     navigate("/");
@@ -31,23 +30,26 @@ export default function EditTable() {
   const { isAuthenticated } = useAuthContext();
   const inputFocus = useFocus();
   const { itemId } = useParams();
-
   const [item, setItem] = useGetOneForEdit(itemId);
-
-  // const getOneHandler = async (itemId) => {
-  //     console.log(itemId);
-  //     const result = await itemsAPI.getOne(itemId);
-  //     console.log(result[0]);
-  //     setItem(result[0]);
-  // }
-  // getOneHandler(it12emId)
+  const initialFormValue = useMemo(() => Object.assign({}, initialValue, item), [item])
+  const onDeleteHandler = async() => {
+    const confirmed = confirm(`Are you shure you want to delete ${item.name}`)
+    if (!confirmed){
+      return
+    }
+    try {
+       await itemsAPI.remove(itemId);      
+      navigate('/')
+    }catch (err) {
+      console.log(err.message);     
+    }
+  }
   const { values, changeHandler, onsubmitHandler } = useForm(
-    Object.assign(initialValue, item),
-     async (values) => {
+    initialFormValue,
+    async (values) => {
       console.log(values);
-    const updatedData = await itemsAPI.update(itemId, values);
-   navigate('/')    
-    
+      await itemsAPI.update(itemId, values);
+      navigate("/");
     }
   );
 
@@ -77,71 +79,81 @@ export default function EditTable() {
             </button>
           </header>
           <form onSubmit={onsubmitHandler}>
-          <div className="content__table">
-            {/* <div className="image-container__table">
+            <div className="content__table">
+              {/* <div className="image-container__table">
                         <img src={''} alt="avatar" className="image" />
                     </div> */}
-            <div className="table-details">
-              <p>
-                ID: 
-                <strong>{values.id}</strong>
+              <div className="table-details">
+                <p>
+                  ID:
+                  <strong>{values.id}</strong>
                 </p>
                 <p>
                   Name:
-                <strong>
-                <input
-                  className="input__table"
-                  ref={inputFocus}
-                  type="text"
-                  placeholder="Name"
-                  id="name"
-                  name="name"
-                  value={values.name}
-                  onChange={changeHandler}
-                />
-                </strong>
-              </p>          
-              <p>
-              Description: 
-                <strong>
-                <input
-                  className="input__table"                 
-                  type="text"
-                  spellCheck="true"
-                  placeholder="Description"
-                  id="description"
-                  name="description"
-                  value={values.description}
-                  onChange={changeHandler}
-                />
-                </strong>
-              </p>          
-              <p>
-              Amout: 
-                <strong>
-                <input
-                  className="input__table"                 
-                  type="text"
-                  placeholder="Amount"
-                  id="amount"
-                  name="amount"
-                  value={values.amount}
-                  onChange={changeHandler}
-                />
-                </strong>
-              </p> 
-              <p>
-                            Date:
-                            <strong> {formatDateTime.dateTime(values.date)}</strong>
-                        </p>            
-                        <p>Created on ISO-DATE: <strong>{values.date}</strong></p>
-                        <p>Modified on: <strong>{values.updatedAt ?formatDateTime.dateTime(values.updatedA) : 'It has not been changed.'}</strong></p>
+                  <strong>
+                    <input
+                      className="input__table"
+                      ref={inputFocus}
+                      type="text"
+                      placeholder="Name"
+                      id="name"
+                      name="name"
+                      value={values.name}
+                      onChange={changeHandler}
+                    />
+                  </strong>
+                </p>
+                <p>
+                  Description:
+                  <strong>
+                    <input
+                      className="input__table"
+                      type="text"
+                      spellCheck="true"
+                      placeholder="Description"
+                      id="description"
+                      name="description"
+                      value={values.description}
+                      onChange={changeHandler}
+                    />
+                  </strong>
+                </p>
+                <p>
+                  Amout:
+                  <strong>
+                    <input
+                      className="input__table"
+                      type="number"
+                      step="0.01"
+                      placeholder="Amount"
+                      id="amount"
+                      name="amount"
+                      value={values.amount}
+                      onChange={changeHandler}
+                    />
+                  </strong>
+                </p>
+                <p>
+                  Date:
+                  <strong> {formatDateTime.dateTime(values.date)}</strong>
+                </p>
+                <p>
+                  Created on ISO-DATE: <strong>{values.date}</strong>
+                </p>
+                <p>
+                  Modified on:{" "}
+                  <strong>
+                    {values.updatedAt
+                      ? formatDateTime.dateTime(values.updatedAt)
+                      : "It has not been changed."}
+                  </strong>
+                </p>
+              </div>
             </div>
-          </div>
             {isAuthenticated && (
               <div className="btn_form_details">
                 <button className="btn__details">Save</button>
-                <button className="btn__details"> Delete</button>
+                <button className="btn__details" onClick={onDeleteHandler}> Delete</button>
                 <button className="btn__details" onClick={onClose}>
                   close
                 </button>

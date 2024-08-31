@@ -36,7 +36,7 @@
 .btn-submit {
   background: #00dfc4;
   color: #223243;
-  padding: 9px 0;
+  padding: 5px 0;
   letter-spacing: 1px;
   font-weight: 500;
   cursor: pointer;
@@ -46,8 +46,26 @@
     inset -5px -5px 15px rgba(255, 255, 255, 0.1),
     inset 5px 5px 15px rgba(0, 0, 0, 0.35)
     ;
+    font-size: 0.8em;
 }
 
+.btn-small {
+  background: #00dfc4;
+  /* color: #223243; */
+  color: #fff;
+  padding: 4px 0.4rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow:
+   -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.35),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+    inset 5px 5px 15px rgba(0, 0, 0, 0.35)
+    ;
+    margin-right: 3px;
+    font-size: 0.5em;
+}
 
 
 html {
@@ -98,7 +116,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  /* outline: 4px auto -webkit-focus-ring-color; */
   border: none;
 }
 

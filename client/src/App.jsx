@@ -12,6 +12,7 @@ import ConfirmModal from './util/confirmModal/ConfirmModal';
 import { AuthContextProvider } from './context/AuthContext';
 import Logout from './components/logout/logout';
 import EditTable from './components/tableRow/EditTable';
+import PrivateGuard from './components/common/PrivateGuard';
 
 const App = () => {
 
@@ -21,15 +22,17 @@ const App = () => {
         <Header />
         <Routes>
         <Route path='/' element={<TableRow />} />
+        <Route element={<PrivateGuard />}>
         <Route path='/item/:itemId' element={<TableDetails/>} />
         <Route path='/edit/:itemId' element={<EditTable/>} />
+        <Route path='/logout' element={<Logout />} />
+        </Route>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/not-found' element={<NotFound />} />
         <Route path='/*' element={<NotFound />} />
         <Route path='/spinner' element={<Spinner />} />
         <Route path='/confirm' element={<ConfirmModal />} />
-        <Route path='/logout' element={<Logout />} />
         </Routes>
         </AuthContextProvider>
         </>
