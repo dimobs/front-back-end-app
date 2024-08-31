@@ -34,6 +34,9 @@ export default function TableRow() {
 
   // createSetter
   const createHandler = async(values) => {
+    if (!values.name || !values.description || !values.amount){
+      return
+    }
     try{
     const newItemCreated = await createItem(values);
     setItems((oldState) => [newItemCreated, ...oldState]);
@@ -95,6 +98,7 @@ const detailsHandler = async (i) => {
                 className="input__table"
                 type="text"
                 placeholder="Description"
+                spellCheck="true"
                 id="description"
                 name="description"
                 value={values.description}
