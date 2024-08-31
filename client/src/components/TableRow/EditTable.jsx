@@ -107,7 +107,7 @@ export default function EditTable() {
                   Description:
                   <strong>
                     <input
-                      className="input__table"
+                      className="input__table"                
                       type="text"
                       spellCheck="true"
                       placeholder="Description"

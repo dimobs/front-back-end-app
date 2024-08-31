@@ -26,11 +26,15 @@ export default function TableRowItem (
   <tr>
     <td className="index">{index}</td>
     <td >{formatDate.date(date)}</td>
-    <td className='header__items td'>{name}</td>
-    <td className="description header__items td" >{description}</td>
+    <td className='header__items td'>{name}</td>  
+    {description.length <= 35 
+      ? <td className="description header__items td" >{description}</td>
+      :  <td style={{fontSize: "0.75rem"}} className="description header__items td">{description.slice(0, 40)}...</td>
+  
+    }
     <td className='header__items td'>{value}</td>
     <td>
-    <button className="btn-small" title="View"
+    <button className="btn-small" title="View for more info"
     onClick={editItemHandler}>
     View
     </button>
@@ -42,6 +46,7 @@ export default function TableRowItem (
     </button>
     {modify 
     ? <button
+    title="This entry has been modified"
     className="btn-small"
     >
       <strong style={{color: "whitesmoke", marginTop:"5px"}}>M</strong></button>
