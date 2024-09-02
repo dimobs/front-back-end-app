@@ -47,7 +47,6 @@ export default function EditTable() {
   const { values, changeHandler, onsubmitHandler } = useForm(
     initialFormValue,
     async (values) => {
-      console.log(values);
       await itemsAPI.update(itemId, values);
       navigate("/");
     }

@@ -4,8 +4,7 @@ import formatDateTime from "../../util/formatDate";
 import { useAuthContext } from "../../context/AuthContext";
 
 // export default function TableDetails({ detailsItem, onClose, itemDelHandler }) {
-export default function TableDetails({detailsItem, onClose}) {
-    
+export default function TableDetails({ detailsItem, onClose }) {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuthContext();
   document.onkeydown = function (e) {
@@ -67,27 +66,38 @@ export default function TableDetails({detailsItem, onClose}) {
                 Amout: <strong>{detailsItem.amount}</strong>
               </p>
               <p>
-                            Date:
-                            <strong> {formatDateTime.dateTime(detailsItem.date)}</strong>
-                        </p>            
-                        <p>Created on ISO-DATE: <strong>{detailsItem.date}</strong></p>
-                        <p>Modified on: <strong>{detailsItem.updatedAt ? formatDateTime.dateTime(detailsItem.updatedAt) : 'It has not been changed.'}</strong></p>
+                Date:
+                <strong> {formatDateTime.dateTime(detailsItem.date)}</strong>
+              </p>
+              <p>
+                Created on ISO-DATE: <strong>{detailsItem.date}</strong>
+              </p>
+              <p>
+                Modified on:{" "}
+                <strong>
+                  {detailsItem.updatedAt
+                    ? formatDateTime.dateTime(detailsItem.updatedAt)
+                    : "It has not been changed."}
+                </strong>
+              </p>
             </div>
           </div>
           {isAuthenticated && (
             <div className="btn_form_details">
-              <button className="btn__details">
-                <Link to={`/edit/${detailsItem.id}`}>Edit</Link>
+              <button className="btn__details" onClick={editHandler}>
+                Edit
               </button>
               <button className="btn__details" onClick={deleteHandler}>
                 {" "}
                 Delete
-              </button>
-              <button className="btn__details" onClick={onClose}>
-                close
-              </button>
+              </button>      
             </div>
           )}
+          <div className="btn_form_details">
+            <button className="btn__details" onClick={onClose}>
+              close
+            </button>
+          </div>
         </div>
       </div>
     </div>
