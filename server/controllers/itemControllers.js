@@ -1,5 +1,7 @@
 const itemController = require('express').Router()
 const {db} = require('../config/items-DB');
+const authMiddlewares = require('../middlewares/authMiddlewares');
+const { hasUser } = require('../middlewares/guards');
 
 // Get all items
 itemController.get('/', (req, res) => {
@@ -14,7 +16,10 @@ itemController.get('/', (req, res) => {
 });
 
 // Add a new item
-itemController.post('/', (req, res) => {       
+itemController.post('/', hasUser(), (req, res) => {    
+    console.log(req, req.user);
+    // const { userId } = req.user;
+       
     if ((Object.values(req.body).length == 0) || (Object.values(req.body).includes(''))){  
         return res.status(204).json({message: 'No content!'})
     }

@@ -10,8 +10,6 @@ export default function usePersistedState(key, initialState) {
                 : initialState;
         }
 
-
-
         const authData = JSON.parse(persistedAuth);
 
         return authData;
