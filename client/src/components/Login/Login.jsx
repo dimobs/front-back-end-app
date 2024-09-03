@@ -69,6 +69,8 @@ export default function Login() {
               <div className="inputBox">
                 <input
                   type="password"
+                  min={3}
+                  max={9}
                   required="required"
                   autoComplete="on"
                   name="password"

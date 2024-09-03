@@ -98,7 +98,7 @@ export function useCreate() {
 
         const result = itemsAPI.create(values)
 
-        return result
+        return result;
     }
 
     return createItem

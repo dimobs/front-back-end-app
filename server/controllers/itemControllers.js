@@ -1,12 +1,12 @@
 const itemController = require('express').Router()
-const {db} = require('../config/items-DB');
+const {db, TABLE_ITEMS} = require('../config/items-DB');
 const authMiddlewares = require('../middlewares/authMiddlewares');
 const { hasUser } = require('../middlewares/guards');
 
 // Get all items
 itemController.get('/', (req, res) => {
     // db.all("SELECT * FROM items ORDER BY id DESC LIMIT 5", (err, rows) => {
-        db.all("SELECT * FROM items ORDER BY id DESC", (err, rows) => {
+        db.all(`SELECT * FROM ${TABLE_ITEMS} ORDER BY id DESC`, (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
             return;
@@ -17,7 +17,7 @@ itemController.get('/', (req, res) => {
 
 // Add a new item
 itemController.post('/', hasUser(), (req, res) => {    
-    console.log(req, req.user);
+    console.log(req.user._id);
     // const { userId } = req.user;
        
     if ((Object.values(req.body).length == 0) || (Object.values(req.body).includes(''))){  
@@ -27,7 +27,7 @@ itemController.post('/', hasUser(), (req, res) => {
     // const date = new Date().toISOString(); 
     const date = new Date().toISOString(); 
   
-    db.run("INSERT INTO items (date, name, description, amount, updatedAt) VALUES (?, ?, ?, ?, ?)", [date, name, description, amount, updatedAt], function(err) {
+    db.run(`INSERT INTO ${TABLE_ITEMS} (date, name, description, amount, updatedAt) VALUES (?, ?, ?, ?, ?)`, [date, name, description, amount, updatedAt], function(err) {
 
         if (err) {
             res.status(500).send(err.message);
@@ -43,7 +43,7 @@ itemController.get('/:id', (req, res) => {
         res.status(401).json({message: 'No content'})
     }
     // ToDo! try catch
-    db.all(`SELECT * FROM items WHERE ID = ${req.params.id}`, (err, rows) => {
+    db.all(`SELECT * FROM ${TABLE_ITEMS} WHERE ID = ${req.params.id}`, (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
             return;
@@ -54,7 +54,7 @@ itemController.get('/:id', (req, res) => {
 });
 
 //update
-itemController.put('/:id', (req, res) => {
+itemController.put('/:id', hasUser(), (req, res) => {
     
     // ToDo update hasChanged field
     const {name, description, amount } = req.body;
@@ -66,7 +66,7 @@ itemController.put('/:id', (req, res) => {
     const updatedData = new Date().toISOString();
 
     db.run(
-        `UPDATE items SET name = ?, description = ?, amount = ?, updatedAt = ? WHERE id = ?`,
+        `UPDATE ${TABLE_ITEMS} SET name = ?, description = ?, amount = ?, updatedAt = ? WHERE id = ?`,
         [name, description, amount, updatedData, req.params.id],
         function(err) {
             if (err) {
@@ -86,7 +86,7 @@ itemController.put('/:id', (req, res) => {
 //Del by ID
 itemController.delete('/:id', async (req, res) => {
     let delItem = undefined
-    db.all(`SELECT * FROM items WHERE ID = ${req.params.id}`, (err, rows) => {
+    db.all(`SELECT * FROM ${TABLE_ITEMS} WHERE ID = ${req.params.id}`, (err, rows) => {
         if (err) {
             res.status(500).send({message:'No such ID were found. Please refresh and try again.'}, err.message);
             return;
@@ -94,7 +94,7 @@ itemController.delete('/:id', async (req, res) => {
 
         delItem = rows;
     });
-    db.all(`DELETE FROM items WHERE ID=${req.params.id}`, (err, rows) => {
+    db.all(`DELETE FROM ${TABLE_ITEMS} WHERE ID=${req.params.id}`, (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
             return;
