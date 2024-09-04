@@ -27,9 +27,9 @@ export default function TableRowItem (
     <td className="index">{index}</td>
     <td >{formatDate.date(date)}</td>
     <td className='header__items td'>{name}</td>  
-    {description.length <= 35 
+    {description.length <= 34 
       ? <td className="description header__items td" >{description}</td>
-      :  <td style={{fontSize: "0.75rem"}} className="description header__items td">{description.slice(0, 40)}...</td>
+      :  <td style={{fontSize: "0.75rem", spellCheck:"true"}} className="description header__items td">{description.slice(0, 34)}...</td>
   
     }
     <td className='header__items td'>{value}</td>

@@ -181,3 +181,8 @@ tfoot td {
     }
   }
    */
+
+   .description::first-letter{ 
+    text-transform: capitalize;
+   }
+
