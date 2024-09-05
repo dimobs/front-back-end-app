@@ -35,7 +35,7 @@ itemController.post('/', hasUser(), (req, res) => {
 
         if (err) {
             console.log(err.message);
-            
+
             res.status(500).send(err.message);
             return;
         }
@@ -61,59 +61,67 @@ itemController.get('/:id', (req, res) => {
 
 //update
 itemController.put('/:id', hasUser(), (req, res) => {
-
-    //    if (ObjectId.isValid(req.user._id)){
-    //     console.log('valid user', req.user);
-    //    }else {
-    //     console.log('not valid id user', req.user);
-
-    //    }
-
-    // ToDo update hasChanged field
     const { name, description, amount } = req.body;
 
     if (!name || !description || !amount) {
         return res.status(400).json({ message: 'All fields are required' });
     }
-
+    const ownerId = req.user._id;
+    const rowId = req.params.id;
     const updatedData = new Date().toISOString();
 
-    db.run(
-        `UPDATE ${TABLE_ITEMS} SET name = ?, description = ?, amount = ?, updatedAt = ? WHERE id = ?`,
-        [name, description, amount, updatedData, req.params.id],
-        function (err) {
-            if (err) {
-                res.status(500).send(err.message);
-                return;
-            }
-
-            if (this.changes == 0) {
-                return res.status(400).json({ message: 'Entry not found or no changes made' })
-            }
-
-            res.json({ message: 'Entry updated successfully', id: req.params.id })
+    db.get(`SELECT * FROM ${TABLE_ITEMS} WHERE id = ? and user_id = ?`, [rowId, ownerId], (err, row) => {
+        if (err) {
+            console.err(err.message);
+            return res.status(500).send(err.message);
         }
-    );
+
+        if (!row) {
+            console.error({ message: "Unauthorized to update this entry" });
+            return res.status(403).json({ message: 'Unauthorized to update this entry' })
+        }
+
+        db.run(
+            `UPDATE ${TABLE_ITEMS} SET name = ?, description = ?, amount = ?, updatedAt = ? WHERE id = ?`,
+            [name, description, amount, updatedData, req.params.id],
+            function (err) {
+                if (err) {
+                    res.status(500).send(err.message);
+                    return;
+                }
+
+                if (this.changes == 0) {
+                    return res.status(400).json({ message: 'Entry not found or no changes made' })
+                }
+
+                res.json({ message: 'Entry updated successfully', id: req.params.id })
+            }
+        );
+    })
 });
 
 //Del by ID
-itemController.delete('/:id', async (req, res) => {
-    let delItem = undefined
-    db.all(`SELECT * FROM ${TABLE_ITEMS} WHERE ID = ${req.params.id}`, (err, rows) => {
+itemController.delete('/:id', hasUser(), (req, res) => {
+    const ownerId = req.user._id
+    const paramsId = req.params.id
+
+    db.get(`SELECT * FROM ${TABLE_ITEMS} where id = ? and user_id = ?`, [paramsId, ownerId], (err, row) => {
         if (err) {
-            res.status(500).send({ message: 'No such ID were found. Please refresh and try again.' }, err.message);
-            return;
+            console.log(err.message, '130 red');
+            return res.status(500).send(err.message);
+        }
+        if (!row) {
+            console.error('Unauthorized to delete this entry');
+            return res.status(403).json({ message: 'Unauthorized to delete this entry' });
         }
 
-        delItem = rows;
-    });
-    db.all(`DELETE FROM ${TABLE_ITEMS} WHERE ID=${req.params.id}`, (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-            return;
-        }
-
-        res.json(delItem);
+        db.run(`DELETE FROM ${TABLE_ITEMS} WHERE id = ?`, [req.params.id], (err) => {
+            if (err) {
+                console.error(err.message);
+                return res.status(500).send(err.message)
+            }
+            res.json({ message: 'Entry deleted successfully', id: req.params.id });
+        });
     });
 });
 

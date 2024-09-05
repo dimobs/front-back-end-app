@@ -23,6 +23,7 @@ export function useForm(initialValues, submitCallback) {
        await submitCallback(values);
         setValues(initialValues);
     }
+    
     return {
         values,
         changeHandler,

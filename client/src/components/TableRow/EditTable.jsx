@@ -38,7 +38,9 @@ export default function EditTable() {
       return
     }
     try {
-       await itemsAPI.remove(itemId);      
+       const res = await itemsAPI.remove(itemId);      
+       console.log(res, 'ressssssssssssss');
+       
       navigate('/')
     }catch (err) {
       console.log(err.message);     

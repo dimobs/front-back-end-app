@@ -3,7 +3,6 @@ import { getAccessToken } from "../util/authUtils";
 async function requester(method, url, data) {
     
     const options = {};
-
     const accessToken = getAccessToken();
 
     if (accessToken) {
