@@ -124,7 +124,7 @@ const detailsHandler = async (i) => {
         <table className="table__container">
           <thead>
             <tr>
-              <td className="index">No.</td>
+              <td className="index">User</td>
               <th className="header__items">Date</th>
               <th className="header__items">Name</th>
               <th className="header__items">Description</th>
@@ -143,6 +143,7 @@ const detailsHandler = async (i) => {
               items.map((i, idx) => (
                 <TableRowItem
                   key={i.id}
+                  username = {i.username.email}
                   itemId={i.id}
                   date={i.date}
                   name={i.name}

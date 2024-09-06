@@ -25,7 +25,13 @@ function date(isoDate) {
         day: 'numeric'
     };
 
-    return (new Date(isoDate).toLocaleDateString('bg-BG', options));
+    const mydate = (new Date(isoDate).toLocaleDateString('bg-BG', options));
+    let result = ""
+    result += `${mydate.split(' ')[0]} `;
+    result += `${mydate.split(' ')[1].slice(0, 3)} `;
+    result += `${mydate.split(' ')[2]}`;
+    
+    return result
 }
 
 

@@ -50,9 +50,9 @@
 }
 
 .btn-small {
-  background: #00dfc4;
+  background: #4A657C;
   /* color: #223243; */
-  color: #fff;
+  color: #C0C7D6;
   padding: 4px 0.4rem;
   letter-spacing: 1px;
   font-weight: 500;
@@ -66,6 +66,7 @@
     margin-right: 3px;
     font-size: 0.5em;
 }
+
 
 
 html {

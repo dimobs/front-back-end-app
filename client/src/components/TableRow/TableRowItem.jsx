@@ -10,6 +10,7 @@ export default function TableRowItem (
       value, 
       modify,
       index, 
+      username,
       itemDelHandler, 
       itemDetailsClickHandler
     }) {
@@ -24,7 +25,7 @@ export default function TableRowItem (
     return(
 <>
   <tr>
-    <td className="index">{index}</td>
+    <td className="index">{username}</td>
     <td >{formatDate.date(date)}</td>
     <td className='header__items td'>{name}</td>  
     {description.length <= 34 

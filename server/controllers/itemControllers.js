@@ -2,18 +2,34 @@ const itemController = require('express').Router()
 const { db, TABLE_ITEMS } = require('../config/items-DB');
 const authMiddlewares = require('../middlewares/authMiddlewares');
 const { hasUser } = require('../middlewares/guards');
-const { ObjectId } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
+const { getById, getAll } = require('./userService');
 
 // Get all items
 itemController.get('/', (req, res) => {
-    // db.all("SELECT * FROM items ORDER BY id DESC LIMIT 5", (err, rows) => {
-    db.all(`SELECT * FROM ${TABLE_ITEMS} ORDER BY id DESC`, (err, rows) => {
+    try {
+    db.all(`SELECT * FROM ${TABLE_ITEMS} ORDER BY id DESC`, async (err, rows) => {
         if (err) {
             res.status(500).send(err.message);
             return;
         }
-        res.json(rows);
+
+        const itemsWithUsernames = await Promise.all(rows.map( async (item) => {
+    
+            const user = await getById(item.user_id);      
+            console.log(user);
+            
+            return {
+                ...item,
+                username: user ? user : "Unknown"
+            };
+        }));
+
+        res.json(itemsWithUsernames);
     });
+}catch (err) {
+    res.status(500).json({error: 'An error occurred while fetching items'})
+}
 });
 
 // Add a new item
@@ -31,14 +47,14 @@ itemController.post('/', hasUser(), (req, res) => {
 
     const date = new Date().toISOString();
 
-    db.run(`INSERT INTO ${TABLE_ITEMS} (date, user_id, name, description, amount, updatedAt) VALUES (?, ?, ?, ?, ?, ?)`, [date, user_id, name, description, amount, updatedAt], function (err) {
-
+    db.run(`INSERT INTO ${TABLE_ITEMS} (date, user_id, name, description, amount, updatedAt) VALUES (?, ?, ?, ?, ?, ?)`, [date, user_id, name, description, amount, updatedAt], async function  (err) {
         if (err) {
             console.log(err.message);
 
             res.status(500).send(err.message);
             return;
         }
+
         res.json({ id: this.lastID, date, name, description, amount, updatedAt });
     });
 });
