@@ -15,9 +15,7 @@ itemController.get('/', (req, res) => {
         }
 
         const itemsWithUsernames = await Promise.all(rows.map( async (item) => {
-    
             const user = await getById(item.user_id);      
-            console.log(user);
             
             return {
                 ...item,
@@ -54,8 +52,9 @@ itemController.post('/', hasUser(), (req, res) => {
             res.status(500).send(err.message);
             return;
         }
-
-        res.json({ id: this.lastID, date, name, description, amount, updatedAt });
+        const user = await getById(user_id);
+        
+        res.json({ id: this.lastID, date, name, description, amount, updatedAt, username: user ? user : 'Unknown' });
     });
 });
 

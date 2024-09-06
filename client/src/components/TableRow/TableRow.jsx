@@ -143,7 +143,7 @@ const detailsHandler = async (i) => {
               items.map((i, idx) => (
                 <TableRowItem
                   key={i.id}
-                  username = {i.username.email}
+                  username = {i.username.email.split('@')[0]}
                   itemId={i.id}
                   date={i.date}
                   name={i.name}
