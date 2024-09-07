@@ -186,3 +186,12 @@ tfoot td {
     text-transform: capitalize;
    }
 
+   .details__view {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+   }
+
+   .table-details>p:last-child{
+  margin-bottom: 12PX;
+   }

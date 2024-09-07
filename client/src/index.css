@@ -72,6 +72,7 @@
 html {
 scroll-behavior: smooth;
 font-family: "Poppins", sans-serif;
+
 }
 li { list-style: none; }
 
@@ -91,6 +92,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   transition: 0.75s ease;
+
 }
 .container { padding-inline: 16px; }
 h1 {
@@ -109,6 +111,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   color: var(--color-dark-four);
+
 }
 button:hover {
   border-color: var(--color-yellow-two);
@@ -144,6 +147,7 @@ th, td {
 }
 th {
   background-color: var(--color-dark-four);
+  filter: blur(0.35px);
 }
 tfoot {
   font-weight: bold;
@@ -201,7 +205,6 @@ margin: 5px;
     border-collapse: collapse;
     font-weight: 100;
     font-size: 10px;
-  
  }
 }
 

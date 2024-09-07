@@ -219,7 +219,7 @@ export default function TableRow() {
         <table className="table__container">
           <thead>
             <tr>
-              <td className="index">No.</td>
+              <td className="index header__items">No.</td>
               <th className="header__items">Date</th>
               <th className="header__items">Name</th>
               <th className="header__items">Description</th>

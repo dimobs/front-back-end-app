@@ -15,7 +15,7 @@ const INITIAL_VALUE = { name: "", description: "", amount: "" };
 export default function TableRow() {
   const { isAuthenticated } = useAuthContext();
   const cursorPointer = useFocus();
-  const { itemId } = useParams();
+  // const { itemId } = useParams();
   const loading = false;
   const [showItem, setShowItem] = useState(false);
   const [notification, setNotification] = useState({
@@ -124,7 +124,7 @@ const detailsHandler = async (i) => {
         <table className="table__container">
           <thead>
             <tr>
-              <td className="index">User</td>
+              <th className="header__items">User</th>
               <th className="header__items">Date</th>
               <th className="header__items">Name</th>
               <th className="header__items">Description</th>

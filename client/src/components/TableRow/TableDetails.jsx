@@ -52,9 +52,14 @@ export default function TableDetails({ detailsItem, onClose }) {
                         <img src={''} alt="avatar" className="image" />
                     </div> */}
             <div className="table-details">
+              <div className="details__view">
               <p>
                 ID: <strong>{detailsItem.id}</strong>
               </p>
+              <p>
+                User: <strong>{detailsItem.username.email}</strong>
+              </p>
+              </div>
               <p>
                 name:
                 <strong>{detailsItem.name}</strong>
@@ -63,14 +68,11 @@ export default function TableDetails({ detailsItem, onClose }) {
                 Description: <strong>{detailsItem.description}</strong>
               </p>
               <p>
-                Amout: <strong>{detailsItem.amount}</strong>
+                Amout: <strong>{ detailsItem.amount} лв.</strong>
               </p>
               <p>
                 Date:
                 <strong> {formatDateTime.dateTime(detailsItem.date)}</strong>
-              </p>
-              <p>
-                Created on ISO-DATE: <strong>{detailsItem.date}</strong>
               </p>
               <p>
                 Modified on:{" "}
