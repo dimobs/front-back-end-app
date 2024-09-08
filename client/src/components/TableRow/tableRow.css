@@ -102,7 +102,7 @@ tfoot td {
     margin: auto;
     border-radius: 20px;
     background-color: transparent;
-    border: 2px solid #f4a261;
+    border: 2px solid #2a9d8f;
     backdrop-filter: blur(2px) saturate(400%) ;
     padding: 1rem;
      box-shadow: 0 2px 18px rgba(51, 111, 42, 0.946);
@@ -134,10 +134,11 @@ tfoot td {
     /* justify-content: left; */
   }
 
-  .btn__details{
-    
+  .btn__details{ 
     width: 60px;
     margin-left: 20px;
+    font-size: 10px;
+    letter-spacing: 1px;
   }
   @media (max-width: 630px) {
       .modal {

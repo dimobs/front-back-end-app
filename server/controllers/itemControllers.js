@@ -1,9 +1,8 @@
 const itemController = require('express').Router()
 const { db, TABLE_ITEMS } = require('../config/items-DB');
-const authMiddlewares = require('../middlewares/authMiddlewares');
 const { hasUser } = require('../middlewares/guards');
-const { MongoClient, ObjectId } = require('mongodb');
-const { getById, getAll } = require('./userService');
+const { ObjectId } = require('mongodb');
+const { getById } = require('./userService');
 
 // Get all items
 itemController.get('/', (req, res) => {

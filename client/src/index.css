@@ -50,7 +50,10 @@
 }
 
 .btn-small {
-  background: #4A657C;
+  line-height: 1;
+  font-size: 1.2rem;
+  text-decoration: none;
+  background: #578dbd;
   /* color: #223243; */
   color: #C0C7D6;
   padding: 4px 0.4rem;
@@ -83,7 +86,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: var(--color-dark-four);
+  color: var(--color-yellow-two);
 }
 
 body {
@@ -133,7 +136,6 @@ form .btn {
   display: inline-block;
  margin-right: 12px;
 }
-
 
 table {
   width: 100%;

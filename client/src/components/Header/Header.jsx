@@ -5,8 +5,8 @@ import { useAuthContext } from '../../context/AuthContext';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const {isAuthenticated, email} = useAuthContext();
-
+    const {isAuthenticated, email, totalAmount} = useAuthContext();
+    const totalAmountEuro = (totalAmount / 1.96).toFixed(2)
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
@@ -31,9 +31,30 @@ const Header = () => {
                                     <Link to="/table/tableDetails">Details</Link>
                                     <Link to="/spinner">Spinner</Link>
                                     <Link to="/confirm">confirm</Link>
-                                <div>
-                                
-                                        <Link style={{marginLeft: "15rem"}} to="/logout">Logout({email.split('@')[0].toUpperCase()}) </Link>
+                                    {totalAmount >= 0 
+                                    ? (<div style={{padding: "5px",background:"green", borderRadius: '19px', border: "1px solid black"}} className='balance'>
+                                            <div className='balance__bgn'>
+                                            <span className='balance__label'>BGN</span> 
+                                            <span>{totalAmount}</span>
+                                            </div>
+                                            <span className='balance__label__euro'>(EUR</span>
+                                            <span className='balance__label__euro'>{totalAmountEuro})</span>      
+                                        </div> ) 
+                                        : 
+                                        (<div style={{padding: "5px",background:"red", borderRadius: '19px', border: "1px solid black"}} className='balance'>
+                                            <div className='balance__bgn'>
+                                            <span className='balance__label'>BGN</span>
+                                            <span>{totalAmount}</span>
+                                            </div>
+                                            <span className='balance__label__euro'>(EUR</span>
+                                            <span className='balance__label__euro'>{totalAmountEuro})</span>      
+                                        </div> ) 
+                                        }
+                                <div className='logout'>
+                          
+                                        <Link  to="/logout"> 
+   
+                                        Logout({email.split('@')[0].toUpperCase()}) </Link>
                                     </div>                    
                                 </div>
                                 </>

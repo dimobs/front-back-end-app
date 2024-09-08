@@ -31,6 +31,13 @@ ul {
   gap: 80px;
 }
 
+.hasUser .balance{
+position: absolute;
+}
+.logout {
+  margin-left: 18em;
+  position: relative;
+}
 .guest {
 /* background-color: red; */
 display: flex;
@@ -123,7 +130,7 @@ gap: 20px;
     align-items: center;
     position: relative;
     padding: 5px 0px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #2a9d8f
   }
 
   .content__table {
@@ -199,4 +206,37 @@ gap: 20px;
       width: 140px;
       height: 140px;
     }
+  }
+
+  .balance {
+    display: inline-block;
+    vertical-align: middle;
+    /* margin-right: 20px; */
+    font-size: 85%;
+    right: 180px
+  }
+  .balance__bgn{
+    transition: all 1.5s ease-in-out;
+    float: left;   
+    margin-right: 10px;
+    padding-left: 5px;
+  }
+  
+  .balance__label { 
+    display: inline;
+    /* padding: .2em .6em .3em; */
+    padding-right: 5px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .balance__label__euro{
+    display: inline;
+    padding-right: 5px;
+  }
+
+  .nav__bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
   }

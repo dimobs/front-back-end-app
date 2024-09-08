@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import useFocus from "../../hooks/useFocus";
 import { useCreate, useGetAllTableItems} from "../../hooks/useTableItem";
@@ -7,13 +7,12 @@ import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
 import "./tableRow.css";
 import Notification from "../Notification/Notification";
-import { useParams } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 
 const INITIAL_VALUE = { name: "", description: "", amount: "" };
 
 export default function TableRow() {
-  const { isAuthenticated } = useAuthContext();
+  const { isAuthenticated, setTotalAmount } = useAuthContext();
   const cursorPointer = useFocus();
   // const { itemId } = useParams();
   const loading = false;
@@ -30,6 +29,12 @@ export default function TableRow() {
    const totalAmount = (items.length == 0) 
   ? ""
   : `${(items.reduce((total, x) => total + Number(x.amount), 0)).toFixed(2)}лв.`;
+  useEffect(() => {
+    if (items.length > 0) {
+      setTotalAmount(items.reduce((total, x) => total + Number(x.amount), 0).toFixed(2));
+    }
+  }, [items, setTotalAmount]);
+
   // createGETTER
   const createItem = useCreate();
 

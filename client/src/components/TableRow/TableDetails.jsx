@@ -71,7 +71,7 @@ export default function TableDetails({ detailsItem, onClose }) {
                 Amout: <strong>{ detailsItem.amount} лв.</strong>
               </p>
               <p>
-                Date:
+                Date Created:
                 <strong> {formatDateTime.dateTime(detailsItem.date)}</strong>
               </p>
               <p>

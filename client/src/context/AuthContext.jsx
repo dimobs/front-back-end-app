@@ -1,4 +1,4 @@
-import {createContext, useContext} from 'react'
+import {createContext, useContext, useState} from 'react'
 import usePersistedState from '../hooks/usePersistedState';
 
 export const AuthContext = createContext({
@@ -12,6 +12,7 @@ export const AuthContext = createContext({
 
 export function AuthContextProvider(props) {
 const [authState, setAuthState] = usePersistedState('auth', {});
+const [totalAmount, setTotalAmount] = useState(0)
 
 const changeAuthState = (state) => {  
     setAuthState(state)
@@ -26,6 +27,8 @@ const contextData = {
     email: authState?.email,
     accessToken: authState?.accessToken,
     isAuthenticated: !!authState?.email,
+    totalAmount: totalAmount,
+    setTotalAmount,
     changeAuthState,
     logout,
 }
