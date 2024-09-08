@@ -32,10 +32,12 @@ table th {
 }
 
 .input__table {
-  padding: 12px 10px 12px 8px;
+  /* padding: 12px 10px 12px 8px; */
+  /* padding: 8px; */
     height: 30px;
-    width: 15rem;
+    width: 12rem;
     /* padding: 10px; */
+    padding-left:10px;
     border: none;
     background-color: #223243;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -52,7 +54,14 @@ table th {
      letter-spacing: 0.05em;
      color: rgba(255, 255, 255, 0.5);
   border-bottom: 0.5px solid #00dfc4;
+}
 
+.input__table::placeholder {
+  padding-left: 15px;
+}
+
+select {
+  cursor: grab;
 }
 
 input:valid,

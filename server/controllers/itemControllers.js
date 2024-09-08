@@ -7,32 +7,33 @@ const { getById } = require('./userService');
 // Get all items
 itemController.get('/', (req, res) => {
     try {
-    db.all(`SELECT * FROM ${TABLE_ITEMS} ORDER BY id DESC`, async (err, rows) => {
-        if (err) {
-            res.status(500).send(err.message);
-            return;
-        }
+        db.all(`SELECT * FROM ${TABLE_ITEMS} ORDER BY id DESC`, async (err, rows) => {
+            if (err) {
+                res.status(500).send(err.message);
+                return;
+            }
 
-        const itemsWithUsernames = await Promise.all(rows.map( async (item) => {
-            const user = await getById(item.user_id);      
-            
-            return {
-                ...item,
-                username: user ? user : "Unknown"
-            };
-        }));
+            const itemsWithUsernames = await Promise.all(rows.map(async (item) => {
+                const user = await getById(item.user_id);
 
-        res.json(itemsWithUsernames);
-    });
-}catch (err) {
-    res.status(500).json({error: 'An error occurred while fetching items'})
-}
+                return {
+                    ...item,
+                    username: user ? user : "Unknown"
+                };
+            }));
+
+            res.json(itemsWithUsernames);
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'An error occurred while fetching items' })
+    }
 });
 
 // Add a new item
 itemController.post('/', hasUser(), (req, res) => {
     const user_id = req.user._id
-    const { name, description, amount, updatedAt } = req.body;
+    const { name, description, amount, type, updatedAt } = req.body;
+    console.log(name, description, amount, updatedAt, type);
 
     if ((Object.values(req.body).length == 0) || (Object.values(req.body).includes(''))) {
         return res.status(204).json({ message: 'No content!' })
@@ -44,7 +45,7 @@ itemController.post('/', hasUser(), (req, res) => {
 
     const date = new Date().toISOString();
 
-    db.run(`INSERT INTO ${TABLE_ITEMS} (date, user_id, name, description, amount, updatedAt) VALUES (?, ?, ?, ?, ?, ?)`, [date, user_id, name, description, amount, updatedAt], async function  (err) {
+    db.run(`INSERT INTO ${TABLE_ITEMS} (date, user_id, name, description, amount, type, updatedAt ) VALUES (?, ?, ?, ?, ?, ?, ?)`, [date, user_id, name, description, amount, type, updatedAt ], async function (err) {
         if (err) {
             console.log(err.message);
 
@@ -52,8 +53,8 @@ itemController.post('/', hasUser(), (req, res) => {
             return;
         }
         const user = await getById(user_id);
-        
-        res.json({ id: this.lastID, date, name, description, amount, updatedAt, username: user ? user : 'Unknown' });
+
+        res.json({ id: this.lastID, date, name, description, amount, type, updatedAt, username: user ? user : 'Unknown' });
     });
 });
 
@@ -121,7 +122,7 @@ itemController.delete('/:id', hasUser(), (req, res) => {
 
     db.get(`SELECT * FROM ${TABLE_ITEMS} where id = ? and user_id = ?`, [paramsId, ownerId], (err, row) => {
         if (err) {
-            console.log(err.message, '130 red');
+            console.log(err.message);
             return res.status(500).send(err.message);
         }
         if (!row) {

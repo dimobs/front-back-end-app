@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import useFocus from "../../hooks/useFocus";
-import { useCreate, useGetAllTableItems} from "../../hooks/useTableItem";
+import { useCreate, useGetAllTableItems } from "../../hooks/useTableItem";
 import Spinner from "../spinner/Spinner";
 import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
@@ -9,7 +9,7 @@ import "./tableRow.css";
 import Notification from "../Notification/Notification";
 import { useForm } from "../../hooks/useForm";
 
-const INITIAL_VALUE = { name: "", description: "", amount: "" };
+const INITIAL_VALUE = { name: "", description: "", amount: "", type: "" };
 
 export default function TableRow() {
   const { isAuthenticated, setTotalAmount } = useAuthContext();
@@ -25,13 +25,18 @@ export default function TableRow() {
   const [item, setitem] = useState([]);
   // const [item, handleCallBack] = useGetOneCallback();
   // getall
-  const [items, setItems ] = useGetAllTableItems();
-   const totalAmount = (items.length == 0) 
-  ? ""
-  : `${(items.reduce((total, x) => total + Number(x.amount), 0)).toFixed(2)}лв.`;
+  const [items, setItems] = useGetAllTableItems();
+  const totalAmount =
+    items.length == 0
+      ? ""
+      : `${items
+          .reduce((total, x) => total + Number(x.amount), 0)
+          .toFixed(2)}лв.`;
   useEffect(() => {
     if (items.length > 0) {
-      setTotalAmount(items.reduce((total, x) => total + Number(x.amount), 0).toFixed(2));
+      setTotalAmount(
+        items.reduce((total, x) => total + Number(x.amount), 0).toFixed(2)
+      );
     }
   }, [items, setTotalAmount]);
 
@@ -39,15 +44,17 @@ export default function TableRow() {
   const createItem = useCreate();
 
   // createSetter
-  const createHandler = async(values) => {
-    if (!values.name || !values.description || !values.amount){
-      return
+  const createHandler = async (values) => {
+    console.log(values, "values");
+
+    if (!values.name || !values.description || !values.amount || values.type == "") {
+      return;
     }
-    try{
-    const newItemCreated = await createItem(values);
-    setItems((oldState) => [newItemCreated, ...oldState]);
-    }catch (err){
-      console.log(err.message);      
+    try {
+      const newItemCreated = await createItem(values);
+      setItems((oldState) => [newItemCreated, ...oldState]);
+    } catch (err) {
+      console.log(err.message);
     }
   };
   const { values, changeHandler, onsubmitHandler } = useForm(
@@ -60,11 +67,11 @@ export default function TableRow() {
     setNotification({ message: "", visible: false });
   };
 
-// getOne
-const detailsHandler = async (i) => {
-  setShowItem(true);
-  setitem(i)
-}
+  // getOne
+  const detailsHandler = async (i) => {
+    setShowItem(true);
+    setitem(i);
+  };
 
   // onClose
   const itemModalCloseHandler = () => {
@@ -119,10 +126,18 @@ const detailsHandler = async (i) => {
                 value={values.amount}
                 onChange={changeHandler}
               />
-              <button             
-              className="btn-submit form__submit">
-                Add Entry
-                </button>
+              <select
+                className="input__table"
+                id="type"
+                name="type"
+                value={values.type}
+                onChange={changeHandler}                
+              >
+                <option value="">Select</option>
+                <option value="subtract">Spend</option>
+                <option value="add">Add funds</option>
+              </select>
+              <button className="btn-submit form__submit">Add Entry</button>
             </div>
           </form>
         )}
@@ -148,7 +163,7 @@ const detailsHandler = async (i) => {
               items.map((i, idx) => (
                 <TableRowItem
                   key={i.id}
-                  username = {i.username.email.split('@')[0]}
+                  username={i.username?.email?.split("@")[0]}
                   itemId={i.id}
                   date={i.date}
                   name={i.name}
@@ -156,8 +171,10 @@ const detailsHandler = async (i) => {
                   value={i.amount}
                   modify={i.updatedAt}
                   index={idx + 1}
-                itemDetailsClickHandler={() => {detailsHandler(i)}}
-                
+                  itemDetailsClickHandler={() => {
+                    detailsHandler(i);
+                  }}
+
                   // itemDelHandler={handleDeleteClick}
                 />
               ))
@@ -171,7 +188,7 @@ const detailsHandler = async (i) => {
           </tfoot>
         </table>
         {showItem && (
-          <TableDetails        
+          <TableDetails
             detailsItem={item}
             onClose={itemModalCloseHandler}
             // itemDelHandler={handleDeleteClick}
