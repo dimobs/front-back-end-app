@@ -73,7 +73,7 @@ const detailsHandler = async (i) => {
   return (
     <div>
       <div className="table__body">
-        <h1>Table</h1>
+        <h1>Dashboard</h1>
         <Notification
           message={notification.message}
           visible={notification.visible}

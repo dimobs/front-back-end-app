@@ -213,7 +213,9 @@ gap: 20px;
     vertical-align: middle;
     /* margin-right: 20px; */
     font-size: 85%;
-    right: 180px
+    right: 180px;
+    /* opacity: 0.8; */
+    
   }
   .balance__bgn{
     transition: all 1.5s ease-in-out;
