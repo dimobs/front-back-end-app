@@ -59,6 +59,9 @@ export default function TableDetails({ detailsItem, onClose }) {
               <p>
                 User: <strong>{detailsItem.username.email}</strong>
               </p>
+              <p>
+                type: <strong>{detailsItem.TYPE === "add" ? "+ Add funds" : "- Spend"}</strong>
+              </p>
               </div>
               <p>
                 name:

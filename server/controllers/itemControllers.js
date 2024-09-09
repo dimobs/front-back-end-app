@@ -15,6 +15,7 @@ itemController.get('/', (req, res) => {
 
             const itemsWithUsernames = await Promise.all(rows.map(async (item) => {
                 const user = await getById(item.user_id);
+console.log(item);
 
                 return {
                     ...item,
@@ -29,7 +30,7 @@ itemController.get('/', (req, res) => {
     }
 });
 
-// Add a new item
+//Create
 itemController.post('/', hasUser(), (req, res) => {
     const user_id = req.user._id
     const { name, description, amount, type, updatedAt } = req.body;

@@ -26,19 +26,24 @@ export default function TableRow() {
   // const [item, handleCallBack] = useGetOneCallback();
   // getall
   const [items, setItems] = useGetAllTableItems();
-  const totalAmount =
-    items.length == 0
-      ? ""
-      : `${items
-          .reduce((total, x) => total + Number(x.amount), 0)
-          .toFixed(2)}лв.`;
+  const totalAmount = (items.length === 0) 
+  ? ""
+  : `${(items.reduce((total, x) => {
+      return x.type === 'subtract' 
+      ? total - Number(x.amount) 
+      : total + Number(x.amount);
+    }, 0)).toFixed(2)}лв.`;
   useEffect(() => {
     if (items.length > 0) {
       setTotalAmount(
-        items.reduce((total, x) => total + Number(x.amount), 0).toFixed(2)
-      );
-    }
-  }, [items, setTotalAmount]);
+        items.reduce(
+          (total, x) => {
+            return x.type === "substract"
+            ? total - Number(x.amount)
+            : total + Number(x.amount);
+          }, 0)
+          .toFixed(2));
+        }}, [items, setTotalAmount]);
 
   // createGETTER
   const createItem = useCreate();
@@ -47,7 +52,7 @@ export default function TableRow() {
   const createHandler = async (values) => {
     console.log(values, "values");
 
-    if (!values.name || !values.description || !values.amount || values.type == "") {
+    if (!values.name || !values.description || !values.amount || !values.type) {
       return;
     }
     try {
@@ -134,8 +139,8 @@ export default function TableRow() {
                 onChange={changeHandler}                
               >
                 <option value="">Select</option>
-                <option value="subtract">Spend</option>
-                <option value="add">Add funds</option>
+                <option value="subtract">Spend -</option>
+                <option value="add">Add funds +</option>
               </select>
               <button className="btn-submit form__submit">Add Entry</button>
             </div>
@@ -164,6 +169,7 @@ export default function TableRow() {
                 <TableRowItem
                   key={i.id}
                   username={i.username?.email?.split("@")[0]}
+                  type={i.type}
                   itemId={i.id}
                   date={i.date}
                   name={i.name}
