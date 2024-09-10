@@ -212,9 +212,9 @@ gap: 20px;
     display: inline-block;
     vertical-align: middle;
     /* margin-right: 20px; */
-    font-size: 85%;
     right: 180px;
     /* opacity: 0.8; */
+    background: transparent;
     
   }
   .balance__bgn{
@@ -222,6 +222,7 @@ gap: 20px;
     float: left;   
     margin-right: 10px;
     padding-left: 5px;
+    font-size: 1rem;
   }
   
   .balance__label { 
@@ -230,10 +231,12 @@ gap: 20px;
     padding-right: 5px;
     line-height: 1;
     white-space: nowrap;
+    font-size: 0.9rem;
   }
   .balance__label__euro{
     display: inline;
     padding-right: 5px;
+    font-size: 0.9rem;
   }
 
   .nav__bar {

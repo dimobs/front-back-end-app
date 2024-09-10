@@ -42,7 +42,7 @@ export function useGetOneTableData(id) {
         (async () => {
             setLoading(true);
             try {
-                const result = await itemsAPI.get4One(id);
+                const result = await itemsAPI.getOne(id);
                 console.log(result, 'useTableItem.js');
 
                 setItem(result);
