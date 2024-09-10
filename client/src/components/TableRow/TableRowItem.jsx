@@ -4,6 +4,7 @@ import formatDate from "../../util/formatDate"
 export default function TableRowItem (
     {
       itemId, 
+      method,
       date, 
       name, 
       description, 
@@ -31,9 +32,11 @@ export default function TableRowItem (
     {description.length <= 34 
       ? <td className="description header__items td" >{description}</td>
       :  <td style={{fontSize: "0.75rem", spellCheck:"true"}} className="description header__items td">{description.slice(0, 34)}...</td>
-  
     }
-    <td className='header__items td'>{value}</td>
+    {method == "add" 
+    ? <td style={{color: "rgba(200, 247, 197)", fontWeight: "900"}} className='header__items td'>{value}</td>
+    :  <td style={{color: "#ff7878", fontWeight: "900"}} className='header__items td'>{value}</td>
+    }
     <td>
     <button className="btn-small" title="View for more info"
     onClick={editItemHandler}>

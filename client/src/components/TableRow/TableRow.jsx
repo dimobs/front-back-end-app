@@ -128,7 +128,7 @@ export default function TableRow() {
                 className="input__table"
                 ref={cursorPointer}
                 type="text"
-                placeholder="Name"
+                placeholder="Paid for..."
                 id="name"
                 name="name"
                 value={values.name}
@@ -161,9 +161,9 @@ export default function TableRow() {
                 value={values.method}
                 onChange={changeHandler}                
               >
-                <option value="">Select</option>
-                <option value="subtract">Spend -</option>
-                <option value="add">Add funds +</option>
+                <option  value="">Select</option>
+                <option style={{color: "red"}} value="subtract">Spend</option>
+                <option style={{color: "green"}} value="add">+Add funds</option>
               </select>
               <button className="btn-submit form__submit">Add Entry</button>
             </div>
@@ -174,9 +174,9 @@ export default function TableRow() {
             <tr>
               <th className="header__items">User</th>
               <th className="header__items">Date</th>
-              <th className="header__items">Name</th>
+              <th className="header__items">Paid for...</th>
               <th className="header__items">Description</th>
-              <th className="header__items">Amount</th>
+              <th className="header__items">Value</th>
               <th className="header__items controls">Controls</th>
             </tr>
           </thead>
@@ -192,7 +192,7 @@ export default function TableRow() {
                 <TableRowItem
                   key={i.id}
                   username={i.username?.email?.split("@")[0]}
-                  type={i.method}
+                  method={i.method}
                   itemId={i.id}
                   date={i.date}
                   name={i.name}

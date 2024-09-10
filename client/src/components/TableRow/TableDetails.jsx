@@ -60,7 +60,7 @@ export default function TableDetails({ detailsItem, onClose }) {
                 User: <strong>{detailsItem.username.email}</strong>
               </p>
               <p>
-                type: <strong>{detailsItem.TYPE === "add" ? "+ Add funds" : "- Spend"}</strong>
+                type: <strong>{detailsItem.method === "add" ? "+ ADD FUNDS" : "- SPEND"}</strong>
               </p>
               </div>
               <p>

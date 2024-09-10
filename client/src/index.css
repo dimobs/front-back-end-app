@@ -197,9 +197,9 @@ tfoot {
 display: flex;
 margin: 5px;
   }
-  .index {
+  /* .index {
     display: none;
-  }
+  } */
 
   .table__container{
     width: 100%;
