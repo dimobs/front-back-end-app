@@ -22,32 +22,8 @@ export default function TableRow() {
   });
   // getOne
   const [item, setitem] = useState([]);
-  // const [item, handleCallBack] = useGetOneCallback();
   // getall
-  const [items, setItems] = useGetAllTableItems();
-
-//   const subtractAll = () => {
-//     let total = 0;
-//     let temp = total
-//   items.forEach((x) => {
-//     console.log(x.TYPE, '1');
-    
-//   if (x.TYPE === "subtract" ){
-//     console.log(x.TYPE, '2 sub');
-
-//     temp -= Number(x.amount)
-//   }else {
-//     console.log(x.TYPE, '3 add');
-
-//     temp += Number(x.amount)
-//   }
-//   total = 0
-// })
-//   return (temp.toFixed(2))
-//     }
-//       console.log(subtractAll());
-      
-
+  const [items, setItems] = useGetAllTableItems();    
   const totalAmount = (items.length === 0) 
   ? ""
   : `${(items.reduce((total, x) => {

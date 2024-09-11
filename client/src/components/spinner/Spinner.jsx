@@ -1,9 +1,13 @@
+import { useLoading } from './SpinnerContext'
 import './spinnerCSS.css'
 
-export default function Spinner () {
-
+export default function LoadingSpinner () {
+    const { loading } = useLoading();
 
     return(
-        <div className="rainbow-loader"></div>
-    )
+        loading && (
+            <div className="rainbow-loader"></div>
+
+        )
+    );
 }

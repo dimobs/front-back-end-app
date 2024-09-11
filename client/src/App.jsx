@@ -13,6 +13,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import Logout from './components/logout/logout';
 import EditTable from './components/tableRow/EditTable';
 import PrivateGuard from './components/common/PrivateGuard';
+import { LoadingProvider } from './components/spinner/SpinnerContext';
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
         <>
         <AuthContextProvider>
         <Header />
+            <LoadingProvider>        
         <Routes>
         <Route path='/' element={<TableRow />} />
         <Route element={<PrivateGuard />}>
@@ -34,6 +36,7 @@ const App = () => {
         <Route path='/spinner' element={<Spinner />} />
         <Route path='/confirm' element={<ConfirmModal />} />
         </Routes>
+        </LoadingProvider>
         </AuthContextProvider>
         </>
     )

@@ -13,8 +13,10 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #223243;
-
+  /* background-color: #223243; */
+  /* background: rgb(34,50,67); */
+  background: radial-gradient(circle, rgb(35, 55, 76) 0%, rgb(29, 45, 45) 50%, rgb(10, 10, 10) 100%);
+  background-repeat: no-repeat;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -53,8 +55,7 @@
   line-height: 1;
   font-size: 1.2rem;
   text-decoration: none;
-  background: #578dbd;
-  /* color: #223243; */
+  background: #223243;
   color: #C0C7D6;
   padding: 4px 0.4rem;
   letter-spacing: 1px;
@@ -68,9 +69,8 @@
     ;
     margin-right: 3px;
     font-size: 0.5em;
+    border-bottom:1px solid #00dfc4;
 }
-
-
 
 html {
 scroll-behavior: smooth;
