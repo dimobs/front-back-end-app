@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import formatDateTime from "../../util/formatDate";
-import { useAuthContext } from "../../context/AuthContext";
+import { useAuthContext } from "../../context/auth/AuthContext";
 
 // export default function TableDetails({ detailsItem, onClose, itemDelHandler }) {
 export default function TableDetails({ detailsItem, onClose }) {

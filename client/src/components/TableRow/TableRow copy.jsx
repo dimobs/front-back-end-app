@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import TableRowItem from "./TableRowItem";
 import "./tableRow.css";
 import TableDetails from "./tableDetails";
-import Notification from "../globalStates/notification/Notification";
+import Notification from "../../context/notification/ErrorModal";
 import Spinner from "../spinner/Spinner";
 import useFocus from "../../hooks/useFocus";
 import {
@@ -16,7 +16,7 @@ import {
 import { useForm } from "../../hooks/useForm";
 import itemsAPI from "../../api/item-api";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuthContext } from "../../context/AuthContext";
+import { useAuthContext } from "../../context/auth/AuthContext";
 import ConfirmModal from "../../util/confirmModal/ConfirmModal";
 
 export default function TableRow() {

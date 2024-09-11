@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import formatDateTime from "../../util/formatDate";
-import { useAuthContext } from "../../context/AuthContext";
+import { useAuthContext } from "../../context/auth/AuthContext";
 import { useForm } from "../../hooks/useForm";
 import useFocus from "../../hooks/useFocus";
 import {

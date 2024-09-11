@@ -7,14 +7,17 @@ import TableDetails from './components/TableRow/TableDetails'
 import Login from './components/login/Login';
 import Register from './components/login/Register';
 import NotFound from './components/NotFound404/NotFound';
-import Spinner from './components/globalStates/spinner/Spinner';
+import Spinner from './context/spinner/Spinner';
 import ConfirmModal from './util/confirmModal/ConfirmModal';
-import { AuthContextProvider } from './context/AuthContext';
+// import { AuthContextProvider } from './context/AuthContext';
+import { AuthContextProvider } from './context/auth/AuthContext';
 import Logout from './components/logout/logout';
 import EditTable from './components/tableRow/EditTable';
 import PrivateGuard from './components/common/PrivateGuard';
-import { LoadingProvider } from './components/globalStates/spinner/SpinnerContext';
-import LoadingSpinner from './components/globalStates/spinner/Spinner';
+import { LoadingProvider } from './context/spinner/SpinnerContext';
+import LoadingSpinner from './context/spinner/Spinner';
+import { ErrorProvider } from './context/notification/ErrorContext';
+import ErrorModal from './context/notification/ErrorModal';
 
 const App = () => {
 
@@ -23,7 +26,9 @@ const App = () => {
         <AuthContextProvider>
         <Header />
             <LoadingProvider>  
-                <LoadingSpinner />      
+            <LoadingSpinner />
+            <ErrorProvider>
+            <ErrorModal />               
         <Routes>
         <Route path='/' element={<TableRow />} />
         <Route element={<PrivateGuard />}>
@@ -38,6 +43,7 @@ const App = () => {
         <Route path='/spinner' element={<Spinner />} />
         <Route path='/confirm' element={<ConfirmModal />} />
         </Routes>
+        </ErrorProvider>     
         </LoadingProvider>
         </AuthContextProvider>
         </>

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useAuthContext } from "../../context/AuthContext";
+import { useAuthContext } from "../../context/auth/AuthContext";
 import useFocus from "../../hooks/useFocus";
 import { useCreate, useGetAllTableItems } from "../../hooks/useTableItem";
 import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
 import "./tableRow.css";
-import Notification from "../globalStates/notification/Notification";
+import Notification from "../../context/notification/ErrorModal";
 import { useForm } from "../../hooks/useForm";
-import { useLoading } from "../globalStates/spinner/SpinnerContext";
+import { useLoading } from "../../context/spinner/SpinnerContext";
 
 const INITIAL_VALUE = { name: "", description: "", amount: "", method: "" };
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css'; // Make sure to create this file
-import { useAuthContext } from '../../context/AuthContext';
+import { useAuthContext } from '../../context/auth/AuthContext';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);

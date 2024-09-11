@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import itemsAPI from "../api/item-api";
 import { useParams } from "react-router-dom";
-import { useLoading } from "../components/globalStates/spinner/SpinnerContext";
+import { useLoading } from "../context/spinner/SpinnerContext";
 
 
 
