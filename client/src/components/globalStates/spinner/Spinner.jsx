@@ -6,8 +6,9 @@ export default function LoadingSpinner () {
 
     return(
         loading && (
+            <div className="overlay__spinner">
             <div className="rainbow-loader"></div>
-
+            </div>
         )
     );
 }

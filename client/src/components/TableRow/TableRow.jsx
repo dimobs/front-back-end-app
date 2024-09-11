@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import useFocus from "../../hooks/useFocus";
 import { useCreate, useGetAllTableItems } from "../../hooks/useTableItem";
-import Spinner from "../spinner/Spinner";
 import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
 import "./tableRow.css";
-import Notification from "../Notification/Notification";
+import Notification from "../globalStates/notification/Notification";
 import { useForm } from "../../hooks/useForm";
+import { useLoading } from "../globalStates/spinner/SpinnerContext";
 
 const INITIAL_VALUE = { name: "", description: "", amount: "", method: "" };
 
 export default function TableRow() {
+  const {setLoading} = useLoading();
   const { isAuthenticated, setTotalAmount } = useAuthContext();  
   const cursorPointer = useFocus();
-  const loading = false;
   const [showItem, setShowItem] = useState(false);
   const [notification, setNotification] = useState({
     message: "",
@@ -55,8 +55,10 @@ export default function TableRow() {
       return;
     }
     try {
+      setLoading(true);
       const newItemCreated = await createItem(values);
       setItems((oldState) => [newItemCreated, ...oldState]);
+      setLoading(false);
     } catch (err) {
       console.log(err.message);
     }
@@ -157,14 +159,7 @@ export default function TableRow() {
             </tr>
           </thead>
           <tbody>
-            {loading ? (
-              <tr>
-                <td colSpan={6}>
-                  <Spinner />
-                </td>
-              </tr>
-            ) : (
-              items.map((i, idx) => (
+             {items.map((i, idx) => (
                 <TableRowItem
                   key={i.id}
                   username={i.username?.email?.split("@")[0]}
@@ -182,8 +177,8 @@ export default function TableRow() {
 
                   // itemDelHandler={handleDeleteClick}
                 />
-              ))
-            )}
+                ))}
+          
           </tbody>
           <tfoot>
             <tr>

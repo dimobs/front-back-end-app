@@ -7,14 +7,14 @@ import TableDetails from './components/TableRow/TableDetails'
 import Login from './components/login/Login';
 import Register from './components/login/Register';
 import NotFound from './components/NotFound404/NotFound';
-import Spinner from './components/spinner/Spinner';
+import Spinner from './components/globalStates/spinner/Spinner';
 import ConfirmModal from './util/confirmModal/ConfirmModal';
 import { AuthContextProvider } from './context/AuthContext';
 import Logout from './components/logout/logout';
 import EditTable from './components/tableRow/EditTable';
 import PrivateGuard from './components/common/PrivateGuard';
-import { LoadingProvider } from './components/spinner/SpinnerContext';
-import LoadingSpinner from './components/spinner/Spinner';
+import { LoadingProvider } from './components/globalStates/spinner/SpinnerContext';
+import LoadingSpinner from './components/globalStates/spinner/Spinner';
 
 const App = () => {
 

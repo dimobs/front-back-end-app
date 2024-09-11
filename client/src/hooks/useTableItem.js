@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import itemsAPI from "../api/item-api";
 import { useParams } from "react-router-dom";
-import { useLoading } from "../components/spinner/SpinnerContext";
+import { useLoading } from "../components/globalStates/spinner/SpinnerContext";
 
 
 
@@ -120,7 +120,6 @@ export function useGetOne() {
 export function useGetAllTableItems() {
     const { setLoading } = useLoading();
     const [all, setAll] = useState([]);
-    // const [loading, setLoading] = useState(false);
     const [notification, setNotification] = useState({ message: "", visible: false })
     const onClose = () => {
         setNotification({ message: '', visible: false });
