@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import TableRowItem from "./TableRowItem";
 import "./tableRow.css";
 import TableDetails from "./tableDetails";
-import Notification from "../../context/notification/ErrorModal";
+import Notification from "../../context/notification/ErrorNotification";
 import Spinner from "../spinner/Spinner";
 import useFocus from "../../hooks/useFocus";
 import {

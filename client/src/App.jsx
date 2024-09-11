@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+import { AuthContextProvider } from './context/auth/AuthContext';
 import Header from './components/Header/Header';
 import TableRow from './components/TableRow/TableRow';
 import TableDetails from './components/TableRow/TableDetails'
@@ -9,15 +10,13 @@ import Register from './components/login/Register';
 import NotFound from './components/NotFound404/NotFound';
 import Spinner from './context/spinner/Spinner';
 import ConfirmModal from './util/confirmModal/ConfirmModal';
-// import { AuthContextProvider } from './context/AuthContext';
-import { AuthContextProvider } from './context/auth/AuthContext';
 import Logout from './components/logout/logout';
 import EditTable from './components/tableRow/EditTable';
 import PrivateGuard from './components/common/PrivateGuard';
 import { LoadingProvider } from './context/spinner/SpinnerContext';
 import LoadingSpinner from './context/spinner/Spinner';
 import { ErrorProvider } from './context/notification/ErrorContext';
-import ErrorModal from './context/notification/ErrorModal';
+import ErrorNotification from './context/notification/ErrorNotification';
 
 const App = () => {
 
@@ -28,7 +27,7 @@ const App = () => {
             <LoadingProvider>  
             <LoadingSpinner />
             <ErrorProvider>
-            <ErrorModal />               
+            <ErrorNotification />                        
         <Routes>
         <Route path='/' element={<TableRow />} />
         <Route element={<PrivateGuard />}>
@@ -42,8 +41,8 @@ const App = () => {
         <Route path='/*' element={<NotFound />} />
         <Route path='/spinner' element={<Spinner />} />
         <Route path='/confirm' element={<ConfirmModal />} />
-        </Routes>
-        </ErrorProvider>     
+        </Routes>    
+        </ErrorProvider>    
         </LoadingProvider>
         </AuthContextProvider>
         </>

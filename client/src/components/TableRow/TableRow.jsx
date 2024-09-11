@@ -5,21 +5,23 @@ import { useCreate, useGetAllTableItems } from "../../hooks/useTableItem";
 import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
 import "./tableRow.css";
-import Notification from "../../context/notification/ErrorModal";
+// import Notification from "../../context/notification/ErrorNotification";
 import { useForm } from "../../hooks/useForm";
 import { useLoading } from "../../context/spinner/SpinnerContext";
+import { useError } from "../../context/notification/ErrorContext";
 
 const INITIAL_VALUE = { name: "", description: "", amount: "", method: "" };
 
 export default function TableRow() {
+  const {setError} = useError();
   const {setLoading} = useLoading();
   const { isAuthenticated, setTotalAmount } = useAuthContext();  
   const cursorPointer = useFocus();
   const [showItem, setShowItem] = useState(false);
-  const [notification, setNotification] = useState({
-    message: "",
-    visible: false,
-  });
+  // const [notification, setNotification] = useState({
+  //   message: "",
+  //   visible: false,
+  // });
   // getOne
   const [item, setitem] = useState([]);
   // getall
@@ -49,18 +51,19 @@ export default function TableRow() {
 
   // createSetter
   const createHandler = async (values) => {
-    console.log(values, "values");
-
-    if (!values.name || !values.description || !values.amount || !values.method) {
+    if (!values.name || !values.description || !values.amount || !values.method) {    
+      setError('Your entry is not saved. All fields are required', 7000)
       return;
     }
     try {
       setLoading(true);
       const newItemCreated = await createItem(values);
       setItems((oldState) => [newItemCreated, ...oldState]);
-      setLoading(false);
     } catch (err) {
-      console.log(err.message);
+      setError(err.message)
+      console.error(err.message);
+    }finally {
+      setLoading(false);
     }
   };
   const { values, changeHandler, onsubmitHandler } = useForm(
@@ -70,7 +73,7 @@ export default function TableRow() {
 
   // setOnClose
   const onClose = () => {
-    setNotification({ message: "", visible: false });
+    // setNotification({ message: "", visible: false });
   };
 
   // getOne
@@ -87,11 +90,11 @@ export default function TableRow() {
     <div>
       <div className="table__body">
         <h1>Dashboard</h1>
-        <Notification
+        {/* <Notification
           message={notification.message}
           visible={notification.visible}
           onClose={onClose}
-        />
+        /> */}
 
         {/* <ConfirmModal
                 isOpen={isModalOpen}

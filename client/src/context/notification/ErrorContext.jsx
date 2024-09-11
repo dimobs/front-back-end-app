@@ -1,20 +1,39 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 
+// Create ErrorContext
 const ErrorContext = createContext({
-    error: null, 
-    setError: () => {},
-})
+  error: null,
+  setError: (message, duration) => {},
+  clearError: () => {},
+});
 
+export const ErrorProvider = ({ children }) => {
+    
+  const [error, setErrorState] = useState(null);
 
-export function ErrorProvider({children}) {
-const [error, setError] = useState(null);
+  // Function to set the error with optional timeout
+  const setError = (message, duration = 5000) => {  
+    setErrorState(message);
+    
+    // Automatically clear the error after the specified duration
+    if (duration) {
+      setTimeout(() => {
+        setErrorState(null);
+      }, duration);
+    }
+  };
 
+  // Manually clear the error
+  const clearError = () => {
+    setErrorState(null);
+  };
 
-    return (
-       <ErrorContext.Provider value={{error, setError}}>
-        {children}
-       </ErrorContext.Provider> 
-    );
-}
+  return (
+    <ErrorContext.Provider value={{ error, setError, clearError }}>
+      {children}
+    </ErrorContext.Provider>
+  );
+};
 
-export const useError = () => useContext(ErrorContext );
+// Custom hook to use ErrorContext
+export const useError = () => useContext(ErrorContext);

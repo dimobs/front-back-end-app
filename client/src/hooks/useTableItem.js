@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import itemsAPI from "../api/item-api";
 import { useParams } from "react-router-dom";
 import { useLoading } from "../context/spinner/SpinnerContext";
+import { useError } from "../context/notification/ErrorContext";
 
 
 
@@ -118,6 +119,7 @@ export function useGetOne() {
 }
 
 export function useGetAllTableItems() {
+    const {setError } = useError();
     const { setLoading } = useLoading();
     const [all, setAll] = useState([]);
     const [notification, setNotification] = useState({ message: "", visible: false })
@@ -132,10 +134,11 @@ export function useGetAllTableItems() {
                 const result = await itemsAPI.getAll();
                 setAll(result);
             } catch (err) {
-                setNotification({ message: `Cannot reach the server.\nError: ${err}`, visible: true });
-                setTimeout(() => {
-                    setNotification({ message: '', visible: false });
-                }, 6000)
+                setError(err.message)
+                // setNotification({ message: `Cannot reach the server.\nError: ${err}`, visible: true });
+                // setTimeout(() => {
+                //     setNotification({ message: '', visible: false });
+                // }, 6000)
             } finally {
                 setLoading(false)
             }

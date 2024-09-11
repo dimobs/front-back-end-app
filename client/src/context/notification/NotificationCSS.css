@@ -2,8 +2,9 @@
     position: fixed;
     width: auto;
     background-color: transparent;
-    border: 2px solid #f4a261;
-    backdrop-filter: blur(20px) saturate(400%);
+    /* border: 2px solid #f4a261; */
+    border: 2px solid red;
+    backdrop-filter: blur(40px) saturate(400%);
     color: white;
     padding: 0px;
     border-radius: 5px;
@@ -15,16 +16,15 @@
     /* transform: translateY(100%); */
     padding: 25px;
     animation: txt 0.5s ;
-    font-weight: 700;
+  font-weight: 900;
 }
 
 @keyframes txt {
 	from {
-	  transform: translateX(-100%);
+	  transform: translateX(-100%);     
 	}
 	to {
-        transform: translateX(0);
-
+        transform: translateX(0);            
 	}
   }
 .notification p{
