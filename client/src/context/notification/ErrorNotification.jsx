@@ -19,7 +19,9 @@ import './NotificationCSS.css';
 export default function ErrorNotification() {
   const {error, setError, clearError} = useError();
   
-  const notificationClass = error ? `notification ${error.type || error}` : 'notification';
+  const notificationClass = error 
+  ? `notification ${error.type || error}` 
+  : 'notification';
 
 
 document.onkeydown = function (e) {

@@ -10,6 +10,7 @@ import {
   useGetOneTableData,
 } from "../../hooks/useTableItem";
 import itemsAPI, { getOne } from "../../api/item-api";
+import { useError } from "../../context/notification/ErrorContext";
 
 const initialValue = {
   name: "",
@@ -18,6 +19,7 @@ const initialValue = {
 };
 
 export default function EditTable() {
+  const {setError}  = useError();
   const navigate = useNavigate();
   const onClose = () => {
     navigate("/");
@@ -40,17 +42,23 @@ export default function EditTable() {
     try {
        const res = await itemsAPI.remove(itemId);      
        console.log(res, 'ressssssssssssss');
-       
+       setError('Successfully removed', 'success')
       navigate('/')
     }catch (err) {
+      setError(err.message, 'error')
       console.log(err.message);     
     }
   }
   const { values, changeHandler, onsubmitHandler } = useForm(
     initialFormValue,
     async (values) => {
+      try {
       await itemsAPI.update(itemId, values);
+      setError('Updated successfully!', 'success')
       navigate("/");
+      }catch (err) {
+        setError(err.message, 'error')
+      }
     }
   );
 
