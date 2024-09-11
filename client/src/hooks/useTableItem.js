@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import itemsAPI from "../api/item-api";
 import { useParams } from "react-router-dom";
+import { useLoading } from "../components/spinner/SpinnerContext";
+
 
 
 // export function useAllTableData() {
@@ -52,7 +54,7 @@ export function useGetOneTableData(id) {
                     setNotification({ message: '', visible: false });
                 }, 6000)
             } finally {
-                setLoading(false)
+                // setLoading(false)
             }
         })()
     }, [id]);
@@ -116,13 +118,15 @@ export function useGetOne() {
 }
 
 export function useGetAllTableItems() {
+    const { setLoading } = useLoading();
     const [all, setAll] = useState([]);
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const [notification, setNotification] = useState({ message: "", visible: false })
     const onClose = () => {
         setNotification({ message: '', visible: false });
     }
     useEffect(() => {
+   
         (async () => {
             setLoading(true);
             try {
@@ -140,7 +144,7 @@ export function useGetAllTableItems() {
 
     }, []);
 
-    return [all, setAll, loading, notification, setNotification, onClose];
+    return [all, setAll, notification, setNotification, onClose];
 }
 
 export function useDelete() {

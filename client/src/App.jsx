@@ -14,6 +14,7 @@ import Logout from './components/logout/logout';
 import EditTable from './components/tableRow/EditTable';
 import PrivateGuard from './components/common/PrivateGuard';
 import { LoadingProvider } from './components/spinner/SpinnerContext';
+import LoadingSpinner from './components/spinner/Spinner';
 
 const App = () => {
 
@@ -21,7 +22,8 @@ const App = () => {
         <>
         <AuthContextProvider>
         <Header />
-            <LoadingProvider>        
+            <LoadingProvider>  
+                <LoadingSpinner />      
         <Routes>
         <Route path='/' element={<TableRow />} />
         <Route element={<PrivateGuard />}>
