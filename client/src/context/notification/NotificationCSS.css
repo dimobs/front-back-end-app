@@ -2,8 +2,8 @@
     position: fixed;
     width: auto;
     background-color: transparent;
-    /* border: 2px solid #f4a261; */
-    border: 2px solid red;
+    border: 2px solid #f4a261;
+    /* border: 2px solid red; */
     backdrop-filter: blur(40px) saturate(400%);
     color: white;
     padding: 0px;
@@ -17,6 +17,34 @@
     padding: 25px;
     animation: txt 0.5s ;
   font-weight: 900;
+}
+
+.notification.error {
+border: 2px solid red;
+background-color: rgba(255, 0, 0, 0.4);
+}
+
+.notification.warning {
+  border: 2px solid orange;
+  background-color: rgba(255, 165, 0, 0.4);
+}
+
+.notification.success {
+  border: 2px solid green;
+  background-color: rgba(0, 255, 0, 0.01);
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 5px;
+
 }
 
 @keyframes txt {

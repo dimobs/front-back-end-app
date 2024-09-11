@@ -52,13 +52,14 @@ export default function TableRow() {
   // createSetter
   const createHandler = async (values) => {
     if (!values.name || !values.description || !values.amount || !values.method) {    
-      setError('Your entry is not saved. All fields are required', 7000)
+      setError(`Your entry has not been saved. All fields are required`, "error", 6000)
       return;
     }
     try {
       setLoading(true);
       const newItemCreated = await createItem(values);
-      setItems((oldState) => [newItemCreated, ...oldState]);
+      setItems((oldState) => [newItemCreated, ...oldState]);      
+      setError(`Your item ${newItemCreated.namew} created successfully`, 'success')
     } catch (err) {
       setError(err.message)
       console.error(err.message);

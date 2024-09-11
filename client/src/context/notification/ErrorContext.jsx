@@ -1,6 +1,6 @@
 import { createContext, useState, useContext } from "react";
 
-// Create ErrorContext
+// Create
 const ErrorContext = createContext({
   error: null,
   setError: (message, duration) => {},
@@ -8,14 +8,10 @@ const ErrorContext = createContext({
 });
 
 export const ErrorProvider = ({ children }) => {
-    
   const [error, setErrorState] = useState(null);
 
-  // Function to set the error with optional timeout
-  const setError = (message, duration = 5000) => {  
-    setErrorState(message);
-    
-    // Automatically clear the error after the specified duration
+  const setError = (message, type = 'error', duration = 6000 ) => {
+    setErrorState({message, type});
     if (duration) {
       setTimeout(() => {
         setErrorState(null);
@@ -23,7 +19,6 @@ export const ErrorProvider = ({ children }) => {
     }
   };
 
-  // Manually clear the error
   const clearError = () => {
     setErrorState(null);
   };
@@ -35,5 +30,4 @@ export const ErrorProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use ErrorContext
 export const useError = () => useContext(ErrorContext);

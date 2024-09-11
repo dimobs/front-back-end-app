@@ -133,8 +133,9 @@ export function useGetAllTableItems() {
             try {
                 const result = await itemsAPI.getAll();
                 setAll(result);
+                setError('You are online!', 'success')
             } catch (err) {
-                setError(err.message)
+                setError(err.message, 'warning')
                 // setNotification({ message: `Cannot reach the server.\nError: ${err}`, visible: true });
                 // setTimeout(() => {
                 //     setNotification({ message: '', visible: false });
