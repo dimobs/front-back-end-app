@@ -17,6 +17,7 @@ import { LoadingProvider } from './context/spinner/SpinnerContext';
 import LoadingSpinner from './context/spinner/Spinner';
 import { ErrorProvider } from './context/notification/ErrorContext';
 import ErrorNotification from './context/notification/ErrorNotification';
+import { ConfirmProvider } from './context/notification/confirmModal/ConfirmContext';
 
 const App = () => {
 
@@ -27,7 +28,8 @@ const App = () => {
             <LoadingProvider>  
             <LoadingSpinner />
             <ErrorProvider>
-            <ErrorNotification />                        
+            <ErrorNotification />     
+           <ConfirmProvider>
         <Routes>
         <Route path='/' element={<TableRow />} />
         <Route element={<PrivateGuard />}>
@@ -41,7 +43,8 @@ const App = () => {
         <Route path='/*' element={<NotFound />} />
         <Route path='/spinner' element={<Spinner />} />
         <Route path='/confirm' element={<ConfirmModal />} />
-        </Routes>    
+        </Routes>   
+        </ConfirmProvider>           
         </ErrorProvider>    
         </LoadingProvider>
         </AuthContextProvider>

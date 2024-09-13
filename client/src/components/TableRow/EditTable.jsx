@@ -11,7 +11,7 @@ import {
 } from "../../hooks/useTableItem";
 import itemsAPI, { getOne } from "../../api/item-api";
 import { useError } from "../../context/notification/ErrorContext";
-
+import { useConfirm } from "../../context/notification/confirmModal/ConfirmContext";
 const initialValue = {
   name: "",
   description: "",
@@ -19,6 +19,7 @@ const initialValue = {
 };
 
 export default function EditTable() {
+  const {confirm} = useConfirm();
   const {setError}  = useError();
   const navigate = useNavigate();
   const onClose = () => {
@@ -34,12 +35,14 @@ export default function EditTable() {
   const { itemId } = useParams();
   const [item, setItem] = useGetOneForEdit(itemId);
   const initialFormValue = useMemo(() => Object.assign({}, initialValue, item), [item])
+//delete
   const onDeleteHandler = async() => {
-    const confirmed = confirm(`Are you shure you want to delete ${item.name}`)
-    if (!confirmed){
-      return
-    }
+    // const confirmed = confirm(`Are you shure you want to delete ${item.name}`)
     try {
+      const confirmed = await confirm(`Are you sure you want to delete ${item.name}?`);
+      if(!confirmed) {
+        return
+      }
        const response = await itemsAPI.remove(itemId);             
        navigate('/')
        setError(`Successfully deleted id${response.id} with name ${response.name}`, 'success', 8000)
@@ -49,6 +52,7 @@ export default function EditTable() {
     }
   }
 
+  //save
   const { values, changeHandler, onsubmitHandler } = useForm(
     initialFormValue,
     async (values) => {
@@ -161,15 +165,20 @@ export default function EditTable() {
                 </p>
               </div>
             </div>
-
           </form>
           {isAuthenticated && (
-              <div className="btn_form_details">
-                <button className="btn__details" onClick={onsubmitHandler}>Save</button>
+              <div 
+              className="btn_form_details">
+                <button 
+                className="btn__details" 
+                onClick={onsubmitHandler}>
+                  Save
+                  </button>
                 <button 
                 className="btn__details" 
                 onClick={onDeleteHandler}> 
-                Delete</button>
+                Delete
+                </button>
                 <button 
                 className="btn__details" 
                 onClick={onClose}>

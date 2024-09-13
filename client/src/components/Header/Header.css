@@ -108,7 +108,20 @@ gap: 20px;
     box-shadow: 0 2px 8px rgba(228, 222, 222, 0.25);
     z-index: 30;
     margin-top: 80px;
- 
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+         
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    
+    }
   }
   @media (min-width: 930px) {
     .modal {
