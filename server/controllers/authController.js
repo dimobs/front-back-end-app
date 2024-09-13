@@ -24,14 +24,12 @@ authController.post('/login',
     body('email').trim().isEmail().withMessage('Please enter valid email'),
     body('password').trim().isLength({min: 3}).withMessage('Password must be at least 3 characters long '),
     async (req, res) => {
-    try {
-        console.log(req.body.email, req.body.password);
-        
+    try {        
         const token = await login(req.body.email, req.body.password);
         res.json(token);
     } catch (error) {
-        // const message = parseError(error);
-        res.status(401).json(error);
+        const message = parseError(error);
+        res.status(401).json({message});
     }
 });
 

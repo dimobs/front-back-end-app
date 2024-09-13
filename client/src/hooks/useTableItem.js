@@ -133,13 +133,8 @@ export function useGetAllTableItems() {
             try {
                 const result = await itemsAPI.getAll();
                 setAll(result);
-                // setError('All items are updated successfully!', 'success')
             } catch (err) {
                 setError(err.message, 'error')
-                // setNotification({ message: `Cannot reach the server.\nError: ${err}`, visible: true });
-                // setTimeout(() => {
-                //     setNotification({ message: '', visible: false });
-                // }, 6000)
             } finally {
                 setLoading(false)
             }

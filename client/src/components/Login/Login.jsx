@@ -3,18 +3,28 @@ import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 import { useForm } from "../../hooks/useForm";
 import { useLogin } from "../../hooks/useAuth";
+import { useError } from "../../context/notification/ErrorContext";
 
 const INITIAL_VALUES = { email: "", password: "" };
 
 export default function Login() {
+  const {setError} = useError();
   const navigate = useNavigate();
   const login = useLogin();
 
-  const loginHandler = async ({ email, password }) => {   
+  const loginHandler = async ({ email, password }) => {  
+     if (!email || !password) {
+      console.log('empty');
+      
+     }
+    
     try {
       await login(email, password);
       navigate("/");
+      setError('successfully login', 'success')
     } catch (err) {
+      setError(err.message, 'warning', 90000)
+      console.log(err);      
       console.log(err.message);
     }
   };

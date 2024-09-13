@@ -92,10 +92,10 @@ export default function TableDetails({ detailsItem, onClose }) {
               <button className="btn__details" onClick={editHandler}>
                 Edit
               </button>
-              <button className="btn__details" onClick={deleteHandler}>
+              {/* <button className="btn__details" onClick={deleteHandler}>
                 {" "}
                 Delete
-              </button>      
+              </button>       */}
             </div>
           )}
           <div className="btn_form_details">

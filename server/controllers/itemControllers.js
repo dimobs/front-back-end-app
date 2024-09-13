@@ -81,11 +81,12 @@ itemController.put('/:id', hasUser(), (req, res) => {
     }
     const ownerId = req.user._id;
     const rowId = req.params.id;
+    
     const updatedData = new Date().toISOString();
 
     db.get(`SELECT * FROM ${TABLE_ITEMS} WHERE id = ? and user_id = ?`, [rowId, ownerId], (err, row) => {
         if (err) {
-            console.err(err.message);
+            console.error(err.message);
             return res.status(500).send(err.message);
         }
 
@@ -116,24 +117,25 @@ itemController.put('/:id', hasUser(), (req, res) => {
 //Del by ID
 itemController.delete('/:id', hasUser(), (req, res) => {
     const ownerId = req.user._id
-    const paramsId = req.params.id
+    const rowId = req.params.id
 
-    db.get(`SELECT * FROM ${TABLE_ITEMS} where id = ? and user_id = ?`, [paramsId, ownerId], (err, row) => {
+    db.get(`SELECT * FROM ${TABLE_ITEMS} where id = ? and user_id = ?`, [rowId, ownerId], (err, row) => {
         if (err) {
-            console.log(err.message);
+            console.error(err.message);
             return res.status(500).send(err.message);
         }
         if (!row) {
             console.error('Unauthorized to delete this entry');
             return res.status(403).json({ message: 'Unauthorized to delete this entry' });
         }
-
+       const name = row.name;
+        
         db.run(`DELETE FROM ${TABLE_ITEMS} WHERE id = ?`, [req.params.id], (err) => {
             if (err) {
                 console.error(err.message);
                 return res.status(500).send(err.message)
             }
-            res.json({ message: 'Entry deleted successfully', id: req.params.id });
+            res.json({ message: 'Entry deleted successfully', id: req.params.id, name });
         });
     });
 });

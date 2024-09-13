@@ -40,28 +40,30 @@ export default function EditTable() {
       return
     }
     try {
-       const res = await itemsAPI.remove(itemId);      
-       console.log(res, 'ressssssssssssss');
-       setError('Successfully removed', 'success')
-      navigate('/')
+       const response = await itemsAPI.remove(itemId);             
+       navigate('/')
+       setError(`Successfully deleted id${response.id} with name ${response.name}`, 'success', 8000)
     }catch (err) {
       setError(err.message, 'error')
       console.log(err.message);     
     }
   }
+
   const { values, changeHandler, onsubmitHandler } = useForm(
     initialFormValue,
     async (values) => {
       try {
-      await itemsAPI.update(itemId, values);
-      setError('Updated successfully!', 'success')
+      const response  = await itemsAPI.update(itemId, values);
+      console.log(response);
+      
+      // setError('Updated successfully!', 'success')
       navigate("/");
       }catch (err) {
         setError(err.message, 'error')
       }
     }
   );
-
+ 
   return (
     <div className="overlay__table">
       <div className="backdrop" onClick={onClose}></div>
@@ -159,16 +161,22 @@ export default function EditTable() {
                 </p>
               </div>
             </div>
-            {isAuthenticated && (
+
+          </form>
+          {isAuthenticated && (
               <div className="btn_form_details">
-                <button className="btn__details">Save</button>
-                <button className="btn__details" onClick={onDeleteHandler}> Delete</button>
-                <button className="btn__details" onClick={onClose}>
+                <button className="btn__details" onClick={onsubmitHandler}>Save</button>
+                <button 
+                className="btn__details" 
+                onClick={onDeleteHandler}> 
+                Delete</button>
+                <button 
+                className="btn__details" 
+                onClick={onClose}>
                   close
                 </button>
               </div>
             )}
-          </form>
         </div>
       </div>
     </div>

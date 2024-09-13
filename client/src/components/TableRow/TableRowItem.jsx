@@ -12,7 +12,7 @@ export default function TableRowItem (
       modify,
       index, 
       username,
-      itemDelHandler, 
+      // itemDelHandler, 
       itemDetailsClickHandler
     }) {
       
@@ -20,9 +20,9 @@ export default function TableRowItem (
         itemDetailsClickHandler(itemId)
       }
 
-      const deleteHandler = () => {
-        itemDelHandler(itemId, name)
-      }
+      // const deleteHandler = () => {
+      //   itemDelHandler(itemId, name)
+      // }
     return(
 <>
   <tr>

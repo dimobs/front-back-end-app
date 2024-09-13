@@ -3,11 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 import { useForm } from "../../hooks/useForm";
 import { useRegister } from "../../hooks/useAuth";
+import { useError } from "../../context/notification/ErrorContext";
 
 const INITIAL_VALUES = { email: "", password: "", rePass: "" };
 
 export default function Register() {
-  const [error, setError] = useState();
+  const { setError } = useError();
   const register = useRegister();
   const navigate = useNavigate();
 
@@ -17,23 +18,24 @@ export default function Register() {
   }, []);
 
   const registerHandler = async ({ email, password, rePass }) => {
+
     if (password !== rePass) {
-      return setError("Password mismatch!");
+      return setError("Password mismatch!", 'warning');
     }
 
     try {
       await register(email, password);
-
       navigate("/");
+      setError('Successfully registered', 'success')
     } catch (err) {
-      setError(err.message)
-      console.log(err.message);
+      setError(err.message);
+      console.error(err.message);
     }
   };
-    const { values, changeHandler, onsubmitHandler } = useForm(
-      INITIAL_VALUES,
-      registerHandler
-    );
+  const { values, changeHandler, onsubmitHandler } = useForm(
+    INITIAL_VALUES,
+    registerHandler
+  );
 
   return (
     <form onSubmit={onsubmitHandler}>
@@ -80,11 +82,6 @@ export default function Register() {
                 <i className="fa-solid fa-lock"></i>
                 <span>confirm password</span>
               </div>
-              {error && (
-                <p className="field">
-                  <span>{error}</span>
-                </p>
-              )}
               <div className="inputBox">
                 <input type="submit" value="Create Account" />
               </div>
