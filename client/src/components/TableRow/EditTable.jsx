@@ -41,6 +41,7 @@ export default function EditTable() {
     try {
       const confirmed = await confirm(`Are you sure you want to delete ${item.name}?`);
       if(!confirmed) {
+        setError('No changes have been made', 'warning')
         return
       }
        const response = await itemsAPI.remove(itemId);             
@@ -58,8 +59,8 @@ export default function EditTable() {
     async (values) => {
       try {
       const response  = await itemsAPI.update(itemId, values);
-      console.log(response);
-      
+      console.log(response, );
+      setError(response.message, 'success')
       // setError('Updated successfully!', 'success')
       navigate("/");
       }catch (err) {

@@ -21,7 +21,7 @@ export default function Login() {
     try {
       await login(email, password);
       navigate("/");
-      setError('successfully login', 'success')
+      setError(`Welcome back, ${(email.split("@")[0]).toUpperCase()}`, 'success')
     } catch (err) {
       setError(err.message, 'warning', 90000)
       console.log(err);      
