@@ -21,6 +21,7 @@ table th {
     margin-top: 8rem;
 }
 
+
 .table__container{
    width: 60rem;
    
@@ -150,6 +151,18 @@ tfoot td {
     letter-spacing: 1px;
   }
   @media (max-width: 630px) {
+    html {
+      width: 99.5%;
+    }
+    .form__submit {
+      width: 90%;
+      align-items: center;
+      justify-content: center;
+      margin: 20px;
+  }
+    .table__body h1{
+      font-size: large; 
+      }
       .modal {
         position: absolute;
         top: 50%;
