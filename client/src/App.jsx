@@ -18,6 +18,7 @@ import LoadingSpinner from './context/spinner/Spinner';
 import { ErrorProvider } from './context/notification/ErrorContext';
 import ErrorNotification from './context/notification/ErrorNotification';
 import { ConfirmProvider } from './context/notification/confirmModal/ConfirmContext';
+import { ProfileDetails } from './components/profile/Profile';
 
 const App = () => {
 
@@ -35,6 +36,7 @@ const App = () => {
         <Route element={<PrivateGuard />}>
         <Route path='/item/:itemId' element={<TableDetails/>} />
         <Route path='/edit/:itemId' element={<EditTable/>} />
+        <Route path='/profile' element={<ProfileDetails />} />
         <Route path='/logout' element={<Logout />} />
         </Route>
         <Route path='/login' element={<Login />} />

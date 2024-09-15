@@ -23,7 +23,7 @@ export default function Login() {
       navigate("/");
       setError(`Welcome back, ${(email.split("@")[0]).toUpperCase()}`, 'success')
     } catch (err) {
-      setError(err.message, 'warning', 90000)
+      setError(err.message, 'warning', 2000)
       console.log(err);      
       console.log(err.message);
     }

@@ -1,6 +1,7 @@
 import * as request from './request';
 
-const baseUrl = 'http://localhost:3030/api/items'
+// const baseUrl = 'http://localhost:3030/api/items'
+const baseUrl = 'http://dimo.techbg.net:2081/api/items'
 
 
 export const getAll = async() => {

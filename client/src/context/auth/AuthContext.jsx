@@ -19,7 +19,7 @@ const changeAuthState = (state) => {
 };
 
 const logout = () => {
-     setAuthState(null);
+     setAuthState({});
 }
 
 const contextData = {

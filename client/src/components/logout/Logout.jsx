@@ -7,8 +7,8 @@ export default function Logout() {
     const {setError} = useError();
 
     logout();
-    setError("Good bye", 'success' )
+    setError("Good bye", 'warning', 10000 )
 
 
-return <Navigate to={'/'} />
+return <Navigate to={'/login'} />
 }
