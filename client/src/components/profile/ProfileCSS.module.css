@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+.profile__section{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.profile__body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #223243;
+    /* background: transparent; */
+}
+
+.profile_container {
+    /* background-color: red; */
+margin-top: 4rem;
+padding: 4rem;
+border-radius: 20px;
+border: 8px solid #223243;
+box-shadow: 
+-5px -5px 15px rgba(255, 255, 255, 0.1),
+5px 5px 15px rgba(0, 0, 0, 0.35),
+inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+
+.profile__form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.right {
+    width: 65%;
+    margin-left: 2%;
+    gap: 250px;
+}
+
+.right > h3 {
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+.right .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.right form .row {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.3em;
+    
+}
+
+.right form .inputBox {
+ position: relative;
+ width: 300px;
+}
+
+.right form .inputBox input {
+    padding: 12px 10px 12px 48px;
+    border: none;
+    width: 100%;
+    background: #223243;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-weight: 300;
+    border-radius: 25px;
+    font-size: 1em;
+    box-shadow:
+     -5px -5px 15px rgba(255, 255, 255, 0.1),
+      5px 5px 15px rgba(0, 0, 0, 0.35)
+      ;
+    transition: 0.5s;
+    outline: none;
+   }
+
+   .right form .inputBox span {
+position: absolute;
+left: 0;
+top: 0;
+padding: 12px 10px 12px 60px;
+pointer-events: none;
+font-size: 1em;
+font-weight: 300;
+transition: 0.5s;
+letter-spacing: 0.0em;
+color: rgba(255, 255, 255, 0.5);
+   }
+
+   .right form .inputBox input:focus ~ span,
+   .right form .inputBox input:valid ~ span {
+    color: #00dfc4;
+    border: 1px solid #00dfc4;
+    background: #223243;
+    transform: translateX(25px) translateY(-7px);
+    font-size: 0.6em;
+    padding: 0 8px;
+    border-radius: 10px;
+    letter-spacing: 0.1em;
+   }
+
+   .right form .inputBox input:focus,
+   .right form .inputBox input:valid  {
+    border: 1px solid #00dfc4;
+   }
+
+   .right form .inputBox input:focus ~ span,
+   .right form .inputBox input:valid ~ span {
+    color: #00dfc4;
+    border: 1px solid #00dfc4;
+    background: #223243;
+    transform: translateX(25px) translateY(-7px);
+    font-size: 0.6em;
+    padding: 0 8px;
+    border-radius: 10px;
+    letter-spacing: 0.1em;
+   }
+
+   .right form .inputBox input[type="submit"] {
+    background: #00dfc4;
+    color: #223243;
+    padding: 10px 0;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow:
+     -5px -5px 15px rgba(255, 255, 255, 0.1),
+      5px 5px 15px rgba(0, 0, 0, 0.35),
+      inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+      inset 5px 5px 15px rgba(0, 0, 0, 0.35)
+      ;
+   }
+
+
+   @media only screen and (max-width: 650px) {
+
+    .profile_container {
+      margin-top: 3rem;
+    
+        }
+      }
+      
+ 

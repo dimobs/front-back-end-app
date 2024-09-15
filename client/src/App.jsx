@@ -18,7 +18,7 @@ import LoadingSpinner from './context/spinner/Spinner';
 import { ErrorProvider } from './context/notification/ErrorContext';
 import ErrorNotification from './context/notification/ErrorNotification';
 import { ConfirmProvider } from './context/notification/confirmModal/ConfirmContext';
-import { ProfileDetails } from './components/profile/Profile';
+import ProfileDetails from './components/profile/Profile';
 
 const App = () => {
 
