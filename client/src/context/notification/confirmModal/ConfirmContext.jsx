@@ -1,6 +1,6 @@
 import { createContext, useState, useContext } from "react";
 import styles from './ConfirmContext.module.css'
-// Create the ConfirmContext
+
 const ConfirmContext = createContext();
 
 // ConfirmProvider Component

@@ -2,23 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthContextProvider } from './context/auth/AuthContext';
+import { LoadingProvider } from './context/spinner/SpinnerContext';
+import { ErrorProvider } from './context/notification/ErrorContext';
+import { ConfirmProvider } from './context/notification/confirmModal/ConfirmContext';
+import ErrorNotification from './context/notification/ErrorNotification';
+import ConfirmModal from './util/confirmModal/ConfirmModal';
+import LoadingSpinner from './context/spinner/Spinner';
+import NotFound from './components/NotFound404/NotFound';
+import PrivateGuard from './components/common/PrivateGuard';
 import Header from './components/Header/Header';
 import TableRow from './components/TableRow/TableRow';
-import TableDetails from './components/TableRow/TableDetails'
-import Login from './components/login/Login';
-import Register from './components/login/Register';
-import NotFound from './components/NotFound404/NotFound';
 import Spinner from './context/spinner/Spinner';
-import ConfirmModal from './util/confirmModal/ConfirmModal';
-import Logout from './components/logout/logout';
 import EditTable from './components/tableRow/EditTable';
-import PrivateGuard from './components/common/PrivateGuard';
-import { LoadingProvider } from './context/spinner/SpinnerContext';
-import LoadingSpinner from './context/spinner/Spinner';
-import { ErrorProvider } from './context/notification/ErrorContext';
-import ErrorNotification from './context/notification/ErrorNotification';
-import { ConfirmProvider } from './context/notification/confirmModal/ConfirmContext';
+import TableDetails from './components/TableRow/TableDetails'
 import ProfileDetails from './components/profile/Profile';
+import Register from './components/login/Register';
+import Login from './components/login/Login';
+import Logout from './components/logout/logout';
 
 const App = () => {
 
