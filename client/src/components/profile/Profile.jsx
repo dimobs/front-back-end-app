@@ -24,45 +24,64 @@ const ProfileDetails = () => {
       <div className={styles["profile__body"]}>
         <div className={styles["profile_container"]}>
           <div className={styles["info__section"]}>
-            <div className="profile__form">
+            <div className={styles["profile__form"]}>
               <div className={styles["left"]}>
-                <h3>Account Settings</h3>
-        <div>
-            <img src="" alt="user-profile-picture" />
-        </div>
-                <form action="">
-                  <div>
-                    <div className={styles["row"]}></div>
-                    <div className={styles["row"]}></div>
-                  </div>
-                </form>
+                <div className={styles["img__container"]}>
+                  <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png" alt="user-profile-picture" />
+                  <button className={styles["remove-profile-btn"]} onClick>
+                    X
+                  </button>
+                </div>
+                <div className={styles['user__info']}>
+                    <p className={styles['name']}></p>
+                   
+                    <form onSubmit>
+                        <div className={styles['field']}>
+                            <label htmlFor="profile-img">Profile Image</label>
+                            <input
+                                type="file"
+                                id="profile_img"
+                                name="profileImg"
+                                className={styles['choose-file-button']}
+                                onChange
+                            />
+                        </div>
+
+                      
+                            <button className={styles['updated-button']} disabled><img src="" className={styles['tick']} alt='tick' />Saved</button>
+                     
+                            <button className={styles['update-button']}>Save</button>
+                     
+                        
+                    </form>
+                </div>
               </div>
               <div className={styles["right"]}>
                 <h3>Account Settings</h3>
                 <form onSubmit={onsubmitHandler} action="">
                   <div className={styles["form"]}>
-                    <div className={styles['field']}>
-                    <div className={styles[("row", "inputBox")]}>
-                      <input
-                        type="text"
-                        required
-                        name="first_name"
-                        ref={inputRef}
-                        value={values.first_name}
-                        onChange={changeHandler}
-                      />
-                      <span>First Name</span>
-                    </div>
-                    <div className={styles[("row", "inputBox")]}>
-                      <input
-                        type="text"
-                        required
-                        name="last_name"
-                        value={values.last_name}
-                        onChange={changeHandler}
-                      />
-                      <span>Last Name</span>
-                    </div>
+                    <div className={styles["field"]}>
+                      <div className={styles[("row", "inputBox")]}>
+                        <input
+                          type="text"
+                          required
+                          name="first_name"
+                          ref={inputRef}
+                          value={values.first_name}
+                          onChange={changeHandler}
+                        />
+                        <span>First Name</span>
+                      </div>
+                      <div className={styles[("row", "inputBox")]}>
+                        <input
+                          type="text"
+                          required
+                          name="last_name"
+                          value={values.last_name}
+                          onChange={changeHandler}
+                        />
+                        <span>Last Name</span>
+                      </div>
                     </div>
                     <div className={styles[("row", "inputBox")]}>
                       <input
@@ -74,9 +93,9 @@ const ProfileDetails = () => {
                       />
                       <span>Phone N:</span>
                     </div>
-                    <div className={styles["row", "inputBox"]}>
+                    <div className={styles[("row", "inputBox")]}>
                       <input
-                      required='false'
+                        required="false"
                         type="text"
                         name="bio"
                         value={values.bio}
@@ -85,9 +104,7 @@ const ProfileDetails = () => {
                       <span>Bio:</span>
                     </div>
                     <div className="inputBox">
-                      <input 
-                      type="submit" 
-                      value="Save" />
+                      <input type="submit" value="Save" />
                     </div>
                   </div>
                 </form>
