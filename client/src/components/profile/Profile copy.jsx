@@ -1,28 +1,35 @@
 import styles from "./ProfileCSS.module.css";
 import useFocus from "../../hooks/useFocus";
-import { useForm } from "../../hooks/useForm";
-import { useAuthContext } from "../../context/auth/AuthContext";
-import { useError } from "../../context/notification/ErrorContext";
+import useProfileImgForm from "../../hooks/useProfileImgForm";
+import { useContext, useState } from "react";
+import { AuthContext, useAuthContext } from "../../context/auth/AuthContext";
 
 const INITIAL_VALUES = {
-  firstName: "",
-  lastName: "",
-  phoneNumber: "",
+  first_name: "",
+  last_name: "",
+  phone_number: "",
   bio: "",
 };
 
 const ProfileDetails = () => {
   const inputRef = useFocus();
-  const {updateUserHandler} = useAuthContext();
-  const {setError} = useError();
-  
-const editProfileSubmitHandler = async (values) =>{
- await updateUserHandler(values)
-setError('Successfully updated.', 'success')
-}
-const {values, changeHandler, onsubmitHandler} = useForm(INITIAL_VALUES, editProfileSubmitHandler)
+  const { createdUser, setCreatedUser } = useAuthContext(AuthContext)
+  const [showDeleteProfileImgButton, setShowDeleteProfileImgButton] = useState(
+    () => {
+      return (
+        createdUser.profileImg !== "https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png"
+      );
+    }
+  );
+  const changeSavedImgState = () => {};
 
+  const changeProfileImgSubmitHandler = () => {};
 
+  const [onChangeImg, onSubmitImg] = useProfileImgForm(
+    changeProfileImgSubmitHandler,
+    changeSavedImgState,
+    createdUser.profileImg
+  );
 
   return (
     <div className={styles["profile__section"]}>
@@ -36,16 +43,16 @@ const {values, changeHandler, onsubmitHandler} = useForm(INITIAL_VALUES, editPro
                     src="https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png"
                     alt="user-profile-picture"
                   />
-                  <button className={styles["remove-profile-btn"]} >
+                  <button className={styles["remove-profile-btn"]} onClick>
                     X
                   </button>
                 </div>
                 <div className={styles["user__info"]}>
                   <p className={styles["name"]}>
-                    {/* {`${createdUser.first_name} ${createdUser.last_name}`} */}
+                    {`${createdUser.first_name} ${createdUser.last_name}`}
                   </p>
 
-                  <form >
+                  <form onSubmit={onSubmitImg}>
                     <div className={styles["field"]}>
                       <label htmlFor="profile-img">Profile Image</label>
                       <input
@@ -53,7 +60,7 @@ const {values, changeHandler, onsubmitHandler} = useForm(INITIAL_VALUES, editPro
                         id="profile_img"
                         name="profileImg"
                         className={styles["choose-file-button"]}
-                        
+                        onChange={onChangeImg}
                       />
                     </div>
 
@@ -74,10 +81,10 @@ const {values, changeHandler, onsubmitHandler} = useForm(INITIAL_VALUES, editPro
                       <div className={styles[("row", "inputBox")]}>
                         <input
                           type="text"
-                          // required={false}
-                          name="firstName"
+                          required
+                          name="first_name"
                           ref={inputRef}
-                          value={values.firstName}
+                          value={values.first_name}
                           onChange={changeHandler}
                         />
                         <span>First Name</span>
@@ -85,8 +92,9 @@ const {values, changeHandler, onsubmitHandler} = useForm(INITIAL_VALUES, editPro
                       <div className={styles[("row", "inputBox")]}>
                         <input
                           type="text"
-                          name="lastName"
-                          value={values.lastName}
+                          required
+                          name="last_name"
+                          value={values.last_name}
                           onChange={changeHandler}
                         />
                         <span>Last Name</span>
@@ -95,14 +103,16 @@ const {values, changeHandler, onsubmitHandler} = useForm(INITIAL_VALUES, editPro
                     <div className={styles[("row", "inputBox")]}>
                       <input
                         type="text"
-                        name="phoneNumber"
-                        value={values.phoneNumber}
+                        required="false"
+                        name="phone_number"
+                        value={values.phone_number}
                         onChange={changeHandler}
                       />
                       <span>Phone N:</span>
                     </div>
                     <div className={styles[("row", "inputBox")]}>
                       <input
+                        required="false"
                         type="text"
                         name="bio"
                         value={values.bio}

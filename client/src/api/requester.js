@@ -1,7 +1,8 @@
+
 import { getAccessToken } from "../util/authUtils";
 
 async function requester(method, url, data) {
-    
+  
     const options = {};
     const accessToken = getAccessToken();
 
@@ -25,7 +26,6 @@ async function requester(method, url, data) {
 
         const response = await fetch(url, options);        
         if (response.status === 204){
-        
             return;
         }
 

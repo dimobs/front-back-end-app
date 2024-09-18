@@ -8,6 +8,7 @@ export const ConfirmProvider = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [message, setMessage] = useState("");
   const [resolveCallback, setResolveCallback] = useState(null);
+  const [createUser, setCreatedUser] = useState('createdUser', {})
 
   // Show confirmation modal
   const showConfirmModal = (msg) => {

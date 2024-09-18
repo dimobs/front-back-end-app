@@ -1,6 +1,6 @@
 const authController = require('express').Router();
 const { body, validationResult } = require('express-validator');
-const { register, login, logout } = require('../services/userService');
+const { register, login, logout, updateUser } = require('../services/userService');
 const {parseError} = require('../util/parser')
 
 authController.post('/register',
@@ -27,6 +27,18 @@ authController.post('/login',
     try {        
         const token = await login(req.body.email, req.body.password);
         res.json(token);
+    } catch (error) {
+        const message = parseError(error);
+        res.status(401).json({message});
+    }
+});
+
+authController.put('/update',
+    async (req, res) => {
+        const data = Object.fromEntries(Object.entries(req.body.userData).filter(value => value[1]));        
+    try {    
+        const tokenUpdate = await updateUser(req.body.id, data);
+        res.json(tokenUpdate);
     } catch (error) {
         const message = parseError(error);
         res.status(401).json({message});

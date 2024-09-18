@@ -41,7 +41,7 @@ export default function EditTable() {
     try {
       const confirmed = await confirm(`Are you sure you want to delete ${item.name}?`);
       if(!confirmed) {
-        setError('No changes have been made', 'warning')
+        setError('No changes has been made', 'warning')
         return
       }
        const response = await itemsAPI.remove(itemId);             

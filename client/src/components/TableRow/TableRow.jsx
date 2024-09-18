@@ -59,7 +59,7 @@ export default function TableRow() {
       setLoading(true);
       const newItemCreated = await createItem(values);
       setItems((oldState) => [newItemCreated, ...oldState]);      
-      setError(`Your payment ${newItemCreated.name} created successful`, 'success')
+      setError(`Your payment ${newItemCreated.name} created successful`, 'success');
     } catch (err) {
       setError(err.message, 'error')
       console.error(err.message);
