@@ -14,8 +14,7 @@ export default function Login() {
 
   const loginHandler = async ({ email, password }) => {  
      if (!email || !password) {
-      console.log('empty');
-      
+      return      
      }
     
     try {

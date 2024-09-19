@@ -1,51 +1,114 @@
+import { useContext, useEffect, useState } from "react";
+
 import styles from "./ProfileCSS.module.css";
+
 import useFocus from "../../hooks/useFocus";
 import { useForm } from "../../hooks/useForm";
 import { useAuthContext } from "../../context/auth/AuthContext";
 import { useError } from "../../context/notification/ErrorContext";
+import tick from "../../assets/tick.png";
+import whiteTick from "../../assets/white_tick.png";
+import useProfileForm from "../../hooks/useProfileImg";
+import formatDateTime from "../../util/formatDate";
+import useUserProfile from "../../hooks/useUserProfile";
 
 const INITIAL_VALUES = {
   firstName: "",
   lastName: "",
   phoneNumber: "",
   bio: "",
+  createdAt: "",
+  profileImg: "https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png"
 };
 
 const ProfileDetails = () => {
   const inputRef = useFocus();
-  const {updateUserHandler} = useAuthContext();
-  const {setError} = useError();
+  const { createdUser, updateUserHandler } = useAuthContext();
+  const [btnDate, setBtnDate] = useState(false);
+  const { fetchUserProfile } = useUserProfile();
+  const [saveProfileImg, setSaveProfileImg] = useState(false);
+  const { setError } = useError();
+
+  const changeProfileSubmitHandler = async (imgUrl) => {
+    setSaveProfileImg(true);
+  };
+
+  const changeSavedImgState = () => {};
+
+  //edit Profile Data (right side)
+  const editProfileSubmitHandler = async (values) => {
+    await updateUserHandler(values);
+    setBtnDate(true);
+    setError("Successfully updated.", "success");
+  };
+
+  const { values, changeHandler, onsubmitHandler, setValues } = useForm(
+    INITIAL_VALUES,
+    editProfileSubmitHandler
+  );
+
+  useEffect(() => {
+    if (createdUser) {
+      setValues({
+        firstName: createdUser.firstName || "",
+        lastName: createdUser.lastName || "",
+        phoneNumber: createdUser.phoneNumber || "",
+        bio: createdUser.bio || "",
+      });
+    }
+  }, [createdUser, setValues]);
+
+  //edit Profile IMG (left side)
+  const [onChangeImg, onSubmitImg] = useProfileForm(
+    changeProfileSubmitHandler,
+    changeSavedImgState
+  );
+  // const userProfileImage = createdUser?.profileImg || "https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png";
   
-const editProfileSubmitHandler = async (values) =>{
- await updateUserHandler(values)
-setError('Successfully updated.', 'success')
-}
-const {values, changeHandler, onsubmitHandler} = useForm(INITIAL_VALUES, editProfileSubmitHandler)
-
-
-
   return (
     <div className={styles["profile__section"]}>
       <div className={styles["profile__body"]}>
         <div className={styles["profile_container"]}>
           <div className={styles["info__section"]}>
+            <div className="table-details">
+              <div className="details__view">
+                <p>
+                  ID: <strong>{createdUser.userId}</strong>
+                </p>
+                <p>
+                  User: <strong>{createdUser.email}</strong>
+                </p>
+                <p>         
+                  CreatedAt: <strong>{formatDateTime.dateTime(createdUser.created)}</strong>
+                </p>
+              </div>
+              <div className="details__view">
+                <p>
+                  First Name:
+                  <strong>{createdUser.firstName}</strong>
+                </p>
+                <p>
+                  Last Name:
+                  <strong>{createdUser.lastName}</strong>
+                </p>
+                <p>
+                  Phone N: <strong>{createdUser.phoneNumber}</strong>
+                </p>
+              </div>
+              <p>
+                Bio: <strong>{createdUser.bio}</strong>
+              </p>
+            </div>
             <div className={styles["profile__form"]}>
               <div className={styles["left"]}>
                 <div className={styles["img__container"]}>
-                  <img
-                    src="https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png"
-                    alt="user-profile-picture"
-                  />
-                  <button className={styles["remove-profile-btn"]} >
-                    X
-                  </button>
+                <img src={createdUser.profileImg || INITIAL_VALUES.profileImg} alt="user-profile-picture" />
+                  <button className={styles["remove-profile-btn"]}>X</button>
                 </div>
                 <div className={styles["user__info"]}>
-                  <p className={styles["name"]}>
-                    {/* {`${createdUser.first_name} ${createdUser.last_name}`} */}
-                  </p>
+                  <p className={styles["name"]}></p>
 
-                  <form >
+                  <form onSubmit={onSubmitImg}>
                     <div className={styles["field"]}>
                       <label htmlFor="profile-img">Profile Image</label>
                       <input
@@ -53,16 +116,17 @@ const {values, changeHandler, onsubmitHandler} = useForm(INITIAL_VALUES, editPro
                         id="profile_img"
                         name="profileImg"
                         className={styles["choose-file-button"]}
-                        
+                        onChange={onChangeImg}
                       />
                     </div>
-
-                    <button className={styles["updated-button"]} disabled>
-                      <img src="" className={styles["tick"]} alt="tick" />
-                      Saved
-                    </button>
-
-                    <button className={styles["update-button"]}>Save</button>
+                    {saveProfileImg ? (
+                      <button className={styles["updated-button"]} disabled>
+                        <img src={tick} className={styles["tick"]} alt="tick" />
+                        Saved
+                      </button>
+                    ) : (
+                      <button className={styles["update-button"]}>Save</button>
+                    )}
                   </form>
                 </div>
               </div>
@@ -110,8 +174,18 @@ const {values, changeHandler, onsubmitHandler} = useForm(INITIAL_VALUES, editPro
                       />
                       <span>Bio:</span>
                     </div>
-                    <div className="inputBox">
-                      <input type="submit" value="Save" />
+                    <div className={styles["inputBox"]}>
+                      <input type="submit" value="Update" />
+                      {btnDate && (
+                        <p>
+                          <img
+                            src={whiteTick}
+                            alt="tick"
+                            className={styles["tick"]}
+                          />
+                          Updated
+                        </p>
+                      )}
                     </div>
                   </div>
                 </form>

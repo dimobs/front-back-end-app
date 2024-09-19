@@ -143,9 +143,13 @@
         inset 5px 5px 15px rgba(0, 0, 0, 0.35);
 }
 
-.right .form input[type="submit"]:hover {
-    box-shadow:none;
+.right .form input[type="submit"]::after {
+content: "Updated";
+}
+
+.right .form .inputBox input[type="submit"]:hover {
     transform: translateY(3px);
+    font-weight: 100;
 }
 
 .right .field {
@@ -168,7 +172,7 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.right .inputBox:hover input {
+.right .inputBox:hover(:not(input[type="submit"])) input {
     background-color: rgba(0, 0, 0, 0.15);
 }
 
@@ -265,7 +269,8 @@
     display: flex;
 }
 
-.buttons p {
+.right .inputBox p {
+display: inline;
     width: 15%;
     align-self: flex-end;
     margin: 0;
