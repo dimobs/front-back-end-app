@@ -17,10 +17,9 @@ const useProfileForm = (submitHandler, changeSavedImgHandler, initialValue) => {
         const formData = new FormData();
 
         formData.append('file', profileImg)
-        formData.append('upload_preset', "dr1lxrsgy")
+        formData.append('upload_preset', "enkza322")
 
         const result = await uploadImage(formData)
-
         submitHandler(result.url);
     }
 

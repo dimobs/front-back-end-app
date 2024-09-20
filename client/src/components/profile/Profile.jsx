@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./ProfileCSS.module.css";
+import whiteTick from "../../assets/white_tick.png";
+import tick from "../../assets/tick.png";
 
-import useFocus from "../../hooks/useFocus";
-import { useForm } from "../../hooks/useForm";
 import { useAuthContext } from "../../context/auth/AuthContext";
 import { useError } from "../../context/notification/ErrorContext";
-import tick from "../../assets/tick.png";
-import whiteTick from "../../assets/white_tick.png";
-import useProfileForm from "../../hooks/useProfileImg";
 import formatDateTime from "../../util/formatDate";
+import useFocus from "../../hooks/useFocus";
+import { useForm } from "../../hooks/useForm";
+import useProfileForm from "../../hooks/useProfileImg";
 import useUserProfile from "../../hooks/useUserProfile";
 
 const INITIAL_VALUES = {
@@ -18,30 +18,46 @@ const INITIAL_VALUES = {
   phoneNumber: "",
   bio: "",
   createdAt: "",
-  profileImg: "https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png"
+  profileImg:
+    "https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png",
 };
 
 const ProfileDetails = () => {
   const inputRef = useFocus();
   const { createdUser, updateUserHandler } = useAuthContext();
-  const [btnDate, setBtnDate] = useState(false);
-  const { fetchUserProfile } = useUserProfile();
-  const [saveProfileImg, setSaveProfileImg] = useState(false);
+  const { fetchFirstData } = useUserProfile(); //in use, do not delete!
+  const [btnDone, setBtnDone] = useState(false);
+  const [saveProfileImgBtn, setSaveProfileImg] = useState(false);
+  const [showDeleteProfileImgButton, setShowDeleteProfileImgButton] = useState(
+    () => {
+      return (
+        createdUser.profileImg !==
+        "https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png"
+      );
+    }
+  );
   const { setError } = useError();
 
   const changeProfileSubmitHandler = async (imgUrl) => {
+    const data = {
+      profileImg: imgUrl,
+    };
+    await updateUserHandler(data);
     setSaveProfileImg(true);
   };
 
-  const changeSavedImgState = () => {};
+  const changeSavedImgState = () => {
+    setSaveProfileImg(false);
+  };
 
-  //edit Profile Data (right side)
   const editProfileSubmitHandler = async (values) => {
     await updateUserHandler(values);
-    setBtnDate(true);
+    setBtnDone(true);
+    setShowDeleteProfileImgButton(true);
     setError("Successfully updated.", "success");
   };
 
+  //edit Profile Data (right side)
   const { values, changeHandler, onsubmitHandler, setValues } = useForm(
     INITIAL_VALUES,
     editProfileSubmitHandler
@@ -61,10 +77,20 @@ const ProfileDetails = () => {
   //edit Profile IMG (left side)
   const [onChangeImg, onSubmitImg] = useProfileForm(
     changeProfileSubmitHandler,
-    changeSavedImgState
+    changeSavedImgState,
+    createdUser.profileImg
   );
-  // const userProfileImage = createdUser?.profileImg || "https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png";
-  
+
+  const removeProfileImg = () => {
+    // setCreatedUser({
+    //   ...createdUser,
+    //   profileImg: 'https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png'
+    // })
+
+    changeProfileSubmitHandler(INITIAL_VALUES.profileImg);
+    setShowDeleteProfileImgButton(false);
+  };
+
   return (
     <div className={styles["profile__section"]}>
       <div className={styles["profile__body"]}>
@@ -73,13 +99,17 @@ const ProfileDetails = () => {
             <div className="table-details">
               <div className="details__view">
                 <p>
-                  ID: <strong>{createdUser.userId}</strong>
+                  ID: <strong>{createdUser._id}</strong>
                 </p>
                 <p>
-                  User: <strong>{createdUser.email}</strong>
+                  User:
+                  <strong>{createdUser.email}</strong>
                 </p>
-                <p>         
-                  CreatedAt: <strong>{formatDateTime.dateTime(createdUser.created)}</strong>
+                <p>
+                  CreatedAt:{" "}
+                  <strong>
+                    {formatDateTime.dateTime(createdUser.created)}
+                  </strong>
                 </p>
               </div>
               <div className="details__view">
@@ -102,8 +132,18 @@ const ProfileDetails = () => {
             <div className={styles["profile__form"]}>
               <div className={styles["left"]}>
                 <div className={styles["img__container"]}>
-                <img src={createdUser.profileImg || INITIAL_VALUES.profileImg} alt="user-profile-picture" />
-                  <button className={styles["remove-profile-btn"]}>X</button>
+                  <img
+                    src={createdUser.profileImg || INITIAL_VALUES.profileImg}
+                    alt="user-profile-picture"
+                  />
+                  {showDeleteProfileImgButton && (
+                    <button
+                      className={styles["remove-profile-btn"]}
+                      onClick={removeProfileImg}
+                    >
+                      X
+                    </button>
+                  )}
                 </div>
                 <div className={styles["user__info"]}>
                   <p className={styles["name"]}></p>
@@ -119,7 +159,7 @@ const ProfileDetails = () => {
                         onChange={onChangeImg}
                       />
                     </div>
-                    {saveProfileImg ? (
+                    {saveProfileImgBtn ? (
                       <button className={styles["updated-button"]} disabled>
                         <img src={tick} className={styles["tick"]} alt="tick" />
                         Saved
@@ -176,7 +216,7 @@ const ProfileDetails = () => {
                     </div>
                     <div className={styles["inputBox"]}>
                       <input type="submit" value="Update" />
-                      {btnDate && (
+                      {btnDone && (
                         <p>
                           <img
                             src={whiteTick}

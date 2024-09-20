@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
+
+import "./tableRow.css";
+
 import { useAuthContext } from "../../context/auth/AuthContext";
+import { useLoading } from "../../context/spinner/SpinnerContext";
+import { useError } from "../../context/notification/ErrorContext";
 import useFocus from "../../hooks/useFocus";
+import { useForm } from "../../hooks/useForm";
 import { useCreate, useGetAllTableItems } from "../../hooks/useTableItem";
 import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
-import "./tableRow.css";
-// import Notification from "../../context/notification/ErrorNotification";
-import { useForm } from "../../hooks/useForm";
-import { useLoading } from "../../context/spinner/SpinnerContext";
-import { useError } from "../../context/notification/ErrorContext";
 
 const INITIAL_VALUE = { name: "", description: "", amount: "", method: "" };
 
 export default function TableRow() {
-  const {setError} = useError();
-  const {setLoading} = useLoading();
-  const { isAuthenticated, setTotalAmount } = useAuthContext();  
+  const { setError } = useError();
+  const { setLoading } = useLoading();
+  const { isAuthenticated, setTotalAmount } = useAuthContext();
   const cursorPointer = useFocus();
   const [showItem, setShowItem] = useState(false);
   // const [notification, setNotification] = useState({
@@ -25,45 +26,61 @@ export default function TableRow() {
   // getOne
   const [item, setitem] = useState([]);
   // getall
-  const [items, setItems] = useGetAllTableItems();    
-  const totalAmount = (items.length === 0) 
-  ? ""
-  : `${(items.reduce((total, x) => {
-      return x.method === 'subtract' 
-      ? total - Number(x.amount) 
-      : total + Number(x.amount);
-    }, 0)).toFixed(2)}лв.`;
+  const [items, setItems] = useGetAllTableItems();
+  const totalAmount =
+    items.length === 0
+      ? ""
+      : `${items
+          .reduce((total, x) => {
+            return x.method === "subtract"
+              ? total - Number(x.amount)
+              : total + Number(x.amount);
+          }, 0)
+          .toFixed(2)}лв.`;
 
   useEffect(() => {
     if (items.length > 0) {
       setTotalAmount(
-        items.reduce(
-          (total, x) => {
+        items
+          .reduce((total, x) => {
             return x.method === "subtract"
-            ? total - Number(x.amount)
-            : total + Number(x.amount);
+              ? total - Number(x.amount)
+              : total + Number(x.amount);
           }, 0)
-          .toFixed(2));
-        }}, [items, setTotalAmount]);
+          .toFixed(2)
+      );
+    }
+  }, [items, setTotalAmount]);
 
   // createGETTER
   const createItem = useCreate();
 
   // createSetter
   const createHandler = async (values) => {
-    if (!values.name || !values.description || !values.amount || !values.method) {    
-      setError(`Your entry has not been saved. All fields are required`, "error")
+    if (
+      !values.name ||
+      !values.description ||
+      !values.amount ||
+      !values.method
+    ) {
+      setError(
+        `Your entry has not been saved. All fields are required`,
+        "error"
+      );
       return;
     }
     try {
       setLoading(true);
       const newItemCreated = await createItem(values);
-      setItems((oldState) => [newItemCreated, ...oldState]);      
-      setError(`Your payment ${newItemCreated.name} created successful`, 'success');
+      setItems((oldState) => [newItemCreated, ...oldState]);
+      setError(
+        `Your payment ${newItemCreated.name} created successful`,
+        "success"
+      );
     } catch (err) {
-      setError(err.message, 'error')
+      setError(err.message, "error");
       console.error(err.message);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -141,11 +158,15 @@ export default function TableRow() {
                 id="type"
                 name="method"
                 value={values.method}
-                onChange={changeHandler}                
+                onChange={changeHandler}
               >
-                <option  value="">Select</option>
-                <option style={{color: "red"}} value="subtract">Spend</option>
-                <option style={{color: "green"}} value="add">+Add funds</option>
+                <option value="">Select</option>
+                <option style={{ color: "red" }} value="subtract">
+                  Spend
+                </option>
+                <option style={{ color: "green" }} value="add">
+                  +Add funds
+                </option>
               </select>
               <button className="btn-submit form__submit">Add Entry</button>
             </div>
@@ -163,26 +184,25 @@ export default function TableRow() {
             </tr>
           </thead>
           <tbody>
-             {items.map((i, idx) => (
-                <TableRowItem
-                  key={i.id}
-                  username={i.username?.email?.split("@")[0]}
-                  method={i.method}
-                  itemId={i.id}
-                  date={i.date}
-                  name={i.name}
-                  description={i.description}
-                  value={i.amount}
-                  modify={i.updatedAt}
-                  index={idx + 1}
-                  itemDetailsClickHandler={() => {
-                    detailsHandler(i);
-                  }}
+            {items.map((i, idx) => (
+              <TableRowItem
+                key={i.id}
+                username={i.username?.email?.split("@")[0]}
+                method={i.method}
+                itemId={i.id}
+                date={i.date}
+                name={i.name}
+                description={i.description}
+                value={i.amount}
+                modify={i.updatedAt}
+                index={idx + 1}
+                itemDetailsClickHandler={() => {
+                  detailsHandler(i);
+                }}
 
-                  // itemDelHandler={handleDeleteClick}
-                />
-                ))}
-          
+                // itemDelHandler={handleDeleteClick}
+              />
+            ))}
           </tbody>
           <tfoot>
             <tr>

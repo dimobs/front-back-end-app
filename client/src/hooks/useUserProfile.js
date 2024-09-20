@@ -14,8 +14,7 @@ const useUserProfile = () => {
     try {        
         setLoading(true);   
         const response = await userInfo(userId);
-        setCreatedUser(response)
-        setError('Your profile data is loaded', 'success')
+        setCreatedUser(response)    
     }catch (err) {
         console.log(err.message)
         setError(`Failed to load profile data. Server said: ${err.message}`);
@@ -27,7 +26,7 @@ const useUserProfile = () => {
    useEffect(() => {
     if(userId) {
         fetchUserProfile();
-    }
+    } 
    }, [userId]);
 
    return { fetchUserProfile };
