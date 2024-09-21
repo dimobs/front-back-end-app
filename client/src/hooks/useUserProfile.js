@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 import { useAuthContext } from "../context/auth/AuthContext";
 import { useError } from "../context/notification/ErrorContext";
 import { useLoading } from "../context/spinner/SpinnerContext";
@@ -14,7 +15,8 @@ const useUserProfile = () => {
     try {        
         setLoading(true);   
         const response = await userInfo(userId);
-        setCreatedUser(response)    
+        setCreatedUser(response)  
+        setError('Your profile details', 'success')  
     }catch (err) {
         console.log(err.message)
         setError(`Failed to load profile data. Server said: ${err.message}`);

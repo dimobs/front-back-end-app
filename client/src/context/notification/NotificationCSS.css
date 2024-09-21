@@ -4,9 +4,8 @@
     background-color: transparent;
     border: 2px solid #f4a261;
     /* border: 2px solid red; */
-    backdrop-filter: blur(40px) saturate(400%);
+    backdrop-filter: blur(40px);
     color: white;
-    padding: 0px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 102;
@@ -33,18 +32,24 @@ background-color: rgba(255, 0, 0, 0.4);
   border: 2px solid green;
   background-color: rgba(0, 255, 0, 0.01);
 }
-
+.notification p{
+  font-family: inherit;
+  letter-spacing: 0.1rem;
+  margin-right: 10px;
+}
 .close-btn {
-  background: transparent;
   border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.8em;
+  background-color: rgba(214, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
   position: absolute;
-  right: 10px;
-  top: 10px;
-  padding: 5px;
-
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes txt {
@@ -55,15 +60,4 @@ background-color: rgba(255, 0, 0, 0.4);
         transform: translateX(0);            
 	}
   }
-.notification p{
-  font-family: inherit;
-  letter-spacing: 0.1rem;
-}
 
-.close-btn {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}

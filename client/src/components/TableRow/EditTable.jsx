@@ -1,15 +1,14 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useMemo} from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
 import formatDateTime from "../../util/formatDate";
 import { useAuthContext } from "../../context/auth/AuthContext";
 import { useForm } from "../../hooks/useForm";
 import useFocus from "../../hooks/useFocus";
 import {
-  useGetOne,
   useGetOneForEdit,
-  useGetOneTableData,
 } from "../../hooks/useTableItem";
-import itemsAPI, { getOne } from "../../api/item-api";
+import itemsAPI from "../../api/item-api";
 import { useError } from "../../context/notification/ErrorContext";
 import { useConfirm } from "../../context/notification/confirmModal/ConfirmContext";
 const initialValue = {
@@ -30,28 +29,13 @@ export default function EditTable() {
       onClose();
     }
   };
+
+
   const { isAuthenticated } = useAuthContext();
   const inputFocus = useFocus();
   const { itemId } = useParams();
-  const [item, setItem] = useGetOneForEdit(itemId);
+  const [item] = useGetOneForEdit(itemId);
   const initialFormValue = useMemo(() => Object.assign({}, initialValue, item), [item])
-//delete
-  const onDeleteHandler = async() => {
-    // const confirmed = confirm(`Are you shure you want to delete ${item.name}`)
-    try {
-      const confirmed = await confirm(`Are you sure you want to delete ${item.name}?`);
-      if(!confirmed) {
-        setError('No changes has been made', 'warning')
-        return
-      }
-       const response = await itemsAPI.remove(itemId);             
-       navigate('/')
-       setError(`Successfully deleted id${response.id} with name ${response.name}`, 'success', 8000)
-    }catch (err) {
-      setError(err.message, 'error')
-      console.log(err.message);     
-    }
-  }
 
   //save
   const { values, changeHandler, onsubmitHandler } = useForm(
@@ -60,8 +44,7 @@ export default function EditTable() {
       try {
       const response  = await itemsAPI.update(itemId, values);
       console.log(response, );
-      setError(response.message, 'success')
-      // setError('Updated successfully!', 'success')
+      setError('Updated successful', 'success')
       navigate("/");
       }catch (err) {
         setError(err.message, 'error')
@@ -175,11 +158,6 @@ export default function EditTable() {
                 onClick={onsubmitHandler}>
                   Save
                   </button>
-                <button 
-                className="btn__details" 
-                onClick={onDeleteHandler}> 
-                Delete
-                </button>
                 <button 
                 className="btn__details" 
                 onClick={onClose}>

@@ -10,23 +10,23 @@ import { useForm } from "../../hooks/useForm";
 import { useCreate, useGetAllTableItems } from "../../hooks/useTableItem";
 import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
+import itemsAPI from "../../api/item-api";
+import { useConfirm } from "../../context/notification/confirmModal/ConfirmContext";
 
 const INITIAL_VALUE = { name: "", description: "", amount: "", method: "" };
 
 export default function TableRow() {
+  const {confirm} = useConfirm();
   const { setError } = useError();
   const { setLoading } = useLoading();
   const { isAuthenticated, setTotalAmount } = useAuthContext();
   const cursorPointer = useFocus();
   const [showItem, setShowItem] = useState(false);
-  // const [notification, setNotification] = useState({
-  //   message: "",
-  //   visible: false,
-  // });
   // getOne
-  const [item, setitem] = useState([]);
+  const [item, setItem] = useState([]);
   // getall
   const [items, setItems] = useGetAllTableItems();
+  // total Amount
   const totalAmount =
     items.length === 0
       ? ""
@@ -89,21 +89,43 @@ export default function TableRow() {
     createHandler
   );
 
-  // setOnClose
-  const onClose = () => {
-    // setNotification({ message: "", visible: false });
-  };
-
   // getOne
   const detailsHandler = async (i) => {
     setShowItem(true);
-    setitem(i);
+    setItem(i);
   };
 
   // onClose
   const itemModalCloseHandler = () => {
     setShowItem(false);
   };
+
+  const onDeleteHandler = async (i) => {
+    try {
+      setLoading(true);
+      const confirmed = await confirm(
+        `Are you sure you want to delete ${i.name}?`
+      );
+      if (!confirmed) {
+        setError("No changes has been made", "warning");
+        return;
+      }
+      const response = await itemsAPI.remove(i.id);    
+      setItems(items.filter((x) => x.id != i.id))
+      setError(
+        `Successfully deleted id${response.id} with name ${response.name}`,
+        "success",
+        8000
+      );
+    } catch (err) {
+      setError(err.message, "error");
+      console.log(err.message);
+    } finally {
+      setLoading(false)
+    }
+  };
+
+
   return (
     <div>
       <div className="table__body">
@@ -199,7 +221,9 @@ export default function TableRow() {
                 itemDetailsClickHandler={() => {
                   detailsHandler(i);
                 }}
-
+              deleteHandler ={() => {
+                onDeleteHandler(i)
+              }}              
                 // itemDelHandler={handleDeleteClick}
               />
             ))}
@@ -215,7 +239,9 @@ export default function TableRow() {
           <TableDetails
             detailsItem={item}
             onClose={itemModalCloseHandler}
-            // itemDelHandler={handleDeleteClick}
+            deleteHandler ={() => {
+              onDeleteHandler(item)
+            }}              
 
             //            // onSave={itemSaveHandler}
           />

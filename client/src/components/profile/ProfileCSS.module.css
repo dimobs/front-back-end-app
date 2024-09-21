@@ -144,7 +144,7 @@
 }
 
 .right .form input[type="submit"]::after {
-content: "Updated";
+    content: "Updated";
 }
 
 .right .form .inputBox input[type="submit"]:hover {
@@ -203,17 +203,29 @@ content: "Updated";
     object-fit: cover;
 }
 
-.left .img__container .remove-profile-btn{
+.left .img__container .remove-profile-btn {
     border: none;
-    border-radius: 4px;
+    border-radius: 25px;
     font-weight: 700;
     font-size: 0.8em;
     margin-top: 1em;
-    background-color: rgb(189, 0, 0);
-    color: rgb(255, 255, 255);
+    background-color: rgb(189, 0, 0, 0.5);
+    color: rgb(255, 255, 255, 0.5);
     position: absolute;
     left: 0;
     top: 0;
+    box-shadow:
+        -5px -5px 15px rgba(255, 255, 255, 0.1),
+        5px 5px 15px rgba(0, 0, 0, 0.35);
+    transition: 0.5s;
+    outline: none;
+}
+
+.left .img-container .remove-profile-btn:hover {
+    background-color: rgba(255, 255, 255) !important;
+    color: rgba(189, 0, 0, 0.5);
+    /* background-color: green; */
+    box-shadow: none;
 }
 
 .left .user__info {
@@ -270,7 +282,7 @@ content: "Updated";
 }
 
 .right .inputBox p {
-display: inline;
+    display: inline;
     width: 15%;
     align-self: flex-end;
     margin: 0;
@@ -283,7 +295,8 @@ display: inline;
     margin-right: 3%;
 }
 
-.update-button, .updated-button {
+.update-button,
+.updated-button {
     width: 15%;
     padding: 1.5%;
     background-color: rgb(230 185 30);
@@ -295,7 +308,7 @@ display: inline;
     margin-right: 1em;
 }
 
-.user__info .updated-button{
+.user__info .updated-button {
     background-color: #64520f;
     width: 32%;
     color: rgba(255, 255, 255, 0.699);
@@ -304,7 +317,10 @@ display: inline;
 }
 
 .user__info .update-button {
-    width: 28%;
+    width: 50%;
+    font-size: 12px;
+    justify-content: center;
+    height: 18px;
     align-self: flex-end;
     margin-top: 1.5%;
     padding: 0.8%;
@@ -345,74 +361,80 @@ display: inline;
         display: flex;
         flex-direction: column;
     }
-    
+
     .left {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 100%
     }
-    
+
     .left .img-container {
         width: 10em;
         height: 10em;
         position: relative;
     }
-    
+
     .left .img-container img {
         width: 100%;
         height: 100%;
         border-radius: 50%;
         object-fit: cover;
     }
-    
-    .left .img-container .remove-profile-btn{
+
+    .left .img-container .remove-profile-btn {
         border: none;
         border-radius: 4px;
         font-weight: 700;
         font-size: 0.8em;
         margin-top: 1em;
         margin-left: 1em;
-        background-color: rgb(189, 0, 0);
+        background-color: rgba(189, 0, 0, 0.5);
         color: rgb(255, 255, 255);
         position: absolute;
         left: 0;
         top: 0;
     }
-    
-    
+
+    .left .img-container .remove-profile-btn:hover {
+        background-color: rgb(255, 255, 255);
+        color: rgba(189, 0, 0, 0.5);
+        background-color: green;
+    }
+
+
     .left .user__info {
         width: 65%;
     }
-    
+
     .left .user__info form {
         width: 100%;
         display: flex;
         flex-direction: column;
     }
-    
+
     .left .user__info .name {
         font-size: 1.5em;
         font-weight: 900;
         color: #C3C3C3;
         text-align: center;
     }
-    
+
     .left .user__info .field {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
-    
+
     .left .user__info .field label {
         color: #969696;
     }
-    
+
     .left .user__info .field .choose-file-button {
         color: rgba(240, 248, 255, 0.849);
         margin-bottom: 0.5em;
     }
-    
+
     .left .user__info .field .choose-file-button::file-selector-button {
         background-color: rgba(240, 248, 255, 0.849);
         width: 45%;
@@ -423,17 +445,17 @@ display: inline;
         font-size: 1.1em;
         color: rgb(112, 112, 112);
     }
-    
-    
+
+
     .left .user__info .field .choose-file-button::file-selector-button:hover {
         background-color: rgba(176, 178, 179, 0.849);
         color: rgba(240, 248, 255, 0.849);
         cursor: pointer;
     }
-    
-    
-    
-    
+
+
+
+
     .right {
         width: 97%;
         margin-left: 2%;
@@ -441,43 +463,44 @@ display: inline;
         display: flex;
         flex-direction: column;
     }
-    
-    .right > h3 {
+
+    .right>h3 {
         margin: 0;
         border-bottom: solid;
         border-width: 0.15em;
         font-size: 1.5em;
         color: #C3C3C3;
     }
-    
+
     .right form {
         display: flex;
         flex-direction: column;
         width: 100%;
     }
-    
+
     .right form .row {
         display: flex;
         justify-content: space-between;
         margin-top: 1.3em;
     }
-    
+
     .right form .row .field {
         display: flex;
         flex-direction: column;
         width: 47%;
     }
-    
-    .right form .row .field p, .right form .bio-row p {
+
+    .right form .row .field p,
+    .right form .bio-row p {
         color: rgb(172, 0, 0);
         margin-top: 0.2em;
     }
-    
+
     .right form .row .field label {
         font-size: 1.2em;
         color: rgb(131, 131, 133);
     }
-    
+
     .right form .row .field input {
         border: solid 1px rgb(160, 159, 161);
         border-radius: 3px;
@@ -486,26 +509,26 @@ display: inline;
         font-size: 1.1em;
         background-color: rgba(240, 248, 255, 0.849);
     }
-    
+
     .right form .row .field input:focus {
         background-color: rgb(240, 248, 255);
         outline: none;
         color: black;
     }
-    
+
     .right form .bio-row h3 {
         margin: 0;
         font-size: 1.2em;
         color: rgb(131, 131, 133);
         font-weight: 400;
     }
-    
+
     .right form .bio-row {
         display: flex;
         flex-direction: column;
         margin-top: 1.3em;
     }
-    
+
     .right form .bio-row textarea {
         border: solid 1px rgb(160, 159, 161);
         border-radius: 3px;
@@ -515,17 +538,17 @@ display: inline;
         font-size: 1.1em;
         background-color: rgba(240, 248, 255, 0.849);
     }
-    
+
     .right form .bio-row textarea:focus {
         background-color: rgb(240, 248, 255);
         outline: none;
         color: black;
     }
-    
+
     .buttons {
         display: flex;
     }
-    
+
     .buttons p {
         width: 15%;
         align-self: flex-end;
@@ -533,15 +556,16 @@ display: inline;
         color: rgb(143, 179, 147);
         font-weight: 500;
     }
-    
-    
-    
+
+
+
     .tick {
         width: 1em;
         margin-right: 3%;
     }
-    
-    .update-button, .updated-button {
+
+    .update-button,
+    .updated-button {
         width: 20%;
         padding: 1.5%;
         background-color: rgb(230 185 30);
@@ -553,29 +577,29 @@ display: inline;
         margin-top: 1em;
         margin-right: 1em;
     }
-    
-    .user__info .updated-button{
+
+    .user__info .updated-button {
         background-color: #64520f;
         width: 36%;
         color: rgba(255, 255, 255, 0.699);
         margin-top: 1.5%;
         align-self: flex-end;
     }
-    
+
     .user__info .update-button {
         width: 28%;
         align-self: center;
         margin-top: 1.5%;
         padding: 0.8%;
     }
-    
+
     .update-button:hover {
         cursor: pointer;
         background-color: rgb(206, 167, 29);
     }
-    
-    
-    
+
+
+
     .delete-button {
         width: 25%;
         padding: 1.5%;
@@ -586,7 +610,7 @@ display: inline;
         font-weight: 700;
         margin-top: 1em;
     }
-    
+
     .delete-button:hover {
         background-color: rgb(189, 0, 0);
         color: rgb(255, 255, 255);

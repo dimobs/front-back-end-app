@@ -132,18 +132,17 @@ const ProfileDetails = () => {
             <div className={styles["profile__form"]}>
               <div className={styles["left"]}>
                 <div className={styles["img__container"]}>
-                  <img
+                  <img title={createdUser.firstName}
                     src={createdUser.profileImg || INITIAL_VALUES.profileImg}
                     alt="user-profile-picture"
-                  />
-                  {showDeleteProfileImgButton && (
-                    <button
+                  />                  
+                    <button 
                       className={styles["remove-profile-btn"]}
                       onClick={removeProfileImg}
                     >
                       X
                     </button>
-                  )}
+                  
                 </div>
                 <div className={styles["user__info"]}>
                   <p className={styles["name"]}></p>
@@ -159,13 +158,14 @@ const ProfileDetails = () => {
                         onChange={onChangeImg}
                       />
                     </div>
-                    {saveProfileImgBtn ? (
-                      <button className={styles["updated-button"]} disabled>
+                    {saveProfileImgBtn 
+                    ? (
+                      <button title="Save Img" className={styles["updated-button"]} disabled>
                         <img src={tick} className={styles["tick"]} alt="tick" />
                         Saved
                       </button>
                     ) : (
-                      <button className={styles["update-button"]}>Save</button>
+                      <button title="Save Img" className={styles["update-button"]}>Save</button>
                     )}
                   </form>
                 </div>
