@@ -4,7 +4,7 @@ import formatDateTime from "../../util/formatDate";
 import { useAuthContext } from "../../context/auth/AuthContext";
 
 // export default function TableDetails({ detailsItem, onClose, itemDelHandler }) {
-export default function TableDetails({ detailsItem, onClose }) {
+export default function TableDetails({ detailsItem, onClose, deleteHandler }) {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuthContext();
   document.onkeydown = function (e) {
@@ -13,8 +13,8 @@ export default function TableDetails({ detailsItem, onClose }) {
     }
   };
 
-  const deleteHandler = () => {
-    itemDelHandler(detailsItem.id);
+  const onDeleteHandler = () => {
+    deleteHandler(detailsItem.id);
   };
 
   const editHandler = () => {
@@ -92,10 +92,10 @@ export default function TableDetails({ detailsItem, onClose }) {
               <button className="btn__details" onClick={editHandler}>
                 Edit
               </button>
-              {/* <button className="btn__details" onClick={deleteHandler}>
-                {" "}
+              <button className="btn__details" onClick={onDeleteHandler}>
+      
                 Delete
-              </button>       */}
+              </button>      
             </div>
           )}
           <div className="btn_form_details">

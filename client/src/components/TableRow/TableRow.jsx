@@ -112,6 +112,7 @@ export default function TableRow() {
       }
       const response = await itemsAPI.remove(i.id);    
       setItems(items.filter((x) => x.id != i.id))
+      setShowItem(false)
       setError(
         `Successfully deleted id${response.id} with name ${response.name}`,
         "success",
