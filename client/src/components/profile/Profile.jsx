@@ -82,11 +82,6 @@ const ProfileDetails = () => {
   );
 
   const removeProfileImg = () => {
-    // setCreatedUser({
-    //   ...createdUser,
-    //   profileImg: 'https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png'
-    // })
-
     changeProfileSubmitHandler(INITIAL_VALUES.profileImg);
     setShowDeleteProfileImgButton(false);
   };
@@ -172,6 +167,7 @@ const ProfileDetails = () => {
               </div>
               <div className={styles["right"]}>
                 <h3>Account Settings</h3>
+                <hr />
                 <form onSubmit={onsubmitHandler} action="">
                   <div className={styles["form"]}>
                     <div className={styles["field"]}>

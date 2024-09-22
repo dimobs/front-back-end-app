@@ -131,18 +131,6 @@ export default function TableRow() {
     <div>
       <div className="table__body">
         <h1>Dashboard</h1>
-        {/* <Notification
-          message={notification.message}
-          visible={notification.visible}
-          onClose={onClose}
-        /> */}
-
-        {/* <ConfirmModal
-                isOpen={isModalOpen}
-                message={`Are you sure you want to delete ${itemToDelete?.name}?`}
-                onConfirm={confirmDelete}
-                onCancel={cancelDelete}
-            /> */}
         {isAuthenticated && (
           <form onSubmit={onsubmitHandler}>
             <div>

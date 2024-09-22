@@ -7,11 +7,11 @@ import { ErrorProvider } from "./context/notification/ErrorContext";
 import { ConfirmProvider } from "./context/notification/confirmModal/ConfirmContext";
 import ErrorNotification from "./context/notification/ErrorNotification";
 import LoadingSpinner from "./context/spinner/Spinner";
+import Spinner from "./context/spinner/Spinner";
 import NotFound from "./components/NotFound404/NotFound";
 import PrivateGuard from "./components/common/PrivateGuard";
 import Header from "./components/Header/Header";
 import TableRow from "./components/TableRow/TableRow";
-import Spinner from "./context/spinner/Spinner";
 import EditTable from "./components/tableRow/EditTable";
 import TableDetails from "./components/TableRow/TableDetails";
 import ProfileDetails from "./components/profile/Profile";
@@ -26,9 +26,9 @@ const App = () => {
         <Header />
         <LoadingProvider>
           <LoadingSpinner />
-          <ErrorProvider>
-            <ErrorNotification />
+              <ErrorProvider>
             <ConfirmProvider>
+              <ErrorNotification />
               <Routes>
                 <Route path="/" element={<TableRow />} />
                 <Route element={<PrivateGuard />}>
@@ -45,8 +45,8 @@ const App = () => {
                 <Route path="/confirm" element={<ConfirmModal />} />
               </Routes>
             </ConfirmProvider>
-          </ErrorProvider>
-        </LoadingProvider>
+                </ErrorProvider>
+                </LoadingProvider>    
       </AuthContextProvider>
     </>
   );
