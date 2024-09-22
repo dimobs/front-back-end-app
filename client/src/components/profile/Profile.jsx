@@ -92,12 +92,12 @@ const ProfileDetails = () => {
         <div className={styles["profile_container"]}>
           <div className={styles["info__section"]}>
             <div className="table-details">
-              <div className="details__view">
+              <div className={styles['details__view']}>
                 <p>
                   ID: <strong>{createdUser._id}</strong>
                 </p>
                 <p>
-                  User:
+                  User: {" "}
                   <strong>{createdUser.email}</strong>
                 </p>
                 <p>
@@ -107,22 +107,24 @@ const ProfileDetails = () => {
                   </strong>
                 </p>
               </div>
-              <div className="details__view">
+              <div className={styles['details__view']}>
                 <p>
-                  First Name:
+                  First Name: {" "}
                   <strong>{createdUser.firstName}</strong>
                 </p>
                 <p>
-                  Last Name:
+                  Last Name: {" "}
                   <strong>{createdUser.lastName}</strong>
                 </p>
                 <p>
                   Phone N: <strong>{createdUser.phoneNumber}</strong>
                 </p>
               </div>
+              <div className={styles['details__view']}>
               <p>
                 Bio: <strong>{createdUser.bio}</strong>
               </p>
+              </div>
             </div>
             <div className={styles["profile__form"]}>
               <div className={styles["left"]}>
