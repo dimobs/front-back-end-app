@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import uploadImage from "../api/cloudinary/uploadImg";
+import secret from "../api/secret";
 
 const useProfileForm = (submitHandler, changeSavedImgHandler, initialValue) => {
     const [ profileImg, setProfileImg] = useState(initialValue);
@@ -17,7 +18,7 @@ const useProfileForm = (submitHandler, changeSavedImgHandler, initialValue) => {
         const formData = new FormData();
 
         formData.append('file', profileImg)
-        formData.append('upload_preset', "enkza322")
+        formData.append('upload_preset', secret.cloudinaryAuth)
 
         const result = await uploadImage(formData)
         submitHandler(result.url);
