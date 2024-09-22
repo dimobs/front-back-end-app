@@ -10,5 +10,5 @@
 - **Logout**: Users can log out of their accounts after they have been logged in.
 
 **Register:**
-![image](https://github.com/user-attachments/assets/8cfcc77c-f0c3-48d2-b9ae-6859fd924bc0)
+![image](https://github.com/dimobs/front-back-end-app/blob/main/public/Screenshot%202024-09-22%20112228.png)
 
