@@ -18,6 +18,7 @@ import ProfileDetails from "./components/profile/Profile";
 import Register from "./components/login/Register";
 import Login from "./components/login/Login";
 import Logout from "./components/logout/logout";
+import ContactUs from "./components/contactUs/ContactUs";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
                 <Route element={<PrivateGuard />}>
                   <Route path="/item/:itemId" element={<TableDetails />} />
                   <Route path="/edit/:itemId" element={<EditTable />} />
+                  <Route path="/contactUs" element={<ContactUs />} />
                   <Route path="/profile" element={<ProfileDetails />} />
                   <Route path="/logout" element={<Logout />} />
                 </Route>

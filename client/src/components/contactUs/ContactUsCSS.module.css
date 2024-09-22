@@ -1,0 +1,60 @@
+.contact__section {
+margin-top: 4.5em;
+padding: 0;
+box-sizing: border-box;
+border-collapse: collapse;
+height: 100vh;
+}
+
+.contact__body {
+    display: flex;
+    justify-content: center;
+    height: auto;
+    background: #223243;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact__body .contact__container__top {
+    width: 60%;
+    margin: 2rem 0;
+    padding: 0.5rem;
+    border-radius: 20px;
+    border: 8px solid #223243;
+    box-shadow:
+        -5px -5px 15px rgba(255, 255, 255, 0.1),
+        5px 5px 15px rgba(0, 0, 0, 0.35),
+        inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+        inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+    justify-content: center;
+}
+
+.contact__body .contact__container__top .head__content  {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-bottom: 3%;
+}
+
+.contact__body .contact__container__top .head__content h2  {
+    color: rgb(143, 179, 147);
+}
+
+.contact__body .contact__container__top .head__content p  {
+    color: rgb(143, 179, 147);
+}
+
+
+
+.contact__body .contact__container__bottom {
+    margin: 2rem 0;
+    padding: 0.5rem;
+    border-radius: 20px;
+    border: 8px solid #223243;
+    box-shadow:
+        -5px -5px 15px rgba(255, 255, 255, 0.1),
+        5px 5px 15px rgba(0, 0, 0, 0.35),
+        inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+        inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+}
