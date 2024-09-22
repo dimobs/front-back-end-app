@@ -1,9 +1,9 @@
 .contact__section {
-margin-top: 4.5em;
-padding: 0;
-box-sizing: border-box;
-border-collapse: collapse;
-height: 100vh;
+    margin-top: 4.5em;
+    padding: 0;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    height: 100vh;
 }
 
 .contact__body {
@@ -30,22 +30,22 @@ height: 100vh;
     justify-content: center;
 }
 
-.contact__body .contact__container__top .head__content  {
-display: flex;
-flex-direction: column;
-align-items: center;
-margin-bottom: 3%;
+.contact__body .contact__container__top .head__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3%;
 }
 
-.contact__body .contact__container__top .head__content h3  {
+.contact__body .contact__container__top .head__content h3 {
     color: #ffffff;
 }
 
-.contact__body .contact__container__top .head__content p  {
+.contact__body .contact__container__top .head__content p {
     color: rgb(143, 179, 147, 0.8);
-   font-style: italic;
-   width: 55%;
-   text-align: center;
+    font-style: italic;
+    width: 55%;
+    text-align: center;
 }
 
 .form__info {
@@ -55,12 +55,15 @@ margin-bottom: 3%;
 .form__info .left {
     width: 50%;
     padding-right: 5%;
-   
+
 }
 
 .form__info .right {
-width: 45%;
-padding-left: 5%;
+    width: 45%;
+    padding-left: 5%;
+    display: flex;
+    flex-direction: column;
+    border-left: solid 1px rgb(124, 124, 124);
 
 }
 
@@ -83,7 +86,7 @@ padding-left: 5%;
     width: 100%;
     background: #223243;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    color: rgb(143, 179, 147); 
+    color: rgb(143, 179, 147);
     font-weight: 300;
     border-radius: 25px;
     font-size: 1em;
@@ -92,7 +95,7 @@ padding-left: 5%;
         5px 5px 15px rgba(0, 0, 0, 0.35);
     transition: 0.5s;
     outline: none;
-margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 
 }
 
@@ -110,7 +113,7 @@ margin-bottom: 0.5rem;
     color: rgba(255, 255, 255, 0.5);
 }
 
-.left form .row .field input:focus~span, 
+.left form .row .field input:focus~span,
 .left form .row .field input:valid~span {
     color: #00dfc4;
     border: 1px solid #00dfc4;
@@ -127,22 +130,20 @@ margin-bottom: 0.5rem;
 }
 
 .message-row textarea {
-padding: 12px 10px 12px 10px;
-border: none;
-width: 100%;
-background: #223243;
-border: 1px solid rgba(0, 0, 0, 0.1);
-color: rgb(143, 179, 147); 
-font-weight: 300;
-border-radius: 25px;
-font-size: 1em;
-box-shadow:
-    -5px -5px 15px rgba(255, 255, 255, 0.1),
-    5px 5px 15px rgba(0, 0, 0, 0.35);
-transition: 0.5s;
-outline: none;
-margin-bottom: 1.5rem;
-
+    padding: 12px 10px 12px 10px;
+    width: 100%;
+    background: #223243;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgb(143, 179, 147);
+    font-weight: 300;
+    border-radius: 25px;
+    font-size: 1em;
+    box-shadow:
+        -5px -5px 15px rgba(255, 255, 255, 0.1),
+        5px 5px 15px rgba(0, 0, 0, 0.35);
+    transition: 0.5s;
+    outline: none;
+    margin-bottom: 1.5rem;
 }
 
 .message-row span {
@@ -189,8 +190,28 @@ margin-bottom: 1.5rem;
 .left input[type="submit"]:hover {
     transform: translateY(3px);
     font-weight: 100;
+    align-items: flex-end;
 }
 
+.right {
+    margin-top: 0;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+
+.right h3 {
+    font-size: 1.5em;
+    margin: 0;
+    margin-bottom: 0.2em;
+}
+
+.right>p {
+    color: rgb(139, 139, 139);
+    font-size: 1.1em;
+    margin: 0;
+    margin-bottom: 3em;
+}
 
 .right p {
     color: rgb(143, 179, 147);
@@ -202,9 +223,47 @@ margin-bottom: 1.5rem;
     margin-bottom: 2em;
 }
 
-
-
-.contact__body .contact__container__bottom {
-    
-   
+.right .info__container .one__section {
+    display: flex;
 }
+
+.right .info__container .one__section .img__container {
+    width: 5%;
+}
+
+.right .info__container .one__section .img__container img {
+    width: 100%;
+}
+
+.right .info__container .one__section p {
+    margin-left: 2%;
+    font-weight: 500;
+    color: rgb(143, 179, 147);
+    font-size: 1em;
+}
+
+.follow-us h3 {
+    margin-bottom: 0.4em;
+}
+
+.follow-us .socials {
+    display: flex;
+    width: 32%;
+    justify-content: space-between;
+}
+
+.follow-us .socials a {
+    width: 30%;
+    border-radius: 10px;
+}
+
+.follow-us .socials a:hover {
+    background-color: white;
+}
+
+.follow-us .socials img {
+    width: 100%;
+}
+
+
+.contact__body .contact__container__bottom {}
