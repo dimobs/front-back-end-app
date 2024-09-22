@@ -38,23 +38,90 @@ margin-bottom: 3%;
 }
 
 .contact__body .contact__container__top .head__content h2  {
-    color: rgb(143, 179, 147);
+    color: #ffffff;
 }
 
 .contact__body .contact__container__top .head__content p  {
-    color: rgb(143, 179, 147);
+    color: rgb(143, 179, 147, 0.8);
+   font-style: italic;
+   width: 55%;
+   text-align: center;
+}
+
+.form__info {
+    display: flex;
+}
+
+.form__info .left {
+    width: 50%;
+    padding-right: 5%;
+   
+}
+
+.form__info .left {
+width: 45%;
+padding-left: 5%;
+
+}
+
+.left form .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.7em;
+}
+
+.left form .row .field {
+    display: flex;
+    flex-direction: column;
+    width: 47%;
+    position: relative;
+}
+
+.left form .row .field input {
+    padding: 12px 10px 12px 10px;
+    border: none;
+    width: 100%;
+    background: #223243;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgb(143, 179, 147); 
+    font-weight: 300;
+    border-radius: 25px;
+    font-size: 1em;
+    box-shadow:
+        -5px -5px 15px rgba(255, 255, 255, 0.1),
+        5px 5px 15px rgba(0, 0, 0, 0.35);
+    transition: 0.5s;
+    outline: none;
 }
 
 
+.left form .row .field span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 12px 10px 12px 20px;
+    pointer-events: none;
+    font-size: 1em;
+    font-weight: 300;
+    transition: 0.5s;
+    letter-spacing: 0.0em;
+    color: rgba(255, 255, 255, 0.5);
+    color: red;
+}
+
+.left form .row .field input:focus~span, 
+.left form .row .field input:valid~span {
+    color: #00dfc4;
+    border: 1px solid #00dfc4;
+    background: #223243;
+    transform: translateX(25px) translateY(-7px);
+    font-size: 0.6em;
+    padding: 0 8px;
+    border-radius: 10px;
+    letter-spacing: 0.1em;
+
+}
 
 .contact__body .contact__container__bottom {
-    margin: 2rem 0;
-    padding: 0.5rem;
-    border-radius: 20px;
-    border: 8px solid #223243;
-    box-shadow:
-        -5px -5px 15px rgba(255, 255, 255, 0.1),
-        5px 5px 15px rgba(0, 0, 0, 0.35),
-        inset -5px -5px 15px rgba(255, 255, 255, 0.1),
-        inset 5px 5px 15px rgba(0, 0, 0, 0.35);
+   
 }
