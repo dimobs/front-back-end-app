@@ -10,5 +10,28 @@
 - **Logout**: Users can log out of their accounts after they have been logged in.
 
 **Register:**
-![image](https://github.com/dimobs/front-back-end-app/blob/main/public/Screenshot%202024-09-22%20112228.png)
+![image](https://github.com/dimobs/front-back-end-app/blob/main/public/register.png)
+
+**Login:**
+![image](https://github.com/dimobs/front-back-end-app/blob/main/public/login.png)
+
+### 📌 Header
+- **Navigation Buttons**:
+  - **Homes**: Redirects to the `Home` page.
+  - **Profile**: Redirects to the `Profile` page. 
+  <!-- - **Search Bar**: Allows users to `Search` for movies. -->
+  <!-- - **Contact Us**: Redirects to the `Contact Us` page. -->
+  - **User Authentication Buttons**:
+    - **Log In**: Displays a login button if the user is not logged in.
+    - **User Dropdown Menu**: Displays a dropdown with the user's profile image if logged in, which includes links to:
+      - **Profile Details**: Redirects to profile details page.
+      - **Watchlist**: Redirects to user's watchlist page.
+      - **Log Out**: Allows users to log out.
+
+**Header when not logged in:**
+![image](https://github.com/user-attachments/assets/87aea10c-3dac-4bbd-b4a0-00e9ab8b731b)
+
+
+**Header when logged in:**
+![image](https://github.com/user-attachments/assets/af2df3c4-3b62-46a0-9b71-0e162c0743a7)
 
