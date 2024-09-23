@@ -17,7 +17,7 @@ const ContactUs = () => {
   return (
     <div className={styles["contact__section"]}>
       <div className={styles["contact__body"]}>
-        <section className={styles["contact__container__top"]}>
+        <section className={styles["contact__container"]}>
           <div className={styles["head__content"]}>
             <h3>Contact Us</h3>
             <p>
@@ -77,7 +77,7 @@ const ContactUs = () => {
                   <div className={styles["img__container"]}>
                     <img src={phoneIcon} alt="phone" />
                   </div>
-                  <p>+359 889 670-187</p>
+                  <p>+359 889 670 187</p>
                 </div>
                 <div className={styles["one__section"]}>
                   <div className={styles["img__container"]}>
@@ -115,8 +115,22 @@ const ContactUs = () => {
             </div>
           </div>
         </section>
-
-        <section className={styles["contact__container__bottom"]}></section>
+        <section className={styles["contact__container"]}>
+        <h2>Where are we located?</h2>
+        <p>Coordinates - 42.495957, 27.463984</p>
+       <section className={styles['mapbox']}>
+        <div>
+        <figure>
+         <iframe 
+         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d94091.20059984463!2d27.369564838250586!3d42.52661894732471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a69266f9fc9d91%3A0x400a01269bf4df0!2z0JHRg9GA0LPQsNGB!5e0!3m2!1sbg!2sbg!4v1681471808118!5m2!1sbg!2sbg"
+          width={750} height={300} loading='lazy'
+          >
+          </iframe>
+            <div className={styles['radar__dot']}></div>
+        </figure>
+        </div>
+       </section>
+        </section>
       </div>
     </div>
   );

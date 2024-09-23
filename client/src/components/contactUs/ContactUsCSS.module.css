@@ -16,7 +16,7 @@
     align-items: center;
 }
 
-.contact__body .contact__container__top {
+.contact__body .contact__container {
     width: 60%;
     margin: 2rem 0;
     padding: 1.5rem;
@@ -30,18 +30,18 @@
     justify-content: center;
 }
 
-.contact__body .contact__container__top .head__content {
+.contact__body .contact__container .head__content {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 3%;
 }
 
-.contact__body .contact__container__top .head__content h3 {
+.contact__body .contact__container .head__content h3 {
     color: #ffffff;
 }
 
-.contact__body .contact__container__top .head__content p {
+.contact__body .contact__container .head__content p {
     color: rgb(143, 179, 147, 0.8);
     font-style: italic;
     width: 55%;
@@ -265,5 +265,55 @@
     width: 100%;
 }
 
+.mapbox {
+    position: relative;
+    /* height: 250px; */
+    /* width: 100%; */
+    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 1px solid black;
+    overflow: hidden;
+}
 
-.contact__body .contact__container__bottom {}
+.mapbox::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: conic-gradient(transparent 95%, rgb(143, 179, 147));
+    border-radius: 50%;
+    box-shadow: inset 0 0 0.0vmin rgba(0, 0, 0, 0.9);
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.radar__dot {
+    position: absolute;
+    width: 3.1%;
+    height: 7.5%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: blink 2s ease-out infinite;
+    top: 66%;
+    left: 56%;
+    animation-delay: 0.87s;
+  }
+
+  @keyframes blink {
+    2%, 20% {
+      background-color: rgba(80, 255, 0, 0.85);
+      box-shadow: 0 0 1vmin rgba(80, 255, 0, 0.6);
+    }
+    90% {
+      background-color: transparent;
+    }
+  }
+
+  .mapbox figure { height: 100%; }
+
+
+  
