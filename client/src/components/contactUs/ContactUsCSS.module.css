@@ -302,23 +302,30 @@
     top: 60%;
     left: 53%;
     animation-delay: 0.87s;
-  }
+}
 
-  @keyframes blink {
-    2%, 20% {
-      background-color: rgba(80, 255, 0, 0.85);
-      box-shadow: 0 0 1vmin rgba(80, 255, 0, 0.6);
+@keyframes blink {
+
+    2%,
+    20% {
+        background-color: rgba(80, 255, 0, 0.85);
+        box-shadow: 0 0 1vmin rgba(80, 255, 0, 0.6);
     }
+
     90% {
-      background-color: transparent;
+        background-color: transparent;
     }
-  }
+}
 
-  .mapbox figure iframe { width: 100%; }
-  .tick_container {
+.mapbox figure iframe {
+    width: 100%;
+}
+
+.tick_container {
     position: relative;
-  }
-  .tick {
+}
+
+.tick {
     position: absolute;
     bottom: 1.3rem;
     left: 0;
@@ -326,11 +333,16 @@
     margin-right: 3%;
 
 }
-.tick_container  span {
+
+.tick_container span {
     position: absolute;
     font-style: italic;
     bottom: 1rem;
     left: 1.1rem;
     width: 1em;
     margin-right: 3%;
+}
+
+.field {
+    font-size: 0.65em;
 }

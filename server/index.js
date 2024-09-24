@@ -22,8 +22,9 @@ app.use(cors());
 app.use(session());
 app.use(session()); //jwt
 
-app.use('/api/items', itemController);
 app.use('/users', authController);
+app.use('/api/items', itemController);
+app.use('/api/email', emailController);
 
 app.listen(config.PORT, () => console.log("Server running on", `http://localhost:${config.PORT}`));
 //   app.listen(config.PORT, () => console.log(`http://192.168.50.206:${config.PORT} App is running on `));

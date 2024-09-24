@@ -75,7 +75,8 @@ const ContactUs = () => {
         name: fullName || "",
         subject: "",
         phoneNumber: createdUser.phoneNumber || "",
-        email: createdUser.email || "",
+        // email: createdUser.email || "",3
+        email: 'd_i_m_o@yahoo.com',
       });
     }
   }, [createdUser, setValues]);
