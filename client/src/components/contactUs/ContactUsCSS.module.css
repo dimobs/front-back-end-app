@@ -172,6 +172,7 @@
 }
 
 .left input[type="submit"] {
+    position: relative;
     width: 100%;
     background: #00dfc4;
     border-radius: 10px;
@@ -270,7 +271,7 @@
     /* height: 250px; */
     /* width: 100%; */
     border-radius: 16px;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     border: 1px solid black;
     overflow: hidden;
 }
@@ -293,13 +294,13 @@
 
 .radar__dot {
     position: absolute;
-    width: 3.1%;
-    height: 7.5%;
+    width: 1.1%;
+    height: 3.5%;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     animation: blink 2s ease-out infinite;
-    top: 66%;
-    left: 56%;
+    top: 60%;
+    left: 53%;
     animation-delay: 0.87s;
   }
 
@@ -313,7 +314,23 @@
     }
   }
 
-  .mapbox figure { height: 100%; }
+  .mapbox figure iframe { width: 100%; }
+  .tick_container {
+    position: relative;
+  }
+  .tick {
+    position: absolute;
+    bottom: 1.3rem;
+    left: 0;
+    width: 1em;
+    margin-right: 3%;
 
-
-  
+}
+.tick_container  span {
+    position: absolute;
+    font-style: italic;
+    bottom: 1rem;
+    left: 1.1rem;
+    width: 1em;
+    margin-right: 3%;
+}

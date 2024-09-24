@@ -34,6 +34,7 @@ const Header = () => {
                     <Link to="/spinner">Spinner</Link>
                     <Link to="/confirm">confirm</Link>
                     <Link to="/contactUs">Contact Us</Link>
+                
                   </div>
                   {totalAmount >= 0 ? (
                     <div

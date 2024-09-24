@@ -11,6 +11,7 @@ import useFocus from "../../hooks/useFocus";
 import { useForm } from "../../hooks/useForm";
 import useProfileForm from "../../hooks/useProfileImg";
 import useUserProfile from "../../hooks/useUserProfile";
+import useScrollToTop from "../../hooks/scrollToTop";
 
 const INITIAL_VALUES = {
   firstName: "",
@@ -23,11 +24,13 @@ const INITIAL_VALUES = {
 };
 
 const ProfileDetails = () => {
-  const inputRef = useFocus();
   const { createdUser, updateUserHandler } = useAuthContext();
-  const { fetchFirstData } = useUserProfile(); //in use, do not delete!
+  const inputRef = useFocus();
+  const { setError } = useError();
+  useUserProfile();
   const [btnDone, setBtnDone] = useState(false);
   const [saveProfileImgBtn, setSaveProfileImg] = useState(false);
+  useScrollToTop();
   const [showDeleteProfileImgButton, setShowDeleteProfileImgButton] = useState(
     () => {
       return (
@@ -36,7 +39,6 @@ const ProfileDetails = () => {
       );
     }
   );
-  const { setError } = useError();
 
   const changeProfileSubmitHandler = async (imgUrl) => {
     const data = {
@@ -92,13 +94,12 @@ const ProfileDetails = () => {
         <div className={styles["profile_container"]}>
           <div className={styles["info__section"]}>
             <div className="table-details">
-              <div className={styles['details__view']}>
+              <div className={styles["details__view"]}>
                 <p>
                   ID: <strong>{createdUser._id}</strong>
                 </p>
                 <p>
-                  User: {" "}
-                  <strong>{createdUser.email}</strong>
+                  User: <strong>{createdUser.email}</strong>
                 </p>
                 <p>
                   CreatedAt:{" "}
@@ -107,39 +108,37 @@ const ProfileDetails = () => {
                   </strong>
                 </p>
               </div>
-              <div className={styles['details__view']}>
+              <div className={styles["details__view"]}>
                 <p>
-                  First Name: {" "}
-                  <strong>{createdUser.firstName}</strong>
+                  First Name: <strong>{createdUser.firstName}</strong>
                 </p>
                 <p>
-                  Last Name: {" "}
-                  <strong>{createdUser.lastName}</strong>
+                  Last Name: <strong>{createdUser.lastName}</strong>
                 </p>
                 <p>
                   Phone N: <strong>{createdUser.phoneNumber}</strong>
                 </p>
               </div>
-              <div className={styles['details__view']}>
-              <p>
-                Bio: <strong>{createdUser.bio}</strong>
-              </p>
+              <div className={styles["details__view"]}>
+                <p>
+                  Bio: <strong>{createdUser.bio}</strong>
+                </p>
               </div>
             </div>
             <div className={styles["profile__form"]}>
               <div className={styles["left"]}>
                 <div className={styles["img__container"]}>
-                  <img title={createdUser.firstName}
+                  <img
+                    title={createdUser.firstName}
                     src={createdUser.profileImg || INITIAL_VALUES.profileImg}
                     alt="user-profile-picture"
-                  />                  
-                    <button 
-                      className={styles["remove-profile-btn"]}
-                      onClick={removeProfileImg}
-                    >
-                      X
-                    </button>
-                  
+                  />
+                  <button
+                    className={styles["remove-profile-btn"]}
+                    onClick={removeProfileImg}
+                  >
+                    X
+                  </button>
                 </div>
                 <div className={styles["user__info"]}>
                   <p className={styles["name"]}></p>
@@ -155,14 +154,22 @@ const ProfileDetails = () => {
                         onChange={onChangeImg}
                       />
                     </div>
-                    {saveProfileImgBtn 
-                    ? (
-                      <button title="Save Img" className={styles["updated-button"]} disabled>
+                    {saveProfileImgBtn ? (
+                      <button
+                        title="Save Img"
+                        className={styles["updated-button"]}
+                        disabled
+                      >
                         <img src={tick} className={styles["tick"]} alt="tick" />
                         Saved
                       </button>
                     ) : (
-                      <button title="Save Img" className={styles["update-button"]}>Save</button>
+                      <button
+                        title="Save Img"
+                        className={styles["update-button"]}
+                      >
+                        Save
+                      </button>
                     )}
                   </form>
                 </div>
