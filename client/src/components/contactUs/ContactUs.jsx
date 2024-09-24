@@ -37,14 +37,12 @@ const ContactUs = () => {
   const mapOfficePosition = [42.495957, 27.463984];
   const {setLoading} = useLoading();
   const sendEmailHandler = async (values) => {
-    console.log(values.name, 'values');
-    
     if (!values.email || !values.subject){
       setError('Please fill form correctly')
       return
     }
     try {
-      await sendEmail(values)
+      await sendEmail(values);
       setLoading(true);
       setBtnDone(true);
       setError('Your message has been sent successfully!', 'success');
@@ -75,8 +73,7 @@ const ContactUs = () => {
         name: fullName || "",
         subject: "",
         phoneNumber: createdUser.phoneNumber || "",
-        // email: createdUser.email || "",3
-        email: 'd_i_m_o@yahoo.com',
+        email: createdUser.email || "",       
       });
     }
   }, [createdUser, setValues]);
