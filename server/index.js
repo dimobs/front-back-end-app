@@ -7,6 +7,7 @@ const itemController = require('./controllers/itemControllers');
 const session = require('./middlewares/session');
 const authController = require('./controllers/authController');
 const trimBody = require('./middlewares/trimBody');
+const emailController = require('./controllers/emailController');
 
 start()
 async function start() {
