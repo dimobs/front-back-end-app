@@ -25,15 +25,16 @@ const messageSender = req.body.data.message
         from: emailSender,
         to: 'd_i_m_o@yahoo.com',
         subject: subjectSender,
-        text: messageSender,
-        phoneNumber: phoneNumberSender
+        text: `${messageSender} ${phoneNumberSender}`, 
       };
       
       // Send the email
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
+          res.status(500).json({ error: 'An error occurred while sending email' })
           return console.log('Error: ', err);
         }
+        res.json('Email sent: ' + info.response);
         console.log('Email sent: ' + info.response);
       });
 });

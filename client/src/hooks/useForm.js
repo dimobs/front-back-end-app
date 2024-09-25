@@ -22,7 +22,7 @@ export function useForm(initialValues, submitCallback) {
     const onsubmitHandler = async (e) => {
         e.preventDefault()
        await submitCallback(values);
-        // setValues(initialValues);
+        setValues(initialValues);
     }
     
     return {

@@ -308,8 +308,8 @@
 
     2%,
     20% {
-        background-color: rgba(80, 255, 0, 0.85);
-        box-shadow: 0 0 1vmin rgba(80, 255, 0, 0.6);
+        background-color: rgba(255, 0, 0, 0.85);
+        box-shadow: 0 0 1vmin rgba(255, 0, 0, 0.6);
     }
 
     90% {

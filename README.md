@@ -35,3 +35,18 @@
 **Header when logged in:**
 ![image]()
 
+
+### 📧 Contact Us
+- **Send Emails**: Users can send emails by providing their name, email, subject, phone number (not required) and message. if the user has filled in their details on the profile page, they will automatically appear in the fields for sending a email.
+- **Contact Information**: On the right side is displayed information about Owner of the site socials and location:
+  - Phone number
+  - Email
+  - GitHub
+  - LinkedIn
+  - Facebook
+  - Office address
+- **Office Location Map**: A card is displayed showing the exact location of the office.
+
+**Contact Us Page:**
+![image](https://github.com/dimobs/front-back-end-app/blob/main/public/contactUs.png)
+

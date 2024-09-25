@@ -30,27 +30,26 @@ const INITIAL_VALUES = {
 const ContactUs = () => {
   const { createdUser } = useAuthContext();
   useUserProfile();
-  // useScrollToTop();
+  useScrollToTop();
   const { setError } = useError();
   const inputRef = useFocus();
   const [btnDone, setBtnDone] = useState(false);
-  const mapOfficePosition = [42.495957, 27.463984];
-  const {setLoading} = useLoading();
+  const { setLoading } = useLoading();
+
   const sendEmailHandler = async (values) => {
-    if (!values.email || !values.subject){
-      setError('Please fill form correctly')
-      return
+    if (!values.email || !values.subject) {
+      setError("Please fill form correctly");
+      return;
     }
     try {
       await sendEmail(values);
       setLoading(true);
       setBtnDone(true);
-      setError('Your message has been sent successfully!', 'success');
-    }catch (err) {
-      setError(err.message)
+      setError(`Your message has been sent successfully!`, "success");
+    } catch (err) {
+      setError(err.message);
       console.log(err.message);
-      
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -64,16 +63,16 @@ const ContactUs = () => {
     if (createdUser) {
       let fullName = "";
       if (createdUser.firstName) {
-        fullName += createdUser.firstName
+        fullName += createdUser.firstName;
       }
       if (createdUser.lastName) {
-        fullName += ` ${createdUser.lastName}`
+        fullName += ` ${createdUser.lastName}`;
       }
       setValues({
         name: fullName || "",
         subject: "",
         phoneNumber: createdUser.phoneNumber || "",
-        email: createdUser.email || "",       
+        email: createdUser.email || "",
       });
     }
   }, [createdUser, setValues]);
@@ -125,7 +124,7 @@ const ContactUs = () => {
                       onChange={changeHandler}
                     />
                     <span>Email:</span>
-                  </div>               
+                  </div>
                   <div className={styles["field"]}>
                     <input
                       type="text"
@@ -150,7 +149,7 @@ const ContactUs = () => {
                 <div className={styles["inputBox"]}>
                   <input type="submit" value="Send" />
                   {btnDone && (
-                    <p className={styles['tick_container']}>
+                    <p className={styles["tick_container"]}>
                       <img
                         className={styles["tick"]}
                         src={whiteTick}
