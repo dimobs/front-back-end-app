@@ -18,7 +18,7 @@ export const AuthContext = createContext({
     logout: () => null
 });
 
-export function AuthContextProvider(props) {
+export function AuthContextProvider({children}) {
 const [authState, setAuthState] = usePersistedState('auth', {});
 const [totalAmount, setTotalAmount] = useState(0);
 const {setError} = useError();
@@ -47,6 +47,7 @@ const changeAuthState = (state) => {
 
 const logout = () => {
      setAuthState({});
+     setCreatedUser({})
 }
 
 const contextData = {
@@ -70,7 +71,7 @@ const contextData = {
 }
     return (
         <AuthContext.Provider value={contextData}>
-            {props.children}
+            {children}
         </AuthContext.Provider>
     );
 }
