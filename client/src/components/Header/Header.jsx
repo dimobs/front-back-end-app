@@ -32,9 +32,7 @@ const Header = () => {
                     <Link to="/profile">Profile</Link>
                     <Link to="/table/tableDetails">Details</Link>
                     <Link to="/spinner">Spinner</Link>
-                    <Link to="/confirm">confirm</Link>
-                    <Link to="/contactUs">Contact Us</Link>
-                
+                    <Link to="/confirm">confirm</Link>                                   
                   </div>
                   {totalAmount >= 0 ? (
                     <div
@@ -94,6 +92,7 @@ const Header = () => {
               <div className="nav-bar guest">
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>
+                <Link to="/contactUs">Contact Us</Link>
               </div>
             )}
           </div>

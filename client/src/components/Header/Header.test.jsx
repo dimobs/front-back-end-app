@@ -38,13 +38,6 @@ describe('HeaderTest', () => {
     })
 
     it('click `Login` and render Log in page', async () => {
-        const authContextValue = {
-            isAuthenticated: false,
-            email: '',
-            totalAmount: 0,
-            changeAuthState: mockChangeAuthState,
-            logout: mockLogout,
-        };
         
         render(
             <BrowserRouter>
@@ -63,84 +56,73 @@ describe('HeaderTest', () => {
         expect(window.location.pathname).toBe('/login')
     })
 
-    it('click home Link and render table', async () => {
+    it('click Home Link and render Home view', async () => {
         render(
             <BrowserRouter>
-                <AuthContext value={authContextValue}>
+                <AuthContext.Provider value={authContextValue={}}>
                     <Header />
-                </AuthContext>
+                </AuthContext.Provider>
             </BrowserRouter>
         )
 
         const allLinks = screen.getAllByRole('link')
 
+        
         await act(async() => {
             fireEvent.click(allLinks[1])
         })
-        expect(window.location.pathname).toBe('/movies/Featured%20Today')
+        expect(window.location.pathname).toBe('/')
     })
 
-    // it('click top rated Link and render top rated', async () => {
-    //     render(
-    //         <BrowserRouter>
-    //             <AuthContext>
-    //                 <Header />
-    //             </AuthContext>
-    //         </BrowserRouter>
-    //     )
+    it('click Login Link and render Login form', async () => {
+        render(
+            <BrowserRouter>
+                <AuthContext.Provider value={authContextValue={}}>
+                    <Header />
+                </AuthContext.Provider>
+            </BrowserRouter>
+        )
 
-    //     const allLinks = screen.getAllByRole('link')
+        const allLinks = screen.getAllByRole('link')        
+        await act(async() => {
+            fireEvent.click(allLinks[2])
+        })
+        expect(window.location.pathname).toBe('/login')
+    })
 
-    //     await act(async() => {
-    //         fireEvent.click(allLinks[2])
-    //     })
-    //     expect(window.location.pathname).toBe('/movies/Top%20Rated')
-    // })
+    it('click Register Link and render User reg form', async () => {
+        render(
+            <BrowserRouter>
+                <AuthContext.Provider value={authContextValue={}}>
+                    <Header />
+                </AuthContext.Provider>
+            </BrowserRouter>
+        )
 
-    // it('click people Link and render all people', async () => {
-    //     render(
-    //         <BrowserRouter>
-    //             <AuthContext>
-    //                 <Header />
-    //             </AuthContext>
-    //         </BrowserRouter>
-    //     )
+        const allLinks = screen.getAllByRole('link')        
+        await act(async() => {
+            fireEvent.click(allLinks[3])
+        })
+        expect(window.location.pathname).toBe('/register')
+    })
 
-    //     const allLinks = screen.getAllByRole('link')
+    it('click ContactUs Link and render contact form', async () => {
+        render(
+            <BrowserRouter>
+                <AuthContext.Provider value={authContextValue={}}>
+                    <Header />
+                </AuthContext.Provider>
+            </BrowserRouter>
+        )
 
-    //     await act(async() => {
-    //         fireEvent.click(allLinks[3])
-    //     })
-    //     expect(window.location.pathname).toBe('/people')
-    // })
+        const allLinks = screen.getAllByRole('link')
+        console.log(allLinks[4]);
+        
+        await act(async() => {
+            fireEvent.click(allLinks[4])
+        })
+        expect(window.location.pathname).toBe('/contactUs')
+    })
 
-    // it('click contactUs Link and render the contact us page', async () => {
-    //     render(
-    //         <BrowserRouter>
-    //             <AuthContext>
-    //                 <Header />
-    //             </AuthContext>
-    //         </BrowserRouter>
-    //     )
 
-    //     const allLinks = screen.getAllByRole('link')
-
-    //     await act(async() => {
-    //         fireEvent.click(allLinks[4])
-    //     })
-    //     expect(window.location.pathname).toBe('/ContactUs')
-    // })
-
-    // it('checks log out Link is not on the page', async () => {
-    //     render(
-    //         <BrowserRouter>
-    //             <AuthContext>
-    //                 <Header />
-    //             </AuthContext>
-    //         </BrowserRouter>
-    //     )
-
-    //     const logOutLink = screen.queryByText(/log out/i)
-    //     expect(logOutLink).toBeNull()
-    // })
 })

@@ -35,16 +35,18 @@ const App = () => {
                 <Route element={<PrivateGuard />}>
                   <Route path="/item/:itemId" element={<TableDetails />} />
                   <Route path="/edit/:itemId" element={<EditTable />} />
-                  <Route path="/contactUs" element={<ContactUs />} />
+                
                   <Route path="/profile" element={<ProfileDetails />} />
                   <Route path="/logout" element={<Logout />} />
                 </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/contactUs" element={<ContactUs />} />
                 <Route path="/not-found" element={<NotFound />} />
                 <Route path="/*" element={<NotFound />} />
                 <Route path="/spinner" element={<Spinner />} />
                 <Route path="/confirm" element={<ConfirmModal />} />
+               
               </Routes>
             </ConfirmProvider>
                 </ErrorProvider>
