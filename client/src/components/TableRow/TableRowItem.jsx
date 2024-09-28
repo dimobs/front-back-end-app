@@ -19,26 +19,29 @@ export default function TableRowItem({
   deleteHandler,
   itemDetailsClickHandler,
 }) {
-  
   const editItemHandler = () => {
     itemDetailsClickHandler(itemId);
   };
 
-
   return (
     <>
-      <tr title={username}>
+      <tr title={username} data-testid="first-section">
         <td className="index">{username}</td>
         <td>{formatDate.date(date)}</td>
         <td className="header__items td">{name}</td>
-        {description.length <= 34 ? (
-          <td className="description header__items td">{description}</td>
+        {description && description.length <= 34 ? (
+          <td
+            style={{ spellCheck: "true" }}
+            className="description header__items td"
+          >
+            {description}
+          </td>
         ) : (
           <td
             style={{ fontSize: "0.75rem", spellCheck: "true" }}
             className="description header__items td"
           >
-            {description.slice(0, 34)}...
+            {description ? description.slice(0, 34) + "..." : ""} 
           </td>
         )}
         {method == "add" ? (
@@ -65,11 +68,7 @@ export default function TableRowItem({
             View
           </button>
 
-          <button
-            className="btn-small"
-            title="Delete?"
-            onClick={deleteHandler}
-          >
+          <button className="btn-small" title="Delete?" onClick={deleteHandler}>
             Del
           </button>
           <button className="btn-small" title="Comment">
