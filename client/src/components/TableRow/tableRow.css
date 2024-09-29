@@ -261,3 +261,7 @@ tfoot td {
   color: red;
   overflow: hidden;
 }
+
+.card__search:hover {
+  background-color: gray;
+}

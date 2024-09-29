@@ -130,12 +130,18 @@ export default function TableRow() {
   };
 
   function onChangeSearchBar(e) {
-    const filteredItems = items.filter((i) => {
-      if (i.name) {
-        return i.name.toLowerCase().includes(e.target.value.toLowerCase());
-      }
+    const searchTerm = e.target.value.toLowerCase();
 
-      return i.name.toLowerCase().includes(e.target.value.toLowerCase());
+    const filteredItems = items.filter((item) => {
+      return (
+        item.name.toLowerCase().includes(searchTerm) ||
+        item.description.toLowerCase().includes(searchTerm) ||
+        item.amount.toString().toLowerCase().includes(searchTerm) ||
+        item.id.toString().toLowerCase().includes(searchTerm) ||
+        item.user_id.toString().toLowerCase().includes(searchTerm) ||
+        (item.date && item.date.includes(searchTerm)) 
+
+      );
     });
 
     setSearchedValue(e.target.value);
