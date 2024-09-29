@@ -17,7 +17,7 @@ import SearchedCard from "./SearchedCard";
 const INITIAL_VALUE = { name: "", description: "", amount: "", method: "" };
 
 export default function TableRow() {
-  const {confirm} = useConfirm();
+  const { confirm } = useConfirm();
   const { setError } = useError();
   const { setLoading } = useLoading();
   const { isAuthenticated, setTotalAmount } = useAuthContext();
@@ -113,9 +113,9 @@ export default function TableRow() {
         setError("No changes has been made", "warning");
         return;
       }
-      const response = await itemsAPI.remove(i.id);    
-      setItems(items.filter((x) => x.id != i.id))
-      setShowItem(false)
+      const response = await itemsAPI.remove(i.id);
+      setItems(items.filter((x) => x.id != i.id));
+      setShowItem(false);
       setError(
         `Successfully deleted id${response.id} with name ${response.name}`,
         "success",
@@ -125,21 +125,21 @@ export default function TableRow() {
       setError(err.message, "error");
       console.log(err.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
   function onChangeSearchBar(e) {
     const filteredItems = items.filter((i) => {
-      if(i.name) {        
-        return i.name.toLowerCase().includes(e.target.value.toLowerCase())
+      if (i.name) {
+        return i.name.toLowerCase().includes(e.target.value.toLowerCase());
       }
 
-      return i.name.toLowerCase().includes(e.target.value.toLowerCase())
-    })
+      return i.name.toLowerCase().includes(e.target.value.toLowerCase());
+    });
 
     setSearchedValue(e.target.value);
-    setMatchedItems(filteredItems)
+    setMatchedItems(filteredItems);
   }
 
   return (
@@ -198,26 +198,30 @@ export default function TableRow() {
             </div>
           </form>
         )}
-        <div className="search__container">
-          <input 
-          type="search" 
-          placeholder="Search..."
-          value={searchedValue}
-          onChange={onChangeSearchBar}
+        <section className="search__container">
+        <div>
+          <input
+            type="search"
+            placeholder="Search..."
+            value={searchedValue}
+            onChange={onChangeSearchBar}
           />
         </div>
+        {console.log(searchedValue, matchedItems)
+        }
         {searchedValue && (
-          <div>
-           {matchedItems.map((i)=> {
-            <SearchedCard 
-            key={i.id}
-            item = {i}
-            setSearchedValue={setSearchedValue}
-            />
-           })}
+
+          <div className="discovered__table">
+            {matchedItems.map((i) => {
+              <SearchedCard
+                key={i.id}
+                item={i}
+                setSearchedValue={setSearchedValue}
+              />;
+            })}
           </div>
         )}
-
+</section>
         <table className="table__container">
           <thead>
             <tr>
@@ -245,9 +249,9 @@ export default function TableRow() {
                 itemDetailsClickHandler={() => {
                   detailsHandler(i);
                 }}
-              deleteHandler ={() => {
-                onDeleteHandler(i)
-              }}              
+                deleteHandler={() => {
+                  onDeleteHandler(i);
+                }}
                 // itemDelHandler={handleDeleteClick}
               />
             ))}
@@ -263,9 +267,9 @@ export default function TableRow() {
           <TableDetails
             detailsItem={item}
             onClose={itemModalCloseHandler}
-            deleteHandler ={() => {
-              onDeleteHandler(item)
-            }}              
+            deleteHandler={() => {
+              onDeleteHandler(item);
+            }}
 
             //            // onSave={itemSaveHandler}
           />
