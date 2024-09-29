@@ -207,18 +207,16 @@ export default function TableRow() {
             onChange={onChangeSearchBar}
           />
         </div>
-        {console.log(searchedValue, matchedItems)
-        }
         {searchedValue && (
-
           <div className="discovered__table">
-            {matchedItems.map((i) => {
+            {matchedItems.map((i) => (
               <SearchedCard
+           
                 key={i.id}
                 item={i}
                 setSearchedValue={setSearchedValue}
-              />;
-            })}
+              />
+            ))}
           </div>
         )}
 </section>
