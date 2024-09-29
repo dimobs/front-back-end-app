@@ -12,6 +12,7 @@ import TableDetails from "./TableDetails";
 import TableRowItem from "./TableRowItem";
 import itemsAPI from "../../api/item-api";
 import { useConfirm } from "../../context/notification/confirmModal/ConfirmContext";
+import SearchedCard from "./SearchedCard";
 
 const INITIAL_VALUE = { name: "", description: "", amount: "", method: "" };
 
@@ -22,6 +23,8 @@ export default function TableRow() {
   const { isAuthenticated, setTotalAmount } = useAuthContext();
   const cursorPointer = useFocus();
   const [showItem, setShowItem] = useState(false);
+  const [searchedValue, setSearchedValue] = useState("");
+  const [matchedItems, setMatchedItems] = useState([]);
   // getOne
   const [item, setItem] = useState([]);
   // getall
@@ -126,6 +129,18 @@ export default function TableRow() {
     }
   };
 
+  function onChangeSearchBar(e) {
+    const filteredItems = items.filter((i) => {
+      if(i.name) {        
+        return i.name.toLowerCase().includes(e.target.value.toLowerCase())
+      }
+
+      return i.name.toLowerCase().includes(e.target.value.toLowerCase())
+    })
+
+    setSearchedValue(e.target.value);
+    setMatchedItems(filteredItems)
+  }
 
   return (
     <div>
@@ -183,6 +198,26 @@ export default function TableRow() {
             </div>
           </form>
         )}
+        <div className="search__container">
+          <input 
+          type="search" 
+          placeholder="Search..."
+          value={searchedValue}
+          onChange={onChangeSearchBar}
+          />
+        </div>
+        {searchedValue && (
+          <div>
+           {matchedItems.map((i)=> {
+            <SearchedCard 
+            key={i.id}
+            item = {i}
+            setSearchedValue={setSearchedValue}
+            />
+           })}
+          </div>
+        )}
+
         <table className="table__container">
           <thead>
             <tr>
