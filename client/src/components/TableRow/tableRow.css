@@ -75,7 +75,8 @@ tr:nth-child(even) {
 }
 
 table tr:hover {
-  background-color: gray;
+  background-color: rgba(101, 126, 150, 0.3);
+
 }
 
 table th,
@@ -258,8 +259,6 @@ tfoot td {
   outline: none;
 }
 
-
-
 .discovered__table{
   position: absolute;
   z-index: 1;
@@ -273,7 +272,21 @@ tfoot td {
  inset -5px -5px 15px rgba(255, 255, 255, 0.1),
  inset 5px 5px 15px rgba(0, 0, 0, 0.35);
 justify-content: center;
-backdrop-filter: blur(20px);
+backdrop-filter: blur(10px);
+animation: fadeIn .6s ease-in-out; 
+
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+       
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  
+  }
+}
 

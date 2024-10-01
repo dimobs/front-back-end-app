@@ -169,6 +169,9 @@ export default function TableRow() {
                   key={i.id}
                   item={i}
                   setSearchedValue={setSearchedValue}
+                  itemDetailsClickHandler={() => {
+                    detailsHandler(i);
+                  }}
                 />
               ))}
           </div>          

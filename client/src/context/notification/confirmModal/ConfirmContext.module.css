@@ -22,9 +22,9 @@
     padding: 20px;
     width: 90%;
     max-width: 400px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     text-align: center;
-    animation: fadeIn 0.3s ease-in-out; /* Optional: adds a fade-in effect */
+    animation: fadeIn 0.3s ease-in-out; 
   }
   
   /* Modal title */
