@@ -1,0 +1,14 @@
+.card__search {
+    /* width: 550rem; */
+    overflow: hidden;
+    /* background-color: green; */
+}
+
+.card__search {    
+    color: rgb(143, 179, 147, 0.8);
+
+  }
+
+  .card__search:hover {
+    background-color: gray;
+  }

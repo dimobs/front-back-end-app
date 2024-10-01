@@ -50,6 +50,13 @@
 
 .form__info {
     display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.form__info::before,
+.form__info::after {
+box-sizing: content-box;
 }
 
 .form__info .left {

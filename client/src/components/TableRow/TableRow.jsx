@@ -139,8 +139,8 @@ export default function TableRow() {
         item.amount.toString().toLowerCase().includes(searchTerm) ||
         item.id.toString().toLowerCase().includes(searchTerm) ||
         item.user_id.toString().toLowerCase().includes(searchTerm) ||
-        (item.date && item.date.includes(searchTerm)) 
-
+        item.method.toLowerCase().includes(searchTerm) ||
+        (item.date && item.date.includes(searchTerm))
       );
     });
 
@@ -152,6 +152,28 @@ export default function TableRow() {
     <div>
       <div className="table__body">
         <h1>Dashboard</h1>
+        <section className="search__container">
+          <div>
+            <input
+              className="search__input"
+              type="search"
+              placeholder="Search..."
+              value={searchedValue}
+              onChange={onChangeSearchBar}
+            />
+          </div>
+          {searchedValue && (
+          <div className="discovered__table">            
+              {matchedItems.map((i) => (
+                <SearchedCard
+                  key={i.id}
+                  item={i}
+                  setSearchedValue={setSearchedValue}
+                />
+              ))}
+          </div>          
+          )}
+        </section>
         {isAuthenticated && (
           <form onSubmit={onsubmitHandler}>
             <div>
@@ -204,28 +226,7 @@ export default function TableRow() {
             </div>
           </form>
         )}
-        <section className="search__container">
-        <div>
-          <input
-            type="search"
-            placeholder="Search..."
-            value={searchedValue}
-            onChange={onChangeSearchBar}
-          />
-        </div>
-        {searchedValue && (
-          <div className="discovered__table">
-            {matchedItems.map((i) => (
-              <SearchedCard
-           
-                key={i.id}
-                item={i}
-                setSearchedValue={setSearchedValue}
-              />
-            ))}
-          </div>
-        )}
-</section>
+  
         <table className="table__container">
           <thead>
             <tr>
