@@ -14,6 +14,7 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(7px);
   background: rgba(255, 255, 255, 0.05);
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 .logo img {
@@ -122,21 +123,11 @@ ul {
   from {
     opacity: 0;
     transform: scale(0.9);
-
   }
-
   to {
     opacity: 1;
     transform: scale(1);
 
-  }
-}
-
-@media (min-width: 930px) {
-  .modal {
-    width: 45rem;
-    left: calc(50% - 20rem);
-    border-radius: 14px;
   }
 }
 
@@ -191,6 +182,14 @@ ul {
 }
 
 /* Media query for small screens */
+
+@media (min-width: 930px) {
+  .modal {
+    width: 45rem;
+    left: calc(50% - 20rem);
+    border-radius: 14px;
+  }
+}
 @media (max-width: 768px) {
   .nav {
     display: none;

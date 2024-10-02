@@ -2,6 +2,7 @@ table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+animation: fadeIn 0.3s ease-in-out; 
 }
 
 table td,
@@ -12,7 +13,7 @@ table th {
     5px 5px 15px rgba(0, 0, 0, 0.35),
     inset -1px -1px 1px rgba(255, 255, 255, 0.1),
     inset 1px 5px 10px rgba(0, 0, 0, 0.35);
-  ;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .table__body {
@@ -156,11 +157,13 @@ tfoot td {
   margin-left: 20px;
   font-size: 10px;
   letter-spacing: 1px;
+animation: fadeIn .9s ease-in-out; 
 }
 
 @media (max-width: 630px) {
   html {
     width: 99.5%;
+animation: fadeIn .6s ease-in-out; 
   }
 
   .form__submit {
@@ -257,6 +260,8 @@ tfoot td {
       inset 5px 5px 15px rgba(0, 0, 0, 0.35);
   justify-content: center;
   outline: none;
+animation: fadeIn 1s ease-in-out; 
+
 }
 
 .discovered__table{
