@@ -93,7 +93,7 @@ const ProfileDetails = () => {
       <div className={styles["profile__body"]}>
         <div className={styles["profile_container"]}>
           <div className={styles["info__section"]}>
-            <div className="table-details">
+            <div className={styles["table-details"]}>
               <div className={styles["details__view"]}>
                 <p>
                   ID: <strong>{createdUser._id}</strong>

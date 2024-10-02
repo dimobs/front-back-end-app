@@ -19,7 +19,9 @@
 
 .logo img {
   height: 40px;
-  /* Adjust based on your logo size */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 ul {
@@ -54,6 +56,9 @@ ul {
 
 .nav {
   gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hasUser {
@@ -165,23 +170,6 @@ ul {
   flex: 4;
 }
 
-.table-details {
-  flex: 8;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-left: 0px !important;
-}
-
-.table-details p {
-  margin-bottom: 10px;
-}
-
-.table-details p:last-of-type {
-  margin-bottom: 0px;
-}
-
-/* Media query for small screens */
 
 @media (min-width: 930px) {
   .modal {
@@ -193,13 +181,6 @@ ul {
 @media (max-width: 768px) {
   .nav {
     display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    padding: 10px 0;
   }
 
   .nav.open {

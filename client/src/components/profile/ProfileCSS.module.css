@@ -380,7 +380,20 @@
     color: rgb(255, 255, 255);
 }
 
+.table-details {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 0px !important;
+  }
+  .table-details p {
+    margin-bottom: 10px;
+  }
 
+  .table-details p:last-of-type {
+    margin-bottom: 0px;
+  }
 
 @media screen and (max-width: 600px) {
     .info-section {
@@ -647,4 +660,5 @@
         color: rgb(255, 255, 255);
     }
 }
+
 
