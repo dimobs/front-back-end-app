@@ -6,7 +6,7 @@ import { useAuthContext } from "../../context/auth/AuthContext";
 // export default function TableDetails({ detailsItem, onClose, itemDelHandler }) {
 export default function TableDetails({ detailsItem, onClose, deleteHandler }) {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuthContext();
+  const { isAuthenticated, createdUser } = useAuthContext();
   document.onkeydown = function (e) {
     if (e.keyCode == 27) {
       onClose();
@@ -57,7 +57,8 @@ export default function TableDetails({ detailsItem, onClose, deleteHandler }) {
                 ID: <strong>{detailsItem.id}</strong>
               </p>
               <p>
-                User: <strong>{detailsItem.username.email}</strong>
+                User: <strong>{
+                detailsItem.username.email}</strong>
               </p>
               <p>
                 type: <strong>{detailsItem.method === "add" ? "+ ADD FUNDS" : "- SPEND"}</strong>

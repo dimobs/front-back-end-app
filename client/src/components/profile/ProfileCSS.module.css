@@ -156,10 +156,14 @@
     content: "Updated";
 }
 
-.right .form .inputBox input[type="submit"]:hover {
+.right .form .inputBox input[type="submit"]:hover,
+.right .form .inputBox input[type="submit"]:focus
+{
     transform: translateY(3px);
     font-weight: 100;
+    box-shadow: none;
 }
+    
 
 .right .field {
     display: flex;
@@ -643,3 +647,4 @@
         color: rgb(255, 255, 255);
     }
 }
+

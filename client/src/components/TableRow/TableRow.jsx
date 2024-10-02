@@ -162,7 +162,7 @@ export default function TableRow() {
               onChange={onChangeSearchBar}
             />
           </div>
-          {searchedValue && (
+          {searchedValue && matchedItems.length >=1 && (
           <div className="discovered__table">            
               {matchedItems.map((i) => (
                 <SearchedCard

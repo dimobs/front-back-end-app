@@ -12,6 +12,10 @@ import { BrowserRouter } from "react-router-dom";
 import EditTable from "./EditTable";
 import { AuthContext } from "../../context/auth/AuthContext";
 import { ConfirmProvider } from "../../context/notification/confirmModal/ConfirmContext";
+import { enableFetchMocks } from 'jest-fetch-mock';
+enableFetchMocks();
+
+fetch.mockResponseOnce(JSON.stringify({ id: 1, name: 'Mock Item' }));
 
 let authContextValue;
 let confirmValue;
