@@ -1,7 +1,9 @@
 import * as request from './requester';
 
-const BASE_URL = 'http://localhost:3030/api/items'
+// const BASE_URL = 'http://localhost:3030/api/items'
 // const BASE_URL = 'http://84.54.187.245:2081/api/items'
+const BASE_URL = 'https://home.techbg.net:2081/api/items'
+
 
 export const getAll = async () => {return await request.get(BASE_URL)};
 export const getOne = async (itemId) => {return await request.get(`${BASE_URL}/${itemId}`)};
