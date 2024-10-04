@@ -31,8 +31,6 @@ const Header = () => {
               <div className="hasUser">
                 <div className="hasProfile">
                   <Link to="/profile">Profile</Link>
-                  <Link to="/table/tableDetails">Details</Link>
-                  <Link to="/spinner">Spinner</Link>
                   <Link to="/contactUs">Contact Us</Link>
                 </div>
                 {totalAmount >= 0 ? (

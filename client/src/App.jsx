@@ -7,7 +7,6 @@ import { ErrorProvider } from "./context/notification/ErrorContext";
 import { ConfirmProvider } from "./context/notification/confirmModal/ConfirmContext";
 import ErrorNotification from "./context/notification/ErrorNotification";
 import LoadingSpinner from "./context/spinner/Spinner";
-import Spinner from "./context/spinner/Spinner";
 import NotFound from "./components/NotFound404/NotFound";
 import PrivateGuard from "./components/common/PrivateGuard";
 import Header from "./components/Header/Header";
@@ -35,7 +34,6 @@ const App = () => {
                 <Route element={<PrivateGuard />}>
                   <Route path="/item/:itemId" element={<TableDetails />} />
                   <Route path="/edit/:itemId" element={<EditTable />} />
-                
                   <Route path="/profile" element={<ProfileDetails />} />
                   <Route path="/logout" element={<Logout />} />
                 </Route>
@@ -44,9 +42,7 @@ const App = () => {
                 <Route path="/contactUs" element={<ContactUs />} />
                 <Route path="/not-found" element={<NotFound />} />
                 <Route path="/*" element={<NotFound />} />
-                <Route path="/spinner" element={<Spinner />} />
                 <Route path="/confirm" element={<ConfirmModal />} />
-               
               </Routes>
             </ConfirmProvider>
                 </ErrorProvider>
