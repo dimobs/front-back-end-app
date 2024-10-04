@@ -32,9 +32,10 @@ async function requester(method, url, data) {
 
     const contentType = response.headers.get('Content-Type');
     if (!contentType || !contentType.includes('application/json')) {
-      throw new Error(`Expected JSON, got ${contentType}`);
+      data = await response.text(); 
+      throw new Error(`Expected JSON, got ${data}`);
     }
-
+    
     const result = await response.json();
 
     if (!response.ok) {

@@ -139,7 +139,8 @@ export default function TableRow() {
         item.amount.toString().toLowerCase().includes(searchTerm) ||
         item.id.toString().toLowerCase().includes(searchTerm) ||
         item.user_id.toString().toLowerCase().includes(searchTerm) ||
-        item.method.toLowerCase().includes(searchTerm) ||
+        item.method.toLowerCase().includes(searchTerm) ||  
+        item.username.email.toLowerCase().includes(searchTerm) ||
         (item.date && item.date.includes(searchTerm))
       );
     });
@@ -187,6 +188,9 @@ export default function TableRow() {
                 placeholder="Paid for..."
                 id="name"
                 name="name"
+                onInput={(e) => {
+                  e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "")
+                }}
                 value={values.name}
                 onChange={changeHandler}
               />
