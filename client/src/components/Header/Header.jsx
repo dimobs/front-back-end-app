@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css"; // Make sure to create this file
 import { useAuthContext } from "../../context/auth/AuthContext";
+import menu__mob from '../../assets/svg/manu__mobile.svg'
+import search_mob from '../../assets/svg/search-svgrepo-com.svg'
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +16,6 @@ const Header = () => {
   return (
     <header className="header">
       <div className="logo">
-        {/* <Link to={'/'}> <img src="logo/dimo-favi.png" alt="Logo" /> </Link> */}
         <Link to={"/"}>
           <img src="logo/dimo-favi.png" alt="Logo"></img>
         </Link>
@@ -96,41 +97,25 @@ const Header = () => {
           )}
         </div>
       </ul>
-      {/* </nav> */}
-      {/* <div className="menu-toggle" onClick={toggleMenu}>
-        <span className="menu-icon">x</span>
-      </div>
-
-      // <nav className={`nav-menu ${menuOpen ? "open" : ""}`}>
-      //   <div className="nav__bar"></div>
-      // </nav>
-
       <div className="menu-toggle" onClick={toggleMenu}>
-        <span className="menu-icon">v</span>
-      </div> */}
-      {/*   
-      {menuOpen && (
-    <nav className="sidebar close">
-   <div className="image-text">
-          <span className="image">
-          <img src="logo/dimo-favi.png" alt="Logo"></img>
-          </span>
-          <div className="text logo-text">
-            <span className="name">Dimo Karachorbadzhiev </span>
-            <span className="profession">Web developer</span>
-          </div>
-        </div>
-    </nav>  
-    )
-      } */}
-
-      <div className="menu-toggle" onClick={toggleMenu}>
+      <img className="menu-mobile" src={menu__mob} alt="menu" />
         <input type="button" />
       </div>
-      {menuOpen && (
+     
         <div className="sidebar">
-          <p>Homeeeeeeeeeeeeee</p>
+          <div className="menu__bar">
+            <div className="menu">
+              <li className="search__bar">
+                <input type="text" placeholder="Search..." />
+                <img className="icon" src={search_mob} alt="Search" />
+              </li>
+            </div>
+            <div className="bottom__content"></div>
+
+          </div>      
         </div>
+        {menuOpen && (
+          <dir><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quisquam nobis, magnam eum sequi enim dolor possimus vel, velit dolorem exercitationem temporibus consequuntur accusamus quam, dolore blanditiis asperiores voluptatem aut!</p></dir>
       )}
     </header>
   );
