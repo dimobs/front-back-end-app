@@ -114,13 +114,20 @@ const Header = () => {
               <img className="icon" src={search_mob} alt="Search" />
             </li>
           <li className="nav-link">
+          <Link to="/">
             <img src={homeBtn} alt="Home" />
+            </Link>
           </li>
           <li className="nav-link">
-            <img src={profileIcon} alt="profile" />
+            <Link to="/profile">
+            <img src={profileIcon} alt="profile"             
+            />
+            </Link>
           </li>
           <li className="nav-link">
+          <Link to="/contactUs">
             <img src={contactUsIcon} alt="Contact-Us" />
+            </Link>
           </li>
           
           </div>
