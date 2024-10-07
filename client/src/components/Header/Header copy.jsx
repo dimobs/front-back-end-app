@@ -4,10 +4,6 @@ import "./Header.css"; // Make sure to create this file
 import { useAuthContext } from "../../context/auth/AuthContext";
 import menu__mob from "../../assets/svg/manu__mobile.svg";
 import search_mob from "../../assets/svg/search-svgrepo-com.svg";
-import homeBtn from '../../assets/svg/home-icon-silhouette-svgrepo-com.svg';
-import profileIcon from '../../assets/svg/profile-round-1342-svgrepo-com.svg';
-import contactUsIcon from '../../assets/svg/contact-phonebook-support-svgrepo-com.svg';
-
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -107,22 +103,54 @@ const Header = () => {
       </div>
 
       <div className="sidebar">
+        <header>
+          <div className="image-text">
+            <span className="image"></span>
+            <div className="text logo-text">
+              <span className="name">Dimo Yankov</span>
+              <span className="profession"></span>
+            </div>
+          </div>
+          {/* <i className='bx bx-chevron-right toggle'></i> */}
+        </header>
         <div className="menu-bar">
           <div className="menu">
-            <li className="search-box nav-link">
-              {/* <input type="text" placeholder="Search..." /> */}
+            <li className="search-box">
+              <input type="text" placeholder="Search..." />
               <img className="icon" src={search_mob} alt="Search" />
             </li>
-          <li className="nav-link">
-            <img src={homeBtn} alt="Home" />
-          </li>
-          <li className="nav-link">
-            <img src={profileIcon} alt="profile" />
-          </li>
-          <li className="nav-link">
-            <img src={contactUsIcon} alt="Contact-Us" />
-          </li>
-          
+
+            <ul className="menu-links">
+              <li className="nav-link">
+                <a href="#">
+                  {/* <i className='bx bx-home-alt icon'></i> */}
+                  <span className="text nav-text">Dashboard</span>
+                </a>
+              </li>
+
+              {/* <li className="nav-link">
+              <a href="#">
+                <i className='bx bx-bell icon'></i>
+                <span className="text nav-text">Notifications</span>
+              </a>
+            </li> */}
+
+              <li className="nav-link">
+                <Link to="/contactUs">                 
+                  {/* <i className="bx bx-wallet icon"></i> */}
+                  <span className="text nav-text"> Contact Us</span>
+                </Link>
+              </li>
+              {isAuthenticated && (
+                <li className="nav-link">
+                  <Link to="/profile">                    
+                    <i className="bx bx-wallet icon"></i>
+                    <span className="text nav-text">Profile</span>
+                  </Link>
+                </li>
+
+              )}
+            </ul>
           </div>
 
           <div className="bottom__content">

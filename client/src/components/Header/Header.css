@@ -224,9 +224,12 @@ ul {
   }
 
   .search__container div,
-  .table__body h1,
-  .sidebar {
+  .table__body h1
+  {
     display: none;
+  }
+  .sidebar{
+    display: block;
   }
 
   form div {
@@ -254,15 +257,17 @@ ul {
 
   .sidebar {
     position: fixed;
-    top: 3em;
-    right: 0;
-    height: 250px;
+    top: 1em;
+    left: 9em;
+    /* height: 250px; */
     width: 100%;
-    padding: 10px 14px;
+    /* padding: 10px 14px; */
     background: transparent;
-    border-radius: 3px solid black;
+    /* border-radius: 3px solid black; */
     transition: all 0.3s ease;
     z-index: 100;
+    align-items: center;
+    justify-content: center;
   }
 
   .sidebar.close {
@@ -272,11 +277,10 @@ ul {
 
   /* ===== Reusable code - Here ===== */
   .sidebar li {
-    height: 50px;
+    height: 30px;
     list-style: none;
     display: flex;
     align-items: center;
-    margin-top: 10px;
   }
 
   .sidebar header .image,
@@ -297,8 +301,8 @@ ul {
 
   .sidebar .text,
   .sidebar .icon {
-    color: var(--text-color);
-    transition: var(--tran-03);
+    color: #ccc;
+    transition: 1s ease-in-out;
   }
 
   .sidebar .text {
@@ -318,7 +322,7 @@ ul {
   /* =========================== */
 
   .sidebar header {
-    position: relative;
+    position: relative;  
   }
 
   .sidebar header .image-text {
@@ -363,21 +367,21 @@ ul {
     height: 25px;
     width: 25px;
     background-color: var(--primary-color);
-    color: var(--sidebar-color);
+    color: #fff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 22px;
     cursor: pointer;
-    transition: var(--tran-05);
+    transition: all 0.3s ease;
     box-shadow: -5px -5px 15px 2px rgb(91, 105, 109);
     transition: 1s;
 
   }
 
   body.dark .sidebar header .toggle {
-    color: var(--text-color);
+    color: #707070;
   }
 
   .sidebar.close .toggle {
@@ -388,27 +392,39 @@ ul {
   }
 
   .sidebar .menu {
-    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    border: 2px solid #00dfc4;
+  }
+
+  .sidebar .menu .nav-link img {
+    background-color: wheat;
+    color: red;
+width: 60px;
+height: 20px;
+
   }
 
   .sidebar li.search-box {
     border-radius: 6px;
-    background-color: var(--primary-color-light);
+    /* background-color:  #f6f5ff; */
     cursor: pointer;
-    transition: var(--tran-05);
+    transition: all 0.3s ease;
+    /* background-color: green; */
   }
 
   .sidebar li.search-box input {
-    height: 100%;
-    width: 100%;
+    /* height: 100%; */
+    /* width: 100%; */
     outline: none;
     border: none;
-    background-color: var(--primary-color-light);
-    color: var(--text-color);
+    background-color:  #f6f5ff;
+    color: #707070;
     border-radius: 6px;
     font-size: 17px;
     font-weight: 500;
-    transition: var(--tran-05);
+    transition: all 0.3s ease;
   }
 
   .sidebar li a {
@@ -421,7 +437,7 @@ ul {
     width: 100%;
     border-radius: 6px;
     text-decoration: none;
-    transition: var(--tran-03);
+    transition: all 0.2s ease;
   }
 
   .sidebar li a:hover {
@@ -430,20 +446,18 @@ ul {
 
   .sidebar li a:hover .icon,
   .sidebar li a:hover .text {
-    color: var(--sidebar-color);
+    color: #fff;
   }
 
   body.dark .sidebar li a:hover .icon,
   body.dark .sidebar li a:hover .text {
-    color: var(--text-color);
+    color: #707070;
   }
 
   .sidebar .menu-bar {
-    height: calc(100% - 55px);
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    overflow-y: scroll;
+    overflow-x: scroll;
   }
 
   .menu-bar::-webkit-scrollbar {
@@ -452,9 +466,9 @@ ul {
 
   .sidebar .menu-bar .mode {
     border-radius: 6px;
-    background-color: var(--primary-color-light);
+    background-color:  #f6f5ff;
     position: relative;
-    transition: var(--tran-05);
+    transition: all 0.3s ease;
   }
 
   .menu-bar .mode .sun-moon {
@@ -496,7 +510,7 @@ ul {
     width: 40px;
     border-radius: 25px;
     background-color: var(--toggle-color);
-    transition: var(--tran-05);
+    transition: all 0.3s ease;
   }
 
   .switch::before {
@@ -508,7 +522,7 @@ ul {
     top: 50%;
     left: 5px;
     transform: translateY(-50%);
-    background-color: var(--sidebar-color);
+    background-color: #fff;
     transition: var(--tran-04);
   }
 
@@ -524,13 +538,13 @@ ul {
     height: 100vh;
     width: calc(100% - 250px);
     background-color: var(--body-color);
-    transition: var(--tran-05);
+    transition: all 0.3s ease;
   }
 
   .home .text {
     font-size: 30px;
     font-weight: 500;
-    color: var(--text-color);
+    color: #707070;
     padding: 12px 60px;
   }
 
