@@ -1,15 +1,11 @@
+import API_URL from './apiConfig';
 import * as request from './requester';
 
-// const BASE_URL = 'http://localhost:3030/api/items'
-// const BASE_URL = 'http://84.54.187.245:2081/api/items'
-const BASE_URL = 'https://home.techbg.net:2081/api/items'
-
-
-export const getAll = async () => {return await request.get(BASE_URL)};
-export const getOne = async (itemId) => {return await request.get(`${BASE_URL}/${itemId}`)};
-export const create = async (data) => {return await request.post(BASE_URL, data)};
-export const update = async (itemId, itemData) => { return request.put(`${BASE_URL}/${itemId}`, itemData)};
-export const remove = async (itemId) => {return await request.remove(`${BASE_URL}/${itemId}`)};
+export const getAll = async () => {return await request.get(`${API_URL}/api/items`)};
+export const getOne = async (itemId) => {return await request.get(`${API_URL}/api/items/${itemId}`)};
+export const create = async (data) => {return await request.post(`${API_URL}/api/items`, data)};
+export const update = async (itemId, itemData) => { return request.put(`${API_URL}/api/items/${itemId}`, itemData)};
+export const remove = async (itemId) => {return await request.remove(`${API_URL}/api/items/${itemId}`)};
 
 const itemsAPI = {
   getAll,

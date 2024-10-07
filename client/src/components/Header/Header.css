@@ -218,7 +218,6 @@ ul {
   }
 
   .menu-toggle .menu-mobile {
-    /* background-color: red; */
     color: red;
     border: 2px solid wheat;
     width: 30px;
@@ -231,8 +230,26 @@ ul {
   }
 
   form div {
-    display: grid;
-    grid-auto-columns: 2;
+    display: flex;
+    flex-direction: column;    
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  form div .input__table {
+    width: 100%;
+    
+  }
+ 
+  form div button {
+    justify-content: flex-start;
+
+  }
+
+
+  form div button.form__submit {
+    width: 100%;
+    
   }
 
   .sidebar {

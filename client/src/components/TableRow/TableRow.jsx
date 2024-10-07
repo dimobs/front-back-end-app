@@ -139,7 +139,7 @@ export default function TableRow() {
         item.amount.toString().toLowerCase().includes(searchTerm) ||
         item.id.toString().toLowerCase().includes(searchTerm) ||
         item.user_id.toString().toLowerCase().includes(searchTerm) ||
-        item.method.toLowerCase().includes(searchTerm) ||  
+        item.method.toLowerCase().includes(searchTerm) ||
         item.username.email.toLowerCase().includes(searchTerm) ||
         (item.date && item.date.includes(searchTerm))
       );
@@ -163,8 +163,8 @@ export default function TableRow() {
               onChange={onChangeSearchBar}
             />
           </div>
-          {searchedValue && matchedItems.length >=1 && (
-          <div className="discovered__table">            
+          {searchedValue && matchedItems.length >= 1 && (
+            <div className="discovered__table">
               {matchedItems.map((i) => (
                 <SearchedCard
                   key={i.id}
@@ -175,7 +175,7 @@ export default function TableRow() {
                   }}
                 />
               ))}
-          </div>          
+            </div>
           )}
         </section>
         {isAuthenticated && (
@@ -189,7 +189,7 @@ export default function TableRow() {
                 id="name"
                 name="name"
                 onInput={(e) => {
-                  e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "")
+                  e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
                 }}
                 value={values.name}
                 onChange={changeHandler}
@@ -216,6 +216,8 @@ export default function TableRow() {
               />
               <select
                 className="input__table"
+                // aria-valuetext="Spend"
+                // style={{ background: "red" }}
                 id="type"
                 name="method"
                 value={values.method}
@@ -233,7 +235,7 @@ export default function TableRow() {
             </div>
           </form>
         )}
-  
+
         <table className="table__container">
           <thead>
             <tr>

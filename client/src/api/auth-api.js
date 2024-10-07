@@ -1,14 +1,8 @@
 import * as requester from './requester.js'
+import API_URL from './apiConfig.js';
 
-// const base_URL = 'http://localhost:3030/users';
-// const base_URL = 'http://dimo.techbg.net:2081/users'
-// const base_URL = 'http://84.54.187.245:2081/users'
-// const base_URL = 'http://199.36.158.100:2081/users'
-const base_URL = 'https://home.techbg.net:2081/users'
-
-
-export const login = (email, password) => requester.post(`${base_URL}/login`, {email, password});
-export const editUser = (id, userData) => requester.put(`${base_URL}/update`, {id, userData});
-export const userInfo = (id) => requester.get(`${base_URL}/profile?id=${id}`);
-export const register = (email, password) => requester.post(`${base_URL}/register`, {email, password});
-export const logout = () => requester.get(`${base_URL}/logout`);
+export const login = (email, password) => requester.post(`${API_URL}/users/login`, {email, password});
+export const editUser = (id, userData) => requester.put(`${API_URL}/users/update`, {id, userData});
+export const userInfo = (id) => requester.get(`${API_URL}/users/profile?id=${id}`);
+export const register = (email, password) => requester.post(`${API_URL}/users/register`, {email, password});
+export const logout = () => requester.get(`${API_URL}/users/logout`);
