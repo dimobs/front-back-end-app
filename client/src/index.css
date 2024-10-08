@@ -17,9 +17,6 @@ body, html {
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  /* color: rgb(143, 179, 147);  */
-  /* background-color: #223243; */
-  /* background: rgb(34,50,67); */
   background: radial-gradient(circle, rgb(35, 55, 76) 0%, rgb(29, 45, 45) 50%, rgb(10, 10, 10) 100%);
   background-repeat: no-repeat;
   font-synthesis: none;
@@ -180,7 +177,6 @@ tfoot {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
     background-color: #ffffff;
   }
   a:hover {
