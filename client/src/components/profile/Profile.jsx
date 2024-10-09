@@ -96,7 +96,7 @@ const ProfileDetails = () => {
             <div className={styles["table-details"]}>
               <div className={styles["details__view"]}>
                 <p>
-                  ID: <strong>{createdUser._id}</strong>
+                  ID: <strong className="on__end">{createdUser._id}</strong>
                 </p>
                 <p>
                   User: <strong>{createdUser.email}</strong>

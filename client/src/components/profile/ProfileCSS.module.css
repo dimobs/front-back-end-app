@@ -5,7 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     border-collapse: collapse;
-   min-height: 100vh;
+    min-height: 100vh;
 }
 
 .profile__body {
@@ -387,13 +387,16 @@
 }
 
 @media (max-width: 768px) {
+
+
     .profile__form {
         flex-direction: column;
         margin: 2% 5%;
         padding: 4% 4%;
     }
 
-    .left, .right {
+    .left,
+    .right {
         width: 100%;
         margin: 0;
     }
@@ -425,6 +428,10 @@
     .right .form input[type="submit"] {
         width: 100%;
         padding: 12px;
+    }
+
+    .details__view {
+        gap: 0;
     }
 }
 
