@@ -26,6 +26,7 @@ table th {
 
 .table__container {
   width: 60rem;
+  overflow-x:auto;
 }
 
 .form__submit {
