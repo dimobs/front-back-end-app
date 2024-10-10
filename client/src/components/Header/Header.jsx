@@ -12,11 +12,26 @@ import loginIcon from "../../assets/svg/login-svgrepo-com.svg";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const { isAuthenticated, email, totalAmount } = useAuthContext();
   const totalAmountEuro = (totalAmount / 1.95583).toFixed(2);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+
   };
+
+  const toggleSearch = () => {
+    let myDiv = document.querySelector('.search__input');
+    if(myDiv.style.display == 'none') {
+      console.log(myDiv.style.display);
+      
+      myDiv.style.display = 'block';
+  } else {
+    myDiv.style.display = "none"
+    console.log(myDiv.style.display);
+
+  }
+  }
 
   return (
     <header className="header">
@@ -103,16 +118,20 @@ const Header = () => {
         </div>
       </ul>
       <div className="menu-toggle" onClick={toggleMenu}>
-        <img className="menu-mobile" src={menu__mob} alt="menu" />
-        <input type="button" />
+        <img className="menu-mobile" src={menu__mob} alt="menu" />       
       </div>
 
       <div className="sidebar">
         <div className="menu-bar">
           <div className="menu">
+          {/* {showSearch && (
+                  <div style={{display: "block"}} className="search__input"></div>
+                  
+              )} */}
             <li className="search-box nav-link">
-              {/* <input type="text" placeholder="Search..." /> */}
-              <img className="icon" src={search_mob} alt="Search" />
+          
+              <img onClick={toggleSearch} className="icon" src={search_mob} alt="Search" />
+
             </li>
             <li className="nav-link">
               <Link to="/">

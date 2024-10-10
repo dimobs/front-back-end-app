@@ -182,44 +182,20 @@ ul {
   }
 
   .menu-toggle {
-    /* display: block; */
     display: flex;
     position: fixed;
     top: 0;
-    left: 5rem;
+    left: 4.5rem;
     margin-top: 1rem;
   }
 
-  .menu-toggle input[type="submit"] {
-    width: 100%;
-    background: #00dfc4;
-    border-radius: 10px;
-    color: #223243;
-    padding: 10px 0;
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow:
-      -5px -5px 15px rgba(255, 255, 255, 0.1),
-      5px 5px 15px rgba(0, 0, 0, 0.35),
-      inset -5px -5px 15px rgba(255, 255, 255, 0.1),
-      inset 5px 5px 15px rgba(0, 0, 0, 0.35);
-    margin-bottom: 3rem;
-    z-index: 100;
-  }
-
-  .menu-toggle input[type="submit"]:hover {
-    transform: translateY(3px);
-    font-weight: 100;
-    align-items: flex-end;
-    z-index: 100;
-  }
-
   .menu-toggle .menu-mobile {
-    border: 2px solid wheat;
-    width: 30px;
+    /* border: 2px solid wheat; */
+    width: 25px;
   }
 
-  .search__container div,
+  /* .search__container div, */
+  .search__input,
   .table__body h1
   /* .table__container */
     {
@@ -250,21 +226,16 @@ ul {
 
   form div button.form__submit {
     width: 100%;
-
   }
 
   .sidebar {
     display: flex;
     position: fixed;
-    /* top: 1em; */
-    left: 9em;
-    /* height: 250px; */
+    left: 7em;
     width: 100%;
-    /* padding: 10px 14px; */
     background: transparent;
-    /* border-radius: 3px solid black; */
     transition: all 0.3s ease;
-    z-index: 100;
+    z-index: 1;
     align-items: center;
   }
 
@@ -394,7 +365,7 @@ ul {
     gap: 7px;
     border: 8px solid #223243;
     padding: 0.5rem;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow:
         -5px -5px 15px rgba(255, 255, 255, 0.1),
         5px 5px 15px rgba(0, 0, 0, 0.35),
