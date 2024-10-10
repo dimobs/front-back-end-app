@@ -230,10 +230,6 @@ ul {
     overflow-x:auto;
   }
 
-  .sidebar {
-    display: block;
-  }
-
   form div {
     display: flex;
     flex-direction: column;
@@ -258,8 +254,9 @@ ul {
   }
 
   .sidebar {
+    display: flex;
     position: fixed;
-    top: 1em;
+    /* top: 1em; */
     left: 9em;
     /* height: 250px; */
     width: 100%;
@@ -269,7 +266,6 @@ ul {
     transition: all 0.3s ease;
     z-index: 100;
     align-items: center;
-    justify-content: center;
   }
 
   .sidebar.close {
@@ -390,20 +386,25 @@ ul {
     transform: translateY(-50%) rotate(0deg);
     box-shadow: 5px 5px 15px 2px rgb(200, 208, 210);
     transition: 1s;
-
   }
 
   .sidebar .menu {
-    width: 100%;
+    min-width: 100%;
     display: flex;
-    gap: 5px;
-    border: 2px solid #00dfc4;
+    gap: 7px;
+    border: 8px solid #223243;
+    padding: 0.5rem;
+    border-radius: 20px;
+    box-shadow:
+        -5px -5px 15px rgba(255, 255, 255, 0.1),
+        5px 5px 15px rgba(0, 0, 0, 0.35),
+        /* inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+        inset 5px 5px 15px rgba(0, 0, 0, 0.35); */
   }
 
   .sidebar .menu .nav-link img {
     background-color: wheat;
-    color: red;
-    width: 60px;
+    width: 40px;
     height: 20px;
 
   }
@@ -415,8 +416,6 @@ ul {
   }
 
   .sidebar li.search-box input {
-    /* height: 100%; */
-    /* width: 100%; */
     outline: none;
     border: none;
     background-color: #f6f5ff;

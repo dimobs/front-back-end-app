@@ -4,10 +4,11 @@ import "./Header.css"; // Make sure to create this file
 import { useAuthContext } from "../../context/auth/AuthContext";
 import menu__mob from "../../assets/svg/manu__mobile.svg";
 import search_mob from "../../assets/svg/search-svgrepo-com.svg";
-import homeBtn from '../../assets/svg/home-icon-silhouette-svgrepo-com.svg';
-import profileIcon from '../../assets/svg/profile-round-1342-svgrepo-com.svg';
-import contactUsIcon from '../../assets/svg/contact-phonebook-support-svgrepo-com.svg';
-
+import homeBtn from "../../assets/svg/home-icon-silhouette-svgrepo-com.svg";
+import profileIcon from "../../assets/svg/profile-round-1342-svgrepo-com.svg";
+import contactUsIcon from "../../assets/svg/contact-phonebook-support-svgrepo-com.svg";
+import logoutIcon from "../../assets/svg/logout-svgrepo-com.svg";
+import loginIcon from "../../assets/svg/login-svgrepo-com.svg";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -113,32 +114,33 @@ const Header = () => {
               {/* <input type="text" placeholder="Search..." /> */}
               <img className="icon" src={search_mob} alt="Search" />
             </li>
-          <li className="nav-link">
-          <Link to="/">
-            <img src={homeBtn} alt="Home" />
-            </Link>
-          </li>
-          <li className="nav-link">
-            <Link to="/profile">
-            <img src={profileIcon} alt="profile"             
-            />
-            </Link>
-          </li>
-          <li className="nav-link">
-          <Link to="/contactUs">
-            <img src={contactUsIcon} alt="Contact-Us" />
-            </Link>
-          </li>
-          
-          </div>
-
-          <div className="bottom__content">
-            {isAuthenticated && (
-                        <li className="logout">
-                        <Link to="/logout">
-                          Logout({email.split("@")[0].toUpperCase()}){" "}
-                        </Link>
-                      </li>
+            <li className="nav-link">
+              <Link to="/">
+                <img src={homeBtn} alt="Home" />
+              </Link>
+            </li>
+            <li className="nav-link">
+              <Link to="/profile">
+                <img src={profileIcon} alt="profile" />
+              </Link>
+            </li>
+            <li className="nav-link">
+              <Link to="/contactUs">
+                <img src={contactUsIcon} alt="Contact-Us" />
+              </Link>
+            </li>
+            {isAuthenticated ? (
+              <li className="nav-link">
+                <Link to="/logout">
+                  <img src={logoutIcon} alt="Logout" />
+                </Link>
+              </li>
+            ) : (
+              <li className="nav-link">
+                <Link to="/login">
+                  <img src={loginIcon} alt="Login" />
+                </Link>
+              </li>
             )}
           </div>
         </div>
