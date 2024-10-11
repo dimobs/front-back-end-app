@@ -1,7 +1,10 @@
-# 🎬 SMARTTABLEPAYMENT (ARRANGE PAYMENT BETWEEN PARTICIPANT WITH MY BALANCE)
+#  SMARTTABLEPAYMENT (ARRANGE PAYMENT BETWEEN PARTICIPANT WITH MY BALANCE)
 ### A React-based application that allows users to spend or add funds to balance. Users can register, log in - add more info in thir profile.
 ### Recommended resolution on computer: 1920x1080
 ### Recommended resolution on phone: <600px
+
+## Technologies 
+- **ReactJs** **Vite** 
 
 ## ✨ Features
 ### 🔐 Authentication
