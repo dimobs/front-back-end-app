@@ -181,6 +181,20 @@ ul {
     position: fixed;
   }
 
+  .overlay__table {
+....................
+  }
+
+  .amount_mobile {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .amount_mobile span {
+    margin: 0.2em;
+  }
+
   .menu-toggle {
     display: flex;
     position: fixed;

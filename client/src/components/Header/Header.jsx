@@ -166,7 +166,12 @@ const Header = () => {
         </div>
       </div>
       {menuOpen && (
+        
         <dir className="menu_overlay">
+          <div className="amount_mobile">
+          <span>{totalAmount}</span>
+          <span className="balance__label">BGN</span>
+          </div>
           <ul>
             <li className="nav-bar-mob">
               <Link to={"/"}>

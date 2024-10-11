@@ -186,9 +186,9 @@ tfoot {
   a:hover {
     color: var(--color-dark-green);
   }
-  button {
+  /* button {
     background-color: var(--color-medium-green);
-  }
+  } */
   .input {
     display: flex;
     background-color: red;

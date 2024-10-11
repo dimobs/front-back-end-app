@@ -131,8 +131,12 @@ export default function TableRow() {
 
   function onChangeSearchBar(e) {
     const searchTerm = e.target.value.toLowerCase();
+   
+    
 
     const filteredItems = items.filter((item) => {
+      console.log(item);
+      
       return (
         item.name.toLowerCase().includes(searchTerm) ||
         item.description.toLowerCase().includes(searchTerm) ||
@@ -140,7 +144,7 @@ export default function TableRow() {
         item.id.toString().toLowerCase().includes(searchTerm) ||
         item.user_id.toString().toLowerCase().includes(searchTerm) ||
         item.method.toLowerCase().includes(searchTerm) ||
-        item.username.email.toLowerCase().includes(searchTerm) ||
+        // item.username.email.toLowerCase().includes(searchTerm) ||
         (item.date && item.date.includes(searchTerm))
       );
     });
@@ -163,7 +167,7 @@ export default function TableRow() {
               onChange={onChangeSearchBar}
             />
           </div>
-          {searchedValue && matchedItems.length >= 1 && (
+          {searchedValue && matchedItems.length >= 1 && (            
             <div className="discovered__table">
               {matchedItems.map((i) => (
                 <SearchedCard
