@@ -189,7 +189,7 @@ export default function TableRow() {
                 id="name"
                 name="name"
                 onInput={(e) => {
-                  e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
+                  e.target.value = e.target.value.replace(/[^A-Za-z0-9\s]/g, "");
                 }}
                 value={values.name}
                 onChange={changeHandler}

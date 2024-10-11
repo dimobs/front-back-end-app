@@ -12,26 +12,23 @@ import loginIcon from "../../assets/svg/login-svgrepo-com.svg";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
   const { isAuthenticated, email, totalAmount } = useAuthContext();
   const totalAmountEuro = (totalAmount / 1.95583).toFixed(2);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-
   };
+  const closeModal = () => {
+    setMenuOpen(!menuOpen)
+  }
 
   const toggleSearch = () => {
-    let myDiv = document.querySelector('.search__input');
-    if(myDiv.style.display == 'none') {
-      console.log(myDiv.style.display);
-      
-      myDiv.style.display = 'block';
-  } else {
-    myDiv.style.display = "none"
-    console.log(myDiv.style.display);
-
-  }
-  }
+    let myDiv = document.querySelector(".search__input");
+    if (myDiv.style.display == "none") {
+      myDiv.style.display = "block";    
+    } else {
+      myDiv.style.display = "none";    
+    }
+  };
 
   return (
     <header className="header">
@@ -118,22 +115,26 @@ const Header = () => {
         </div>
       </ul>
       <div className="menu-toggle" onClick={toggleMenu}>
-        <img className="menu-mobile" src={menu__mob} alt="menu" />       
+        <img className="menu-mobile" src={menu__mob} alt="menu" />
       </div>
 
       <div className="sidebar">
         <div className="menu-bar">
           <div className="menu">
-          {/* {showSearch && (
+            {/* {showSearch && (
                   <div style={{display: "block"}} className="search__input"></div>
                   
               )} */}
             <li className="search-box nav-link">
-          
-              <img onClick={toggleSearch} className="icon" src={search_mob} alt="Search" />
-
+              <img
+                onClick={toggleSearch}
+                className="icon"
+                src={search_mob}
+                alt="Search"
+              />
             </li>
-            <li className="nav-link">
+            <li className="nav-link"    
+            >                      
               <Link to="/">
                 <img src={homeBtn} alt="Home" />
               </Link>
@@ -165,13 +166,53 @@ const Header = () => {
         </div>
       </div>
       {menuOpen && (
-        <dir>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
-            quisquam nobis, magnam eum sequi enim dolor possimus vel, velit
-            dolorem exercitationem temporibus consequuntur accusamus quam,
-            dolore blanditiis asperiores voluptatem aut!
-          </p>
+        <dir className="menu_overlay">
+          <ul>
+            <li className="nav-bar-mob">
+              <Link to={"/"}>
+                <div className="atr_link" onClick={closeModal}>
+                  <img src={homeBtn} alt="Home" className="icon" />
+                  <span>Home</span>
+                </div>
+              </Link>
+            </li>
+            <li onClick={toggleSearch}>
+            <div className="atr_link" onClick={closeModal}>
+                <img  src={search_mob} alt="Search..." className="icon" />
+                <span>Search</span>
+              </div>
+            </li>
+            {isAuthenticated && (
+              <li className="nav-bar-mob">
+                <Link to={"/profile"}>
+                  <div className="atr_link" onClick={closeModal}>
+                    <img src={profileIcon} alt="Profile" className="icon" />
+                    <span>Profile</span>
+                  </div>
+                </Link>
+              </li>
+            )}
+            <li className="nav-bar-mob">
+              <Link to={"/contactUs"}>
+                <div className="atr_link" onClick={closeModal}>
+                  <img src={contactUsIcon} alt="Contact Us" className="icon" />
+                  <span>Contact Us</span>
+                </div>
+              </Link>
+            </li>
+            {isAuthenticated ? (
+              <li>
+                <Link to={'/logout'}>
+                  <div className="atr_link" onClick={closeModal}>
+                    <img src={loginIcon} alt="Logout" className="icon" />
+                    <span>Logout</span>
+                  </div>
+                </Link>
+              </li>
+            ) : (
+              <li>Log in</li>
+            )}
+          </ul>
         </dir>
       )}
     </header>

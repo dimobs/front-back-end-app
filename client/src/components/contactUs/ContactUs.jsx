@@ -30,7 +30,6 @@ const INITIAL_VALUES = {
 const ContactUs = () => {
   const { createdUser } = useAuthContext();
   useUserProfile();
-  useScrollToTop();
   const { setError } = useError();
   const inputRef = useFocus();
   const [btnDone, setBtnDone] = useState(false);
@@ -76,7 +75,8 @@ const ContactUs = () => {
       });
     }
   }, [createdUser, setValues]);
-
+  useScrollToTop();
+  
   return (
     <div className={styles["contact__section"]}>
       <div className={styles["contact__body"]}>
