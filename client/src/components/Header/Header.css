@@ -181,10 +181,6 @@ ul {
     position: fixed;
   }
 
-  .overlay__table {
-....................
-  }
-
   .amount_mobile {
     display: flex;
     justify-content: flex-end;
@@ -539,40 +535,37 @@ ul {
     border-radius: 20px;
     background-color: transparent;
     border: 2px solid #2a9d8f;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(18px);
     padding: 1rem;
     box-shadow: 0 2px 18px rgba(51, 111, 42, 0.946);
-    /* box-shadow:  -5px 15px rgba(255, 255, 255, 0.1),
-  5px 5px 15px rgba(0, 0, 0, 0.35),
-  inset -5px -5px 15px rgba(255, 255, 255, 0.1),
-  inset 5px 5px 15px rgba(0, 0, 0, 0.35);  */
     z-index: 1;
     /* margin-top: 50px; */
     margin-right: 20px;
     color: antiquewhite;
     animation: fadeIn 0.3s ease-in-out;
+    background: rgb(192,192,192, 0.4);
   }
 
   .menu_overlay ul {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
+  }
 
- .atr_link{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+  .atr_link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-.menu_overlay ul span {
-  color: wheat
-}
+  .menu_overlay ul span {
+    color: wheat
+  }
 
-.menu_overlay ul li img.icon {
-width: 2rem;
-}
-
+  .menu_overlay ul li img.icon {
+    width: 2rem;
+  }
 }
 
 @media (min-width: 681px) and (max-width: 1000px) {

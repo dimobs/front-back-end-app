@@ -4,9 +4,9 @@
 ### Recommended resolution on phone: <600px
 
 ## Technologies **JavaScript
-### **Client **FrontEnd
+### **Client** **FrontEnd**
 - **ReactJs** -**Vite** -**SPA** -**SQLight(dataBase)**  -**ErrorHandle** -**Global Spinner** -**Deploy(Firebase)** -**Testing(Jest)** -**Responsive** -**UI** -**Profile Pic upload at (https://cloudinary.com/)** 
-### **BackEnd
+### BackEnd
 -**ExpressJs** -**REST** -**NoSQL(Auth)** -**SQLite3(DataBase)** -**Profile Pic upload at (https://cloudinary.com/)** -**express-validator** **nodemailer(Sending emails)**
 
 ## ✨ Features
