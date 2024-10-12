@@ -74,16 +74,7 @@
 
 
 ### 👩‍🚀 User Profile
-- **Profile Details**: Here you can see profile ID, User: email, Create Date User: (date), First Name, Last Name, Phone N, Biography. User can change details, and profile picture
-
-- **Contact Information**: On the right side is displayed information about Owner of the site socials and location:
-  - Phone number
-  - Email
-  - GitHub
-  - LinkedIn
-  - Facebook
-  - Office address
-- **Office Location Map**: A card is displayed showing the exact location of the office.
+- **Profile Details**: Here you can see profile ID, User: email, Create Date User: (date), First Name, Last Name, Phone N, Biography (Optional for add). User can change details, and profile picture
 
 **Contact Us Page:**
 ![image](https://github.com/dimobs/front-back-end-app/blob/main/public/profile.png)
@@ -102,6 +93,9 @@
 
 3.Error
 ![image](https://github.com/dimobs/front-back-end-app/blob/main/public/error.png)
+
+4.Confirm modal
+![image](https://github.com/dimobs/front-back-end-app/blob/main/public/del.png)
 
 
 ## Responsive 
