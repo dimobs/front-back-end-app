@@ -132,11 +132,7 @@ export default function TableRow() {
   function onChangeSearchBar(e) {
     const searchTerm = e.target.value.toLowerCase();
    
-    
-
-    const filteredItems = items.filter((item) => {
-      console.log(item);
-      
+    const filteredItems = items.filter((item) => {      
       return (
         item.name.toLowerCase().includes(searchTerm) ||
         item.description.toLowerCase().includes(searchTerm) ||
