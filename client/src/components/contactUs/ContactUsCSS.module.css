@@ -96,7 +96,7 @@ box-sizing: content-box;
     color: rgb(143, 179, 147);
     font-weight: 300;
     border-radius: 25px;
-    font-size: 1em;
+    font-size: clamp(1.125rem, 0.7815rem + 0.2174vw, 1.25rem);
     box-shadow:
         -5px -5px 15px rgba(255, 255, 255, 0.1),
         5px 5px 15px rgba(0, 0, 0, 0.35);
@@ -113,7 +113,7 @@ box-sizing: content-box;
     top: 0;
     padding: 12px 10px 12px 20px;
     pointer-events: none;
-    font-size: 1em;
+    font-size: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
     font-weight: 300;
     transition: 0.5s;
     letter-spacing: 0.0em;
@@ -144,7 +144,7 @@ box-sizing: content-box;
     color: rgb(143, 179, 147);
     font-weight: 300;
     border-radius: 25px;
-    font-size: 1em;
+    font-size: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
     box-shadow:
         -5px -5px 15px rgba(255, 255, 255, 0.1),
         5px 5px 15px rgba(0, 0, 0, 0.35);
@@ -210,14 +210,14 @@ box-sizing: content-box;
 }
 
 .right h3 {
-    font-size: 1.5em;
+    font-size:clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
     margin: 0;
     margin-bottom: 0.2em;
 }
 
 .right>p {
     color: rgb(139, 139, 139);
-    font-size: 1.1em;
+    font-size: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
     margin: 0;
     margin-bottom: 3em;
 }
@@ -248,7 +248,7 @@ box-sizing: content-box;
     margin-left: 2%;
     font-weight: 500;
     color: rgb(143, 179, 147);
-    font-size: 1em;
+    font-size:clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
 }
 
 .follow-us h3 {
@@ -352,7 +352,7 @@ box-sizing: content-box;
 }
 
 .field {
-    font-size: 0.65em;
+    font-size: clamp(0.6813rem, 0.7747rem + 0.0326vw, 0.8rem);
 }
 
 @media (max-width: 768px) {

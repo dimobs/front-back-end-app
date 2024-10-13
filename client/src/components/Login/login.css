@@ -64,7 +64,7 @@
     color: #fff;
     font-weight: 300;
     border-radius: 25px;
-    font-size: 1em;
+    font-size: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
     box-shadow:
      -5px -5px 15px rgba(255, 255, 255, 0.1),
       5px 5px 15px rgba(0, 0, 0, 0.35)
@@ -79,7 +79,7 @@
     top: 0px;
     padding: 12px 10px 12px 60px;
     pointer-events: none;
-    font-size: 1em;
+    font-size: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
     font-weight: 300;
     transition: 0.5s;
     letter-spacing: 0.05em;
@@ -92,7 +92,7 @@
     border: 1px solid #00dfc4;
     background: #223243;
     transform: translateX(25px) translateY(-7px);
-    font-size: 0.6em;
+    font-size:clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
     padding: 0 8px;
     border-radius: 10px;
     letter-spacing: 0.1em;
