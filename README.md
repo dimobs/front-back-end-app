@@ -56,8 +56,6 @@
 - On "Controls" table show sign with "M"
 ![image](https://github.com/dimobs/front-back-end-app/blob/main/public/modify.png)
 
-
-
 ### 📧 Contact Us
 - **Send Emails**: Users can send emails by providing their name, email, subject, phone number (not required) and message. if the user has filled in their details on the profile page, they will automatically appear in the fields ready for sending a email.
 - **Contact Information**: On the right side is displayed information about Owner of the site socials and location:
@@ -86,6 +84,9 @@
 - **Light green** when amount is grader than 0.00
 ![image](https://github.com/dimobs/front-back-end-app/blob/main/public/greenAmount.png)
 
+### Search 
+- **Search by  pay || description || amount || id || user_id || method || date**
+![image](https://github.com/dimobs/front-back-end-app/blob/main/public/search.png)
 
 ## 🧪 Data for testing purposes
 - **Users**:0
