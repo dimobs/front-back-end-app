@@ -79,10 +79,18 @@
 **Contact Us Page:**
 ![image](https://github.com/dimobs/front-back-end-app/blob/main/public/profile.png)
 
+**Balance Amount:**
+- **Light Red** when amount is less than 0.00
+![image](https://github.com/dimobs/front-back-end-app/blob/main/public/redAmount.png)
+
+- **Light green** when amount is grader than 0.00
+![image](https://github.com/dimobs/front-back-end-app/blob/main/public/greenAmount.png)
+
 
 ## 🧪 Data for testing purposes
 - **Users**:0
   - **Email:** test@email.com; **password:** test123!
+
 
 ## Error Handling
 1.Warning!
