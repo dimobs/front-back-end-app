@@ -71,9 +71,6 @@ export default function TableRowItem({
           <button className="btn-small" title="Delete?" onClick={deleteHandler}>
             Del
           </button>
-          <button className="btn-small" title="Comment">
-            Comment
-          </button>
           {modify ? (
             <button title="This entry has been modified" className="btn-small">
               <strong style={{ color: "whitesmoke", marginTop: "5px" }}>
