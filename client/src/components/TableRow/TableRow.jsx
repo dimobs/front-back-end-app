@@ -244,7 +244,7 @@ export default function TableRow() {
               <th className="header__items">Paid for...</th>
               <th className="header__items">Description</th>
               <th className="header__items">Value</th>
-              <th className="header__items controls">Controls</th>
+              <th className="header__items controls">control's</th>
             </tr>
           </thead>
           <tbody>
